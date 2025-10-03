@@ -30,7 +30,7 @@ class UserFactory extends Factory
             // Egyptian phone numbers start with 01 followed by 9 digits
             'phone' => '01' . fake()->numberBetween(0,9) . fake()->randomNumber(8, true),
             'address' => fake()->address(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make('12345678'),
             'remember_token' => Str::random(10),
         ];
     }

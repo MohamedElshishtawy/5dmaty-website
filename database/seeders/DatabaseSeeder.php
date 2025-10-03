@@ -13,13 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seed a test user with a valid Egyptian phone number for auth testing
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'phone' => '01123456789',
-            'address' => 'Nasr City, Cairo, Egypt',
-            // password defaults to 'password' via factory
+
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
