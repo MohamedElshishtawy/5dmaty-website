@@ -27,6 +27,9 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            // Egyptian phone numbers start with 01 followed by 9 digits
+            'phone' => '01' . fake()->numberBetween(0,9) . fake()->randomNumber(8, true),
+            'address' => fake()->address(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

@@ -1,0 +1,29 @@
+---
+description: 
+globs:
+alwaysApply: true
+---
+
+
+rules:
+  - name: UseBrandColors
+    description: >
+      Use gold/yellow as the main color, with white and black as secondary colors, to match the company's brand and appeal to Egyptian users. All UI components and styles should reflect this palette. you can use from bootstrap components and basecoat components. (https://basecoatui.com/components)
+    appliesTo: ["resources/views/**/*", "public/css/**/*", "resources/css/**/*", "resources/sass/**/*"]
+
+  - name: ArabicAsDefault
+    description: >
+      The default language of the project must be Arabic (ar). All user-facing text should use the __('...') localization function, and translations should be added to lang/ar/().php. English (en) will be added in the future.
+    
+  - name: RTLLayout
+    description: >
+      The application layout must be right-to-left (RTL) by default to support Arabic users.
+    appliesTo: ["resources/views/layouts/app.blade.php", "resources/views/**/*"]
+
+  - name: MobileFirst
+    description: >
+      The design and layout must be mobile-first, optimized for phone screens as the primary user device.
+    appliesTo: ["resources/views/**/*", "public/css/**/*", "resources/css/**/*", "resources/sass/**/*"]
+
+
+
