@@ -4,7 +4,7 @@
 <h1 class="h4 fw-bold mb-4" style="color: var(--primary);">{{ __('auth.login_title') }}</h1>
 
 <div class="d-grid gap-2 mb-3">
-    <a href="#" class="btn btn-google social-btn d-flex align-items-center justify-content-center gap-2">
+    <a href="{{route('google.redirect')}}" class="btn btn-google social-btn d-flex align-items-center justify-content-center gap-2">
         <i class="fa-brands fa-google"></i>
         <span>{{ __('auth.continue_with_google') }}</span>
     </a>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SocialAuthController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/auth/google', [SocialAuthController::class, 'googleRedirect'])->name('google.redirect');
+Route::get('/auth/google/callback', [SocialAuthController::class, 'googleCallback'])->name('google.callback');
 
 // Admin area
 Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name('admin.')->group(function () {
