@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('main')
-    <x-navbar class="col-12" />
+    <x-navbar class="col-12" :active="$active ?? ''" />
 
     <div class="container mt-4">
         <div class="row">

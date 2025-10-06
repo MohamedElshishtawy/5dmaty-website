@@ -80,3 +80,35 @@
 .site-footer { background: #1A202C; color: #cbd5e1; }
 .site-footer .footer-links a { color: #94a3b8; text-decoration: none; }
 .site-footer .footer-links a:hover { color: oklch(62.3% 0.214 259.815); }
+
+
+/* nav */
+.link-underline:hover::after, .link-underline.active::after { transform: scaleX(1); }
+
+.nav-logo {
+    width: 35px;
+    padding: 4px;
+    border-radius: 4px;
+    background: var(--primary-gradient);
+}
+
+/* Glass navbar and offcanvas */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border-bottom: 1px solid rgba(255,255,255,0.35);
+}
+.animate-nav { animation: fadeSlideDown .6s ease both; }
+@keyframes fadeSlideDown { from { transform: translateY(-8px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+.link-underline { position: relative; }
+.link-underline::after {
+    content: "";
+    position: absolute;
+    right: 0; left: 0; bottom: -1px;
+    height: 2px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s ease;
+}

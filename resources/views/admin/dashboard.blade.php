@@ -1,27 +1,8 @@
 @extends('layouts.admin-layout')
-
+@php($active = 'dashboard')
 @section('content')
 <div class="container-fluid">
     <div class="row g-3">
-        <div class="col-lg-2 d-none d-lg-block">
-            <div class="card">
-                <div class="card-body">
-                    <nav class="nav flex-column">
-                        <a class="nav-link" href="#">{{ __('Dashboard') }}</a>
-                        <a class="nav-link" href="#">{{ __('Payment') }}</a>
-                        <a class="nav-link" href="#">{{ __('Customers') }}</a>
-                        <a class="nav-link d-flex align-items-center justify-content-between" href="#">{{ __('Messages') }}<span class="badge bg-dark">3</span></a>
-                        <hr>
-                        <a class="nav-link" href="#">{{ __('Settings') }}</a>
-                        <a class="nav-link" href="#">{{ __('Help') }}</a>
-                        <div class="mt-3">
-                            <button class="btn w-100" style="background:#FFD700;color:#000">{{ __('Upgrade Plan') }}</button>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-
         <div class="col-12 col-lg-10">
             <div class="row g-3">
                 <div class="col-12 col-lg-4">

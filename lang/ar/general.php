@@ -2,6 +2,7 @@
 
 return [
     'home' => 'الرئيسية',
+    'dashboard' => 'الداشبورد',
     'employment' => 'التوظيف',
     'about' => 'من نحن',
     'real-state' => 'العقارات',
@@ -77,6 +78,8 @@ return [
         'not_found' => 'المورد غير موجود',
     ],
     'login' => 'تسجيل الدخول',
+    'logout' => 'تسجيل الخروج',
+    'email' => 'البريد الإلكتروني',
     'registration' => 'حساب جديد',
     'whatsapp_category_question' => 'أود الإستعلام عن خدمتكم فى :category'
 ];

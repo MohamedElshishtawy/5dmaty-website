@@ -56,6 +56,11 @@
                         <li><a href="#">{{ __('general.real-state-management') }}</a></li>
                         <li><a href="#">{{ __('general.settings') }}</a></li>
                         <li><a href="#">{{ __('general.categories') }}</a></li>
+                        <li>
+                        <li>
+                            <a href="{{route('logout')}}" class="text-danger">{{ __('general.logout') }}</a>
+                        </li>
+
                     </ul>
                 </div>
                 @endrole
