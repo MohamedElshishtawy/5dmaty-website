@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li class="mb-0">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('admin.categories.index')}}">
                     <i class="fas fa-tags me-2 text-warning"></i>
                     {{__('general.categories')}}
                 </a>

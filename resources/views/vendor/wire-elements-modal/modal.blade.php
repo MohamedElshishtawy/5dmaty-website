@@ -42,7 +42,7 @@
                 x-bind:class="modalWidth"
                 class="relative inline-block w-full max-w-md sm:max-w-lg lg:max-w-2xl
            align-bottom bg-white rounded-lg text-left overflow-hidden
-           shadow-xl transform transition-all sm:my-8 sm:align-middle p-4"
+           shadow-xl transform transition-all sm:my-8 sm:align-middle p-4 rtl"
                 id="modal-container"
                 x-trap.noscroll.inert="show && showActiveComponent"
                 aria-modal="true"

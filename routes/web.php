@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('welcome');
+    $categories = Category::with('medias')->get();
+    return view('home', compact('categories'));
 });
 
 Auth::routes();
@@ -13,7 +15,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Admin area
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name('admin.')->group(function () {
     Route::view('/', 'admin.dashboard')->name('dashboard');
     // keep users link to avoid layout route errors
     Route::view('users', 'admin.users.index')->name('users.index');

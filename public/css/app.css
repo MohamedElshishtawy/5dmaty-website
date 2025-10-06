@@ -1,7 +1,82 @@
+:root {
+    --primary: oklch(62.3% 0.214 259.815);
+    --primary-light: oklch(80.9% 0.105 251.813);
+    --secondary: oklch(55.8% 0.288 302.321);
+    --secondary-light: oklch(90.2% 0.063 306.703);
+
+    --primary-gradient: linear-gradient(90deg, var(--primary), var(--secondary));
+    --secondary-gradient: linear-gradient(90deg, var(--primary-light), var(--secondary-light));
+
+    --bg-primary: var(--primary-gradient);
+    --bg-secondary-gradient: var(--secondary-gradient);
+}
+
 * {
     font-family: "Cairo", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    font-variation-settings:
-        "slnt" 0;
+    font-variation-settings: "slnt" 0;
+    text-align: right;
+    direction: rtl;
 }
+
+/* Override Bootstrap Buttons */
+.btn-primary {
+    background: var(--primary-gradient) !important;
+    border-color: var(--primary-gradient) !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--primary-light) !important;
+    border-color: var(--primary-light) !important;
+    color: #fff !important;
+}
+
+/*.btn-secondary {*/
+/*    background-color: var(--secondary) !important;*/
+/*    border-color: var(--secondary) !important;*/
+/*    color: #fff !important;*/
+/*}*/
+
+/*.btn-secondary:hover,*/
+/*.btn-secondary:focus,*/
+/*.btn-secondary:active {*/
+/*    background-color: var(--secondary-light) !important;*/
+/*    border-color: var(--secondary-light) !important;*/
+/*    color: #fff !important;*/
+/*}*/
+
+/* Optional: Gradient versions */
+.btn-gradient {
+    background: var(--primary-gradient) !important;
+    border: none !important;
+    color: #fff !important;
+}
+
+.btn-gradient:hover {
+    background: var(--secondary-gradient) !important;
+}
+
+.bg-primary-gradient {
+    background: var(--secondary-gradient) !important;
+}
+
+.bg-secondary-gradient {
+    background: var(--secondary-gradient) !important;
+}
+
+.logo-gradient {
+    background: var(--primary-gradient) !important;
+    border-radius: 10px;
+    padding: 8px;
+    width: 80px;
+
+
+}
+
+.site-footer { background: #1A202C; color: #cbd5e1; }
+.site-footer .footer-links a { color: #94a3b8; text-decoration: none; }
+.site-footer .footer-links a:hover { color: oklch(62.3% 0.214 259.815); }

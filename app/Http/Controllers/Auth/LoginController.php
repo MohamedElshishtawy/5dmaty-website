@@ -89,9 +89,6 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        // Debug to ensure we hit this method when submitting the login form
-        dd('LoginController@login reached', $request->only($this->username()));
-
         return $this->traitLogin($request);
     }
 }

@@ -22,8 +22,8 @@ class Category extends Model
         static::deleting(function ($category) {
             // Delete associated media files from storage
             foreach ($category->medias as $media) {
-                if (Storage::exists($media->file_path)) {
-                    Storage::delete($media->file_path);
+                if (Storage::exists($media->url)) {
+                    Storage::delete($media->url);
                 }
             }
             // Delete associated media records from database
