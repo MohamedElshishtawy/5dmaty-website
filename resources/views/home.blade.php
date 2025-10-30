@@ -48,7 +48,7 @@
             @foreach(($categories ?? collect()) as $category)
                 @php
                     $media = $category->medias->first();
-                    $src = $media ? \Illuminate\Support\Facades\Storage::url($media->url) : asset('images/black-5dmaty.svg');
+                    $src =  $media->url ? asset('storage/' . $media->url) : asset('images/black-5dmaty.svg');
                     $description = $category->description ?? '';
                     $short = \Illuminate\Support\Str::words(strip_tags($description), 15, '...');
                 @endphp
