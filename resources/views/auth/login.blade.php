@@ -30,10 +30,11 @@
     <div class="mb-2">
         <label for="password" class="form-label">{{ __('auth.password_label') }}</label>
         <div class="input-group">
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
             <span class="input-group-text bg-white password-toggle" onclick="(function(el){ const input = document.getElementById('password'); const icon = el.querySelector('i'); if(input.type==='password'){ input.type='text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); } else { input.type='password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); } })(this)">
                 <i class="fa-regular fa-eye"></i>
             </span>
+            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
             @error('password')
                 <div class="invalid-feedback d-block">{{ $message }}</div>
             @enderror
