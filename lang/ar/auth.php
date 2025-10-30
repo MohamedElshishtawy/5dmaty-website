@@ -23,7 +23,7 @@ return [
 
     'trouble_access' => 'ألا يمكنك الوصول إلى حسابك؟',
     'no_account' => 'أليس لديك حساب؟',
-    'signup_emphasis' => 'تسجيل',
+    'signup_emphasis' => 'حساب جديد',
     'already_have_account' => 'لديك حساب بالفعل؟',
     'login_now' => 'سجل الدخول الآن',
 
