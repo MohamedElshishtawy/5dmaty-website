@@ -14,6 +14,10 @@ Livewire::setUpdateRoute(function ($handle) {
     return Route::post(env('APP_URL').'livewire/update', $handle);
 });
 
+Livewire::setScriptRoute(function ($handle) {
+    return Route::get(env('APP_URL').'/livewire/livewire.js', $handle);
+});
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/auth/google', [SocialAuthController::class, 'googleRedirect'])->name('google.redirect');
 Route::get('/auth/google/callback', [SocialAuthController::class, 'googleCallback'])->name('google.callback');
