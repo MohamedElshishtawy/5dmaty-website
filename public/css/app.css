@@ -9,6 +9,8 @@
 
     --bg-primary: var(--primary-gradient);
     --bg-secondary-gradient: var(--secondary-gradient);
+
+    --navbar-height: 56.8px;
 }
 
 * {
@@ -111,4 +113,47 @@
     transform: scaleX(0);
     transform-origin: left;
     transition: transform .25s ease;
+}
+
+
+/* Text Colors */
+.text-primary-gradient {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Sidebar */
+.sidebar {
+    height: calc(100vh - var(--navbar-height));
+    top: var(--navbar-height);
+    position: fixed;
+    & a.nav-link {
+        padding: 10px;
+        border-radius: 10px;
+        &:hover {
+            background: #f2f3f6;
+        }
+        &.active {
+            background: var(--primary-gradient);
+            color: #fff;
+        }
+    }
+
+}
+
+.main-content {
+    width: calc(100% - 250px);
+    margin-right: 250px;
+}
+
+@media (max-width: 992px) {
+    .main-content {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+.content-container {
+    min-height: calc(100vh - var(--navbar-height));
 }
