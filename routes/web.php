@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post(env('APP_URL').'/livewire/update', $handle);
+    return Route::post(env('APP_ASSET').'/livewire/update', $handle);
 });
 
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post(env('APP_URL').'livewire/update', $handle);
+    return Route::post(env('APP_ASSET').'livewire/update', $handle);
 });
 
 Livewire::setScriptRoute(function ($handle) {
-    return Route::get(env('APP_URL').'/livewire/livewire.js', $handle);
+    return Route::get(env('APP_ASSET').'/livewire/livewire.js', $handle);
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
