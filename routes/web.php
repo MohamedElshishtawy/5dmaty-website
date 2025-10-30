@@ -11,7 +11,7 @@ Livewire::setUpdateRoute(function ($handle) {
 });
 
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post(env('APP_ASSET').'livewire/update', $handle);
+    return Route::post(env('APP_ASSET').'/livewire/update', $handle);
 });
 
 Livewire::setScriptRoute(function ($handle) {
