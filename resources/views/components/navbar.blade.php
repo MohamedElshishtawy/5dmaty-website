@@ -24,7 +24,7 @@
                     <a @class(["nav-link", "link-underline", "active" => $active=='employment' ]) href="#">{{__('general.employment')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a @class(["nav-link", "link-underline", "active" => $active=='real-state' ]) href="#">{{__('general.real-state')}}</a>
+                    <a @class(["nav-link", "link-underline", "active" => $active=='real-state' ]) href="{{route('properties.index')}}">{{__('general.real-state')}}</a>
                 </li>
                 <li class="nav-item">
                     <a @class(["nav-link", "link-underline", "active" => $active=='market' ]) href="#">{{__('general.market')}}</a>
@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a @class(['nav-link', 'link-underline', 'active' => $active == 'real-state']) href="#" data-bs-dismiss="offcanvas">
+                    <a @class(['nav-link', 'link-underline', 'active' => $active == 'real-state']) href="{{route('properties.index')}}" data-bs-dismiss="offcanvas">
                         <i class="fas fa-building me-2"></i>
                         {{__('general.real-state')}}
                     </a>
@@ -113,7 +113,7 @@
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a class="btn glass-btn w-100 text-end" href="#" data-bs-dismiss="offcanvas">
+                    <a class="btn glass-btn w-100 text-end" href="{{route('admin.properties.index')}}" data-bs-dismiss="offcanvas">
                         <i class="fas fa-home me-2 "></i>
                         {{__('general.real-state-management')}}
                     </a>

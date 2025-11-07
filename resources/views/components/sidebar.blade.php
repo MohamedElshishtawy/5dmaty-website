@@ -15,7 +15,7 @@
                 </a>
             </li>
             <li class="mb-2">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('admin.properties.index')}}">
                     <i class="fas fa-home me-2 text-primary-gradient"></i>
                     {{__('general.real-state-management')}}
                 </a>

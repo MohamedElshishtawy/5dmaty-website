@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +26,15 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('home', compact('categories'));
+        
+        // Get latest 5 published properties
+        $properties = Property::whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderBy('published_at', 'desc')
+            ->with('medias')
+            ->take(5)
+            ->get();
+        
+        return view('home', compact('categories', 'properties'));
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\SocialAuthController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Livewire;
 
 Livewire::setUpdateRoute(function ($handle) {
     return Route::post(env('APP_ASSET').'/livewire/update', $handle);
@@ -17,6 +19,10 @@ Livewire::setScriptRoute(function ($handle) {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/auth/google', [SocialAuthController::class, 'googleRedirect'])->name('google.redirect');
 Route::get('/auth/google/callback', [SocialAuthController::class, 'googleCallback'])->name('google.callback');
+
+// Public property routes
+Route::get('real-estate', [PropertyController::class, 'publicIndex'])->name('properties.index');
+Route::get('real-estate/{property:slug}', [PropertyController::class, 'show'])->name('properties.show');
 
 // Admin area
 Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name('admin.')->group(function () {
@@ -31,6 +37,7 @@ Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name(
 
 
     Route::resource('categories', CategoryController::class);
+    Route::get('properties', [PropertyController::class, 'index'])->name('properties.index');
 });
 
 //Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

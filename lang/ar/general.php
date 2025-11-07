@@ -81,5 +81,26 @@ return [
     'logout' => 'تسجيل الخروج',
     'email' => 'البريد الإلكتروني',
     'registration' => 'حساب جديد',
-    'whatsapp_category_question' => 'أود الإستعلام عن خدمتكم فى :category'
+    'whatsapp_category_question' => 'أود الإستعلام عن خدمتكم فى :category',
+    
+    // Properties translations
+    'properties' => 'العقارات',
+    'property' => 'عقار',
+    'add_property' => 'إضافة عقار',
+    'edit_property' => 'تعديل عقار',
+    'property_title' => 'عنوان العقار',
+    'property_description' => 'وصف العقار',
+    'price' => 'السعر',
+    'location' => 'الموقع',
+    'whatsapp_phone' => 'رقم الواتساب',
+    'contact_whatsapp' => 'تواصل عبر واتساب',
+    'whatsapp_message_template' => 'أرغب بالسؤال عن العقار: :title',
+    'published_at' => 'تاريخ النشر',
+    'actions' => 'الإجراءات',
+    'no_properties' => 'لا توجد عقارات حالياً',
+    'view_details' => 'عرض التفاصيل',
+    'back_to_properties' => 'العودة للعقارات',
+    'properties_subtitle' => 'تصفح أفضل العقارات المتاحة',
+    'currency' => 'ج.م',
+    'see_more' => 'شاهد المزيد',
 ];

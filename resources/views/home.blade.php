@@ -3,6 +3,12 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('css/home.css')}}">
+    <style>
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -73,6 +79,61 @@
         </div>
         </div>
     </section>
+
+    <!-- Properties Section -->
+    @if($properties->count() > 0)
+    <section id="properties" class="properties-section py-5 position-relative" style="background-color: #f2f3f6">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h2 class="section-title m-0">{{ __('general.properties') }}</h2>
+                <a href="{{ route('properties.index') }}" class="btn btn-outline-primary">
+                    {{ __('general.see_more') }}
+                    <i class="fas fa-arrow-left ms-2"></i>
+                </a>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                @foreach($properties as $property)
+                    @php
+                        $media = $property->medias->first();
+                        $image = $media ? asset('storage/' . $media->url) : asset('images/black-5dmaty.svg');
+                    @endphp
+                    <div class="col">
+                        <div class="card property-card h-100 border-0 shadow-sm" style="border-radius: 16px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                            <div class="ratio ratio-4x3">
+                                <img src="{{ $image }}" alt="{{ $property->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="h5 card-title mb-2">{{ $property->title }}</h3>
+                                
+                                @if($property->location)
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                        {{ $property->location }}
+                                    </p>
+                                @endif
+
+                                @if($property->price)
+                                    <div class="mb-3">
+                                        <span style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; font-weight: bold; padding: 0.5rem 1rem; border-radius: 12px; display: inline-block;">
+                                            {{ number_format($property->price, 0) }} {{__('general.currency')}}
+                                        </span>
+                                    </div>
+                                @endif
+
+                                <div class="mt-auto">
+                                    <a href="{{ route('properties.show', $property->slug) }}" class="btn btn-primary w-100">
+                                        {{ __('general.view_details') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
 
 {{--    <section id="features" class="features-section py-5 bg-white position-relative" style="background-color: rgba(0,0,0,0.02)">--}}
 {{--        <div class="container">--}}
