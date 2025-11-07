@@ -3,12 +3,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('css/home.css')}}">
-    <style>
-        .property-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/jobs.css')}}">
 @endsection
 
 @section('content')
@@ -99,7 +94,7 @@
                         $image = $media ? asset('storage/' . $media->url) : asset('images/black-5dmaty.svg');
                     @endphp
                     <div class="col">
-                        <div class="card property-card h-100 border-0 shadow-sm" style="border-radius: 16px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        <div class="card property-card h-100 border-0 shadow-sm">
                             <div class="ratio ratio-4x3">
                                 <img src="{{ $image }}" alt="{{ $property->title }}" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
@@ -125,6 +120,71 @@
                                     <a href="{{ route('properties.show', $property->slug) }}" class="btn btn-primary w-100">
                                         {{ __('general.view_details') }}
                                     </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- Jobs Section -->
+    @if($jobs->count() > 0)
+    <section id="jobs" class="jobs-section py-5 bg-white position-relative">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h2 class="section-title m-0">{{ __('general.jobs') }}</h2>
+                <a href="{{ route('jobs.index') }}" class="btn btn-outline-primary">
+                    {{ __('general.see_more') }}
+                    <i class="fas fa-arrow-left ms-2"></i>
+                </a>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                @foreach($jobs as $job)
+                    <div class="col">
+                        <div class="card job-card h-100 border-0 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="h5 card-title fw-bold mb-2">{{ $job->title }}</h3>
+                                
+                                @if($job->shop_name)
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-store me-1"></i>
+                                        {{ $job->shop_name }}
+                                    </p>
+                                @endif
+
+                                @if($job->shop_address)
+                                    <p class="text-muted mb-2">
+                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                        {{ $job->shop_address }}
+                                    </p>
+                                @endif
+
+                                @if($job->description)
+                                    <p class="card-text text-muted mb-3">
+                                        {{ Str::limit($job->description, 100) }}
+                                    </p>
+                                @endif
+
+                                <div class="mt-auto">
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ route('jobs.show', $job->slug) }}" class="btn btn-primary flex-grow-1">
+                                            {{ __('general.view_details') }}
+                                        </a>
+                                        @if($job->whatsapp_phone)
+                                            @php
+                                                $wa_number = preg_replace('/\D+/', '', $job->whatsapp_phone);
+                                                $wa_text = urlencode(__('general.job_whatsapp_message', ['title' => $job->title]));
+                                                $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
+                                            @endphp
+                                            <a href="{{ $wa_url }}" target="_blank" class="btn btn-success">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>

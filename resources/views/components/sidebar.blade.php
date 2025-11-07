@@ -9,9 +9,15 @@
                 </a>
             </li>
             <li class="mb-2">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-user-tie me-2 text-primary-gradient"></i>
+                <a class="nav-link" href="{{route('admin.jobs.index')}}">
+                    <i class="fas fa-briefcase me-2 text-primary-gradient"></i>
                     {{__('general.employment-management')}}
+                </a>
+            </li>
+            <li class="mb-2">
+                <a class="nav-link" href="{{route('admin.employees.index')}}">
+                    <i class="fas fa-user-tie me-2 text-primary-gradient"></i>
+                    {{__('general.employee_management')}}
                 </a>
             </li>
             <li class="mb-2">

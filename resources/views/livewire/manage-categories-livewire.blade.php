@@ -19,8 +19,14 @@
                     <td>{{$category->name}}</td>
                     <td>{{$category->description}}</td>
                     <td>
-                        <button class="btn btn-sm btn-info" wire:click="$dispatch('openModal', {'component': 'create-edit-category-modal', 'arguments': {'category': {{$category->id}}} })">{{__('general.edit')}}</button>
-                        <button class="btn btn-sm btn-danger" wire:confirm="{{__('admin.categories.confirm_delete')}}" wire:click="delete({{$category->id}})">{{__('general.delete')}}</button>
+                        <div class="btn-group" style="direction: ltr">
+                            <button class="btn btn-sm btn-info" wire:click="$dispatch('openModal', {'component': 'create-edit-category-modal', 'arguments': {'category': {{$category->id}}} })">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" wire:confirm="{{__('admin.categories.confirm_delete')}}" wire:click="delete({{$category->id}})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             @endforeach

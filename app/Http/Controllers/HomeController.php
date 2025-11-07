@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Property;
+use App\Models\JobPosting;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -35,6 +36,13 @@ class HomeController extends Controller
             ->take(5)
             ->get();
         
-        return view('home', compact('categories', 'properties'));
+        // Get latest 5 approved and active jobs
+        $jobs = JobPosting::approvedActive()
+            ->orderBy('published_at', 'desc')
+            ->with('user')
+            ->take(5)
+            ->get();
+        
+        return view('home', compact('categories', 'properties', 'jobs'));
     }
 }

@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\EmployeeProfileController;
+use App\Http\Controllers\Admin\JobAdminController;
 use App\Http\Controllers\SocialAuthController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +28,18 @@ Route::get('/auth/google/callback', [SocialAuthController::class, 'googleCallbac
 Route::get('real-estate', [PropertyController::class, 'publicIndex'])->name('properties.index');
 Route::get('real-estate/{property:slug}', [PropertyController::class, 'show'])->name('properties.show');
 
+// Public job routes
+Route::get('jobs', [JobController::class, 'index'])->name('jobs.index');
+Route::get('jobs/{job:slug}', [JobController::class, 'show'])->name('jobs.show');
+
+// Auth-required job routes
+Route::middleware('auth')->group(function () {
+    Route::post('jobs', [JobController::class, 'store'])->name('jobs.store');
+    Route::post('jobs/{job}/apply', [JobApplicationController::class, 'store'])->name('jobs.apply');
+    Route::post('jobs/{job}/toggle-active', [JobController::class, 'toggleActive'])->name('jobs.toggleActive');
+    Route::post('employee-profile', [EmployeeProfileController::class, 'upsert'])->name('employee-profile.upsert');
+});
+
 // Admin area
 Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name('admin.')->group(function () {
     Route::view('/', 'admin.dashboard')->name('dashboard');
@@ -38,6 +54,19 @@ Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name(
 
     Route::resource('categories', CategoryController::class);
     Route::get('properties', [PropertyController::class, 'index'])->name('properties.index');
+    
+    // Job management routes
+    Route::get('jobs', [JobAdminController::class, 'index'])->name('jobs.index');
+    Route::post('jobs/{job}/approve', [JobAdminController::class, 'approve'])->name('jobs.approve');
+    Route::post('jobs/{job}/reject', [JobAdminController::class, 'reject'])->name('jobs.reject');
+    Route::get('jobs/{job}/applications', [JobAdminController::class, 'applications'])->name('jobs.applications');
+    Route::delete('jobs/{job}', [JobAdminController::class, 'destroy'])->name('jobs.destroy');
+    
+    // Employee management routes
+    Route::get('employees', [App\Http\Controllers\Admin\EmployeeProfileAdminController::class, 'index'])->name('employees.index');
+    Route::get('employees/{employee}', [App\Http\Controllers\Admin\EmployeeProfileAdminController::class, 'show'])->name('employees.show');
+    Route::delete('employees/{employee}', [App\Http\Controllers\Admin\EmployeeProfileAdminController::class, 'destroy'])->name('employees.destroy');
+    Route::post('employees/{employee}/toggle-public', [App\Http\Controllers\Admin\EmployeeProfileAdminController::class, 'togglePublic'])->name('employees.togglePublic');
 });
 
 //Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

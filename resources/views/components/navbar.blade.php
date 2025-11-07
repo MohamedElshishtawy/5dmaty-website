@@ -21,7 +21,7 @@
                 </li>
                 @endhasanyrole
                 <li class="nav-item">
-                    <a @class(["nav-link", "link-underline", "active" => $active=='employment' ]) href="#">{{__('general.employment')}}</a>
+                    <a @class(["nav-link", "link-underline", "active" => $active=='employment' ]) href="{{route('jobs.index')}}">{{__('general.employment')}}</a>
                 </li>
                 <li class="nav-item">
                     <a @class(["nav-link", "link-underline", "active" => $active=='real-state' ]) href="{{route('properties.index')}}">{{__('general.real-state')}}</a>
@@ -50,7 +50,7 @@
                 </h5>
             </div>
             <div>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{__('general.close')}}"></button>
+                <button type="button" class="btn-close"  aria-label="{{__('general.close')}}" data-bs-dismiss="offcanvas"></button>
 
             </div>
         </div>
@@ -59,27 +59,33 @@
         <div class="mb-4">
             <ul class="list-unstyled glass-list">
                 <li class="mb-2">
-                    <a @class(['nav-link', 'link-underline', 'active' => $active == 'home']) href="/" data-bs-dismiss="offcanvas">
+                    <a @class(['nav-link', '', 'active' => $active == 'home']) href="/" >
                         <i class="fas fa-home me-2"></i>
                         {{__('general.home')}}
                     </a>
                 </li>
                 @hasanyrole('superadmin|admin')
                 <li class="mb-2">
-                    <a @class(['nav-link', 'link-underline', 'active' => $active == 'dashboard']) href="{{ route('admin.dashboard') }}" data-bs-dismiss="offcanvas">
+                    <a @class(['nav-link', '', 'active' => $active == 'dashboard']) href="{{ route('admin.dashboard') }}" >
                         <i class="fas fa-tachometer-alt me-2"></i>
                         {{__('general.dashboard')}}
                     </a>
                 </li>
                 @endhasanyrole  {{-- Corrected: This closing directive was missing and caused the "unexpected end of file" error --}}
                 <li class="mb-2">
-                    <a @class(['nav-link', 'link-underline', 'active' => $active == 'employment']) href="#" data-bs-dismiss="offcanvas">
+                    <a @class(['nav-link', '', 'active' => $active == 'employment']) href="{{route('jobs.index')}}" >
                         <i class="fas fa-briefcase me-2"></i>
                         {{__('general.employment')}}
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a @class(['nav-link', 'link-underline', 'active' => $active == 'real-state']) href="{{route('properties.index')}}" data-bs-dismiss="offcanvas">
+                    <a @class(['nav-link', '', 'active' => $active == 'employee-profile']) href="{{route('employee-profile.upsert')}}" >
+                        <i class="fas fa-user-tie me-2"></i>
+                        {{__('general.employee_profile')}}
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a @class(['nav-link', '', 'active' => $active == 'real-state']) href="{{route('properties.index')}}" >
                         <i class="fas fa-building me-2"></i>
                         {{__('general.real-state')}}
                     </a>
@@ -101,31 +107,37 @@
             <h6 class="text-muted text-uppercase fw-bold mb-3">{{__('general.management')}}</h6>
             <ul class="list-unstyled glass-list">
                 <li class="mb-2">
-                    <a class="btn glass-btn w-100 text-end" href="#" data-bs-dismiss="offcanvas">
+                    <a class="btn glass-btn w-100 text-end" href="#" >
                         <i class="fas fa-users me-2 "></i>
                         {{__('general.users-management')}}
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a class="btn glass-btn w-100 text-end" href="#" data-bs-dismiss="offcanvas">
-                        <i class="fas fa-user-tie me-2 "></i>
+                    <a class="btn glass-btn w-100 text-end" href="{{route('admin.jobs.index')}}" >
+                        <i class="fas fa-briefcase me-2 "></i>
                         {{__('general.employment-management')}}
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a class="btn glass-btn w-100 text-end" href="{{route('admin.properties.index')}}" data-bs-dismiss="offcanvas">
+                    <a class="btn glass-btn w-100 text-end" href="{{route('admin.employees.index')}}" >
+                        <i class="fas fa-user-tie me-2 "></i>
+                        {{__('general.employee_management')}}
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a class="btn glass-btn w-100 text-end" href="{{route('admin.properties.index')}}" >
                         <i class="fas fa-home me-2 "></i>
                         {{__('general.real-state-management')}}
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a class="btn glass-btn w-100 text-end" href="#" data-bs-dismiss="offcanvas">
+                    <a class="btn glass-btn w-100 text-end" href="#" >
                         <i class="fas fa-cog me-2 "></i>
                         {{__('general.settings')}}
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a class="btn glass-btn w-100 text-end" href="#" data-bs-dismiss="offcanvas">
+                    <a class="btn glass-btn w-100 text-end" href="{{route('admin.categories.index')}}" >
                         <i class="fas fa-tags me-2 "></i>
                         {{__('general.categories')}}
                     </a>

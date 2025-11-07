@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h2 class="card-title">{{__('general.manage')}} {{__('general.properties')}}</h2>
-        <div>
+<div>
             <button class="btn btn-primary" wire:click="$dispatch('openModal', {'component': 'create-edit-property-modal'})">{{__('general.add_property')}}</button>
         </div>
     </div>
@@ -32,8 +32,14 @@
                             <td>{{$property->price ? number_format($property->price, 2) : '-'}}</td>
                             <td>{{$property->published_at ? $property->published_at->format('Y-m-d') : '-'}}</td>
                             <td>
-                                <button class="btn btn-sm btn-info" wire:click="$dispatch('openModal', {'component': 'create-edit-property-modal', 'arguments': {'property': {{$property->id}}} })">{{__('general.edit')}}</button>
-                                <button class="btn btn-sm btn-danger" wire:confirm="{{__('general.confirm_delete')}}" wire:click="delete({{$property->id}})">{{__('general.delete')}}</button>
+                                <div class="btn-group" style="direction: ltr">
+                                    <button class="btn btn-sm btn-info" wire:click="$dispatch('openModal', {'component': 'create-edit-property-modal', 'arguments': {'property': {{$property->id}}} })">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" wire:confirm="{{__('general.confirm_delete')}}" wire:click="delete({{$property->id}})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                </div>
                             </td>
                         </tr>
                     @empty
