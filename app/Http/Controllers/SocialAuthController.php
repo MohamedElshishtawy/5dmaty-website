@@ -28,6 +28,7 @@ class SocialAuthController extends Controller
         $user = User::create([
             'name' => $user->name,
             'email' => $user->email,
+            'phone' => $user->phone,
             'password' => bcrypt('Password123345678'),
             'social_id' => $user->id,
         ]);

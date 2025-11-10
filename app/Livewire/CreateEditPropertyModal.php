@@ -19,6 +19,8 @@ class CreateEditPropertyModal extends ModalComponent
     public $location;
     public $whatsapp_phone;
     public $published_at;
+    public $property_type;
+    public $property_status;
     public $media_files;
     public $medias = [];
 
@@ -31,6 +33,8 @@ class CreateEditPropertyModal extends ModalComponent
             'location' => 'nullable|string|max:255',
             'whatsapp_phone' => 'nullable|string|max:20',
             'published_at' => 'nullable|date',
+            'property_type' => 'required|in:sale,rent',
+            'property_status' => 'required|in:inactive,active,sold',
             'media_files' => 'nullable|array',
             'media_files.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,webp|max:10240',
         ];
@@ -46,7 +50,11 @@ class CreateEditPropertyModal extends ModalComponent
             $this->location = $this->property->location;
             $this->whatsapp_phone = $this->property->whatsapp_phone;
             $this->published_at = $this->property->published_at ? $this->property->published_at->format('Y-m-d') : null;
+            $this->property_type = $this->property->property_type;
+            $this->property_status = $this->property->property_status ?: \App\Models\Property::STATUS_ACTIVE;
             $this->medias = $this->property->medias;
+        } else {
+            $this->property_status = \App\Models\Property::STATUS_ACTIVE;
         }
     }
 
@@ -60,6 +68,8 @@ class CreateEditPropertyModal extends ModalComponent
             $this->property->update([
                 'title' => $this->title,
                 'description' => $this->description,
+                'property_type' => $this->property_type,
+                'property_status' => $this->property_status,
                 'price' => $this->price,
                 'location' => $this->location,
                 'whatsapp_phone' => $this->whatsapp_phone,
@@ -71,6 +81,8 @@ class CreateEditPropertyModal extends ModalComponent
             $property = Property::create([
                 'title' => $this->title,
                 'description' => $this->description,
+                'property_type' => $this->property_type,
+                'property_status' => $this->property_status ?: \App\Models\Property::STATUS_ACTIVE,
                 'price' => $this->price,
                 'location' => $this->location,
                 'whatsapp_phone' => $this->whatsapp_phone,

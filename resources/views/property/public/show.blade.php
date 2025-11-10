@@ -102,8 +102,11 @@
                         <h1 class="h3 fw-bold mb-3">{{ $property->title }}</h1>
 
                         @if($property->price)
-                            <div class="price-display mb-4">
-                                {{ number_format($property->price, 0) }} {{__('general.currency')}}
+                            <div class="mb-4">
+                                <div class="price-display mb-2">
+                                    {{ number_format($property->price, 0) }} {{__('general.currency')}}
+                                </div>
+                                <x-property-badges :property="$property" />
                             </div>
                         @endif
 

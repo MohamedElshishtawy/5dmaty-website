@@ -21,6 +21,7 @@
                         <th>{{__('general.location')}}</th>
                         <th>{{__('general.price')}}</th>
                         <th>{{__('general.published_at')}}</th>
+                        <th>{{__('general.accepted')}}</th>
                         <th>{{__('general.actions')}}</th>
                     </tr>
                 </thead>
@@ -31,6 +32,19 @@
                             <td>{{$property->location ?? '-'}}</td>
                             <td>{{$property->price ? number_format($property->price, 2) : '-'}}</td>
                             <td>{{$property->published_at ? $property->published_at->format('Y-m-d') : '-'}}</td>
+                            <td>
+                                <button
+                                    class="btn btn-sm {{ $property->is_accepted ? 'btn-success' : 'btn-outline-warning text-dark' }}"
+                                    wire:click="toggleAccepted({{$property->id}})"
+                                    title="{{ $property->is_accepted ? __('general.accepted') : __('general.pending_review') }}"
+                                >
+                                    @if($property->is_accepted)
+                                        <i class="fas fa-check ms-1"></i> {{ __('general.accepted') }}
+                                    @else
+                                        <i class="fas fa-hourglass-half ms-1"></i> {{ __('general.pending_review') }}
+                                    @endif
+                                </button>
+                            </td>
                             <td>
                                 <div class="btn-group" style="direction: ltr">
                                     <button class="btn btn-sm btn-info" wire:click="$dispatch('openModal', {'component': 'create-edit-property-modal', 'arguments': {'property': {{$property->id}}} })">
@@ -44,7 +58,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center">{{__('general.no_properties')}}</td>
+                            <td colspan="6" class="text-center">{{__('general.no_properties')}}</td>
                         </tr>
                     @endforelse
                 </tbody>

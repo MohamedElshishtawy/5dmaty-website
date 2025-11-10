@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Property;
 use App\Models\JobPosting;
+use App\Models\Service;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -30,7 +32,8 @@ class HomeController extends Controller
         
         // Get latest 5 published properties
         $properties = Property::whereNotNull('published_at')
-            ->where('published_at', '<=', now())
+            ->where('is_accepted', true)
+            ->where('property_status', 'active')
             ->orderBy('published_at', 'desc')
             ->with('medias')
             ->take(5)
@@ -43,6 +46,15 @@ class HomeController extends Controller
             ->take(5)
             ->get();
         
-        return view('home', compact('categories', 'properties', 'jobs'));
+        // Get all active services for slider
+        $services = Service::with('category')
+            ->where('is_active', true)
+            ->orderByDesc('id')
+            ->get();
+        
+        // FAQs: active and ordered
+        $faqs = Faq::active()->get();
+        
+        return view('home', compact('categories', 'properties', 'jobs', 'services', 'faqs'));
     }
 }

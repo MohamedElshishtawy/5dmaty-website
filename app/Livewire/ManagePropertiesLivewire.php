@@ -9,6 +9,19 @@ class ManagePropertiesLivewire extends Component
 {
     protected $listeners = ['propertyUpdated' => '$refresh'];
 
+    public function toggleAccepted($id)
+    {
+        $property = Property::find($id);
+        if ($property) {
+            $property->is_accepted = !$property->is_accepted;
+            $property->save();
+            session()->flash('message', $property->is_accepted ? __('general.approved') : __('general.rejected'));
+            $this->dispatch('propertyUpdated');
+        } else {
+            session()->flash('error', __('general.massages.not_found'));
+        }
+    }
+
     public function delete($id)
     {
         $property = Property::find($id);

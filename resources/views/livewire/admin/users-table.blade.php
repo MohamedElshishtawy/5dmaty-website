@@ -20,14 +20,14 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->phone }}</td>
                     <td>
-                        <select class="form-select form-select-sm" wire:change="updateRole({{ $user->id }}, $event.target.value)">
-                            @foreach($roles as $roleName)
-                                <option value="{{ $roleName }}" @selected(optional($user->roles->first())->name === $roleName)>{{ __($roleName) }}</option>
-                            @endforeach
-                        </select>
+                        @php $role = strtolower($user->role_name ?? 'user'); @endphp
+                        <span class="badge bg-success">{{ __('general.'.$role) }}</span>
                     </td>
                     <td class="text-end">
-                        <a class="btn btn-outline-secondary btn-sm" href="{{ route('admin.users.edit', $user) }}">{{ __('تعديل') }}</a>
+                        <button class="btn btn-outline-secondary btn-sm" 
+                                wire:click="$dispatch('openModal', {'component': 'create-edit-user-modal', 'arguments': {'user': {{ $user->id }} } })">
+                            {{ __('تعديل') }}
+                        </button>
                         <button class="btn btn-outline-danger btn-sm" wire:click="destroy({{ $user->id }})" onclick="return confirm('{{ __('تأكيد الحذف؟') }}')">{{ __('حذف') }}</button>
                     </td>
                 </tr>

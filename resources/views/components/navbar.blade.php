@@ -1,12 +1,12 @@
 @props(['active' => 'home'])
 <nav {{$attributes->merge(['class'=> "pb-0 navbar navbar-expand-lg glass-nav animate-nav overflow-hidden"])}} data-bs-theme="light">
-    <div class="container">
+    <div class="align-items-center d-flex justify-content-between p-2 w-100">
         <a class="navbar-brand" href="{{route('home')}}">
-            <img src="{{asset('images/white-5dmaty.svg')}}" alt="5dmaty" class="nav-logo">
+            <img src="{{ \App\Support\Settings::imageUrl('site.logo', asset('images/white-5dmaty.svg')) }}" alt="5dmaty" class="nav-logo">
         </a>
 
         <button class="navbar-toggler d-lg-none border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileOffcanvas" aria-controls="mobileOffcanvas">
-            <span class="navbar-toggler-icon"></span>
+            <img src="{{asset('images/menu.png')}}" width="30" alt="menu" class="menu-icon">
         </button>
 
         <div class=" navbar-collapse d-none d-lg-flex">
@@ -21,14 +21,18 @@
                 </li>
                 @endhasanyrole
                 <li class="nav-item">
-                    <a @class(["nav-link", "link-underline", "active" => $active=='employment' ]) href="{{route('jobs.index')}}">{{__('general.employment')}}</a>
+                    <a @class(["nav-link", "link-underline", "active" => $active=='employment' ]) href="{{route('jobs.index')}}">{{__('general.jobs')}}</a>
                 </li>
                 <li class="nav-item">
                     <a @class(["nav-link", "link-underline", "active" => $active=='real-state' ]) href="{{route('properties.index')}}">{{__('general.real-state')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a @class(["nav-link", "link-underline", "active" => $active=='market' ]) href="#">{{__('general.market')}}</a>
+                    <a @class(["nav-link", "link-underline", "active" => $active=='market' ]) href="https://margar.5dmaty.com">{{__('general.market')}}</a>
                 </li>
+                <li class="nav-item">
+                    <a @class(["nav-link", "link-underline", "active" => $active=='market' ]) href="https://edu.5dmaty.com">{{__('general.courses')}}</a>
+                </li>
+
             </ul>
         </div>
         @guest
@@ -46,7 +50,7 @@
         <div class="d-flex justify-content-between align-items-center ">
             <div>
                 <h5 class="offcanvas-title text-dark" id="mobileOffcanvasLabel">
-                    <img src="{{asset('images/white-5dmaty.svg')}}" alt="5dmaty" class="nav-logo">
+                    <img src="{{ \App\Support\Settings::imageUrl('site.logo', asset('images/white-5dmaty.svg')) }}" alt="5dmaty" class="nav-logo">
                 </h5>
             </div>
             <div>
@@ -75,7 +79,7 @@
                 <li class="mb-2">
                     <a @class(['nav-link', '', 'active' => $active == 'employment']) href="{{route('jobs.index')}}" >
                         <i class="fas fa-briefcase me-2"></i>
-                        {{__('general.employment')}}
+                        {{__('general.jobs')}}
                     </a>
                 </li>
                 <li class="mb-2">
@@ -88,6 +92,18 @@
                     <a @class(['nav-link', '', 'active' => $active == 'real-state']) href="{{route('properties.index')}}" >
                         <i class="fas fa-building me-2"></i>
                         {{__('general.real-state')}}
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a @class(['nav-link', '', 'active' => $active == 'market']) href="https://margar.5dmaty.com" >
+                        <i class="fas fa-store me-2"></i>
+                        {{__('general.market')}}
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a @class(['nav-link', '', 'active' => $active == 'courses']) href="https://edu.5dmaty.com" >
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        {{__('general.courses')}}
                     </a>
                 </li>
             </ul>
@@ -131,7 +147,13 @@
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a class="btn glass-btn w-100 text-end" href="#" >
+                    <a class="btn glass-btn w-100 text-end" href="{{route('admin.faqs.index')}}" >
+                        <i class="fas fa-question-circle me-2 "></i>
+                        {{__('general.faq_management')}}
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <a class="btn glass-btn w-100 text-end" href="{{ route('admin.settings.index') }}" >
                         <i class="fas fa-cog me-2 "></i>
                         {{__('general.settings')}}
                     </a>

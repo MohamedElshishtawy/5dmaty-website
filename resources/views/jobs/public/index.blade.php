@@ -40,7 +40,7 @@
                 <a href="{{ route('jobs.index', ['tab' => 'employees']) }}" 
                    class="job-tab {{ $tab === 'employees' ? 'active' : '' }}">
                     <i class="fas fa-users me-2"></i>
-                    {{ __('general.employees') }}
+                    {{ __('general.employment_request') }}
                 </a>
             </div>
 

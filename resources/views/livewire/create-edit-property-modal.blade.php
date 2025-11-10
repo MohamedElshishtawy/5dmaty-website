@@ -42,6 +42,50 @@
                 @enderror
             </div>
 
+            <!-- Property Type -->
+            <div class="mb-3">
+                <label class="form-label">{{ __('general.property_type') }}</label>
+                <div class="d-flex gap-3">
+                    <div class="form-check">
+                        <input class="form-check-input @error('property_type') is-invalid @enderror"
+                               type="radio"
+                               id="type_sale"
+                               value="sale"
+                               wire:model="property_type"
+                               required>
+                        <label class="form-check-label" for="type_sale">{{ __('general.sale') }}</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input @error('property_type') is-invalid @enderror"
+                               type="radio"
+                               id="type_rent"
+                               value="rent"
+                               wire:model="property_type"
+                               required>
+                        <label class="form-check-label" for="type_rent">{{ __('general.rent') }}</label>
+                    </div>
+                </div>
+                @error('property_type')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Property Status -->
+            <div class="mb-3">
+                <label for="property_status" class="form-label">{{ __('general.property_status') }}</label>
+                <select id="property_status"
+                        class="form-select @error('property_status') is-invalid @enderror"
+                        wire:model="property_status"
+                        required>
+                    <option value="active">{{ __('general.status_active') }}</option>
+                    <option value="sold">{{ __('general.status_sold') }}</option>
+                    <option value="inactive">{{ __('general.status_inactive') }}</option>
+                </select>
+                @error('property_status')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <!-- Location -->
             <div class="mb-3">
                 <label for="location" class="form-label">{{ __('general.location') }}</label>

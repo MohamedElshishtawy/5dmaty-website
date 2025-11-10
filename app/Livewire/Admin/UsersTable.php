@@ -12,6 +12,7 @@ class UsersTable extends Component
     use WithPagination;
 
     public string $search = '';
+    protected $listeners = ['userUpdated' => '$refresh'];
 
     public function updatingSearch(): void
     {
@@ -37,17 +38,28 @@ class UsersTable extends Component
     public function render()
     {
         $query = User::query()
+            ->leftJoin('model_has_roles', function ($join) {
+                $join->on('model_has_roles.model_id', '=', 'users.id')
+                     ->where('model_has_roles.model_type', '=', User::class);
+            })
+            ->leftJoin('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->select('users.*', 'roles.name as role_name')
             ->when($this->search, function ($q) {
                 $q->where(function ($qq) {
-                    $qq->where('name', 'like', "%{$this->search}%")
-                       ->orWhere('phone', 'like', "%{$this->search}%");
+                    $qq->where('users.name', 'like', "%{$this->search}%")
+                       ->orWhere('users.phone', 'like', "%{$this->search}%");
                 });
             })
-            ->orderByDesc('id');
+            ->orderByRaw("CASE 
+                WHEN roles.name = 'superadmin' THEN 1
+                WHEN roles.name = 'admin' THEN 2
+                WHEN roles.name IS NULL THEN 4
+                ELSE 3
+            END")
+            ->orderBy('users.name');
 
         $users = $query->paginate(10);
-        $roles = Role::pluck('name')->toArray();
 
-        return view('livewire.admin.users-table', compact('users', 'roles'));
+        return view('livewire.admin.users-table', compact('users'));
     }
 }

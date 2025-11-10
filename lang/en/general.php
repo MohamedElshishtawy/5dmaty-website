@@ -39,4 +39,18 @@ return [
     'cta_call' => 'Call Us',
     'cta_whatsapp' => 'Chat on WhatsApp',
     'whatsapp_prefill' => 'السلام عليمكم هل ممكن استعلم عن خدماتكم واسعارها',
+    
+    // Property type & status
+    'property_type' => 'Property Type',
+    'property_status' => 'Property Status',
+    'sale' => 'Sale',
+    'rent' => 'Rent',
+    'status_inactive' => 'Inactive',
+    'status_active' => 'Active',
+    'status_sold' => 'Sold',
+    'status_rented' => 'Rented',
+    'all_types' => 'All types',
+    'filter_by_type' => 'Filter by type',
+    'filter_by_status' => 'Filter by status',
+    'clear_filters' => 'Clear filters',
 ];

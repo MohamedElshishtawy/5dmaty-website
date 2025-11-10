@@ -6,6 +6,8 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\EmployeeProfileController;
 use App\Http\Controllers\Admin\JobAdminController;
+use App\Http\Controllers\Admin\FaqAdminController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SocialAuthController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +33,11 @@ Route::get('real-estate/{property:slug}', [PropertyController::class, 'show'])->
 // Public job routes
 Route::get('jobs', [JobController::class, 'index'])->name('jobs.index');
 Route::get('jobs/{job:slug}', [JobController::class, 'show'])->name('jobs.show');
+
+// Public categories routes
+Route::get('categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
+// Fallback by ID if slug missing (temporary support)
+Route::get('categories/id/{category}', [CategoryController::class, 'show'])->name('categories.showById');
 
 // Auth-required job routes
 Route::middleware('auth')->group(function () {
@@ -62,11 +69,23 @@ Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name(
     Route::get('jobs/{job}/applications', [JobAdminController::class, 'applications'])->name('jobs.applications');
     Route::delete('jobs/{job}', [JobAdminController::class, 'destroy'])->name('jobs.destroy');
     
+    // FAQ management routes
+    Route::get('faqs', [FaqAdminController::class, 'index'])->name('faqs.index');
+
+    // Settings
+    Route::get('settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings.index');
+    Route::post('settings', [App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('settings.update');
+    // Languages management (simple)
+    Route::post('languages', [App\Http\Controllers\Admin\LanguageAdminController::class, 'store'])->name('languages.store');
+    Route::post('languages/{language}/toggle', [App\Http\Controllers\Admin\LanguageAdminController::class, 'toggle'])->name('languages.toggle');
+
     // Employee management routes
     Route::get('employees', [App\Http\Controllers\Admin\EmployeeProfileAdminController::class, 'index'])->name('employees.index');
     Route::get('employees/{employee}', [App\Http\Controllers\Admin\EmployeeProfileAdminController::class, 'show'])->name('employees.show');
     Route::delete('employees/{employee}', [App\Http\Controllers\Admin\EmployeeProfileAdminController::class, 'destroy'])->name('employees.destroy');
     Route::post('employees/{employee}/toggle-public', [App\Http\Controllers\Admin\EmployeeProfileAdminController::class, 'togglePublic'])->name('employees.togglePublic');
+
+    // Services are managed within categories page (no standalone services index)
 });
 
 //Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

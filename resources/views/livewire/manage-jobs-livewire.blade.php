@@ -9,7 +9,7 @@
 
     </div>
     <div class="card-body">
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2 align-items-center">
             <i class="fas fa-filter"></i>
             <span>{{ __('general.filter_by') }}</span>
             <select wire:model.live="status" class="form-select form-select-sm" style="width: auto;">

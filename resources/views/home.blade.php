@@ -22,12 +22,12 @@
             <div class="row align-items-center g-4">
                 <div class="col-12 col-lg-6 order-2 order-lg-1">
                     <div class="text-center text-lg-start hero-glass p-3 p-md-4 rounded-4">
-                        <img class="hero-logo mb-3 mx-auto mx-lg-0" src="{{asset('images/white-5dmaty.svg')}}" alt="5dmaty"/>
-                        <h1 class="display-5 fw-bold mb-3  mx-auto mx-lg-0 text-center text-lg-end text-dark">{{ __('خدماتى') }}</h1>
-                        <p class="lead mb-4  text-center text-lg-end text-dark">{{ __('general.tagline_home', ['company' => config('app.name')]) }}</p>
+                        <img class="hero-logo mb-3 mx-auto mx-lg-0" src="{{ \App\Support\Settings::imageUrl('home.hero.logo', asset('images/white-5dmaty.svg')) }}" alt="5dmaty"/>
+                        <h1 class="display-5 fw-bold mb-3  mx-auto mx-lg-0 text-center text-lg-end text-dark parastoo">{{ \App\Support\Settings::get('home.hero.title', __('خدماتي')) }}</h1>
+                        <p class="lead mb-4  text-center text-lg-end text-dark">{{ \App\Support\Settings::get('home.hero.subtitle', __('general.tagline_home', ['company' => config('app.name')])) }}</p>
                         <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
-                            <a href="#categories" class="btn btn-gradient px-4 py-2 rounded-pill">{{ __('general.categories') }}</a>
-                            <a href="#features" class="btn btn-outline-dark px-4 py-2 rounded-pill">{{ __('general.features') }}</a>
+                            <a href="#categories" class="btn btn-gradient px-4 py-2 rounded-pill">{{ \App\Support\Settings::get('home.cta.categories_label', __('general.categories')) }}</a>
+                            <a href="#features" class="btn btn-outline-dark px-4 py-2 rounded-pill">{{ \App\Support\Settings::get('home.cta.features_label', __('general.features')) }}</a>
                         </div>
                     </div>
                 </div>
@@ -38,14 +38,104 @@
         </div>
     </section>
 
+    @if(($services ?? collect())->count() > 0)
+    <section id="services" class="services-slider-section py-5 bg-white position-relative">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h2 class="section-title m-0">{{ \App\Support\Settings::get('home.sections.services.title', __('general.services')) }}</h2>
+            </div>
+            <div class="swiper" id="servicesSwiper">
+                <div class="swiper-wrapper">
+                    @foreach($services as $service)
+                        @php
+                            $icon = $service->icon_image ? asset('storage/' . $service->icon_image) : asset('images/black-5dmaty.svg');
+                        @endphp
+                        <div class="swiper-slide">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body d-grid gap-2" style="grid-template-rows: auto 1fr;">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="{{ $icon }}" alt="{{ $service->name }}" style="width:56px;height:56px;object-fit:cover;border-radius:12px;">
+                                        <div class="d-grid">
+                                            <strong class="small">{{ $service->name }}</strong>
+                                            <small class="text-muted">{{ $service->category?->name }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        @if(!is_null($service->price) && (float)$service->price > 0)
+                                            <div>
+                                                <span style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; font-weight: bold; padding: 0.25rem 0.6rem; border-radius: 8px; font-size:.85rem;">
+                                                    {{ number_format($service->price, 0) }} {{ __('general.currency') }}
+                                                </span>
+                                            </div>
+                                        @else
+                                            <span></span>
+                                        @endif
+                                        @php
+                                            $wa_number = config('constants.whatsapp_number');
+                                            $wa_text = urlencode(__('general.service_whatsapp_message', ['service' => $service->name, 'category' => $service->category?->name ?? '']));
+                                            $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
+                                        @endphp
+                                        <a href="{{ $wa_url }}" target="_blank" class="btn btn-sm whatsapp-btn" title="{{ __('general.inquire_about_service') }}">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </a>
+                                    </div>
+                                    @php
+                                        $categoryLink = null;
+                                        if (!empty($service->category?->slug)) {
+                                            $categoryLink = route('categories.show', ['category' => $service->category->slug]);
+                                        } elseif (!empty($service->category?->id)) {
+                                            $categoryLink = route('categories.showById', ['category' => $service->category->id]);
+                                        }
+                                    @endphp
+                                    @if($categoryLink)
+                                        <a class="stretched-link" href="{{ $categoryLink }}" aria-label="{{ $service->name }}"></a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                new Swiper('#servicesSwiper', {
+                    loop: true,
+                    rtl: true,
+                    autoplay: { delay: 2500, disableOnInteraction: false },
+                    slidesPerView: 2,
+                    spaceBetween: 12,
+                    breakpoints: {
+                        576: { slidesPerView: 2, spaceBetween: 12 },
+                        768: { slidesPerView: 3, spaceBetween: 16 },
+                        992: { slidesPerView: 4, spaceBetween: 18 },
+                        1200: { slidesPerView: 5, spaceBetween: 20 }
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+            });
+        </script>
+    </section>
+    @endif
+
 
     <section id="categories" class="categories-section  py-5 bg-white position-relative">
         <div class="container">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <h2 class="section-title m-0">{{ __('general.categories') }}</h2>
+            <h2 class="section-title m-0">{{ \App\Support\Settings::get('home.sections.categories.title', __('general.categories')) }}</h2>
         </div>
 
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 g-4">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
             @foreach(($categories ?? collect()) as $category)
                 @php
                     $media = $category->medias->first();
@@ -58,14 +148,32 @@
                         <div class="ratio ratio-16x9">
                             <img src="{{ $src }}" alt="{{ $category->name }}" class="category-image">
                         </div>
-                        <div class="card-body">
+                        <div class="p-3" style="
+                        display: grid;
+                        height: 100%;
+                        align-content: space-between;
+                        grid-template-rows: auto 1fr auto;
+                    ">
                             <h3 class="h5 card-title mb-2">{{ $category->name }}</h3>
-                            <p class="card-text text-muted mb-0">{{ $short }}</p>
+                            <div class="card-text text-muted mb-0">
+                                <p class="card-text text-muted mb-0">{{ $short }}</p>
+                            </div>
                             <div class="d-flex align-items-center justify-content-end mt-3">
-                                <a href="https://wa.me/201065189050?text={{ urlencode(__('general.whatsapp_category_question', ['category' => $category->name])) }}" class="btn btn-sm btn-primary">
-                                    <i class="fa-brands fa-whatsapp me-2" style="color:#25D366"></i>
-                                    تواصل الآن
-                                </a>
+                                @php
+                                    $categoryLink = null;
+                                    if (!empty($category->slug)) {
+                                        $categoryLink = route('categories.show', ['category' => $category->slug]);
+                                    } elseif (!empty($category->id)) {
+                                        $categoryLink = route('categories.showById', ['category' => $category->id]);
+                                    }
+                                @endphp
+                                @if($categoryLink)
+                                    <a href="{{ $categoryLink }}" class="btn btn-sm btn-primary">
+                                        {{ \App\Support\Settings::get('home.sections.categories.show_more_label', __('general.show_more')) }}
+                                    </a>
+                                @else
+                                    <span class="btn btn-sm btn-secondary disabled">{{ \App\Support\Settings::get('home.sections.categories.show_more_label', __('general.show_more')) }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -80,15 +188,16 @@
     <section id="properties" class="properties-section py-5 position-relative" style="background-color: #f2f3f6">
         <div class="container">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h2 class="section-title m-0">{{ __('general.properties') }}</h2>
+                <h2 class="section-title m-0">{{ \App\Support\Settings::get('home.sections.properties.title', __('general.properties')) }}</h2>
                 <a href="{{ route('properties.index') }}" class="btn btn-outline-primary">
-                    {{ __('general.see_more') }}
+                    {{ \App\Support\Settings::get('home.sections.properties.see_more_label', __('general.see_more')) }}
                     <i class="fas fa-arrow-left ms-2"></i>
                 </a>
             </div>
 
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 @foreach($properties as $property)
+                    @continue(method_exists($property, 'isPubliclyVisible') && !$property->isPubliclyVisible())
                     @php
                         $media = $property->medias->first();
                         $image = $media ? asset('storage/' . $media->url) : asset('images/black-5dmaty.svg');
@@ -108,17 +217,22 @@
                                     </p>
                                 @endif
 
-                                @if($property->price)
-                                    <div class="mb-3">
+                                @if($property->price > 0)
+                                    <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
                                         <span style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; font-weight: bold; padding: 0.5rem 1rem; border-radius: 12px; display: inline-block;">
                                             {{ number_format($property->price, 0) }} {{__('general.currency')}}
                                         </span>
+                                        <x-property-badges :property="$property" />
+                                    </div>
+                                @else
+                                    <div class="mb-3">
+                                        <x-property-badges :property="$property" />
                                     </div>
                                 @endif
 
                                 <div class="mt-auto">
                                     <a href="{{ route('properties.show', $property->slug) }}" class="btn btn-primary w-100">
-                                        {{ __('general.view_details') }}
+                                        {{ \App\Support\Settings::get('home.sections.properties.view_details_label', __('general.view_details')) }}
                                     </a>
                                 </div>
                             </div>
@@ -135,9 +249,9 @@
     <section id="jobs" class="jobs-section py-5 bg-white position-relative">
         <div class="container">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h2 class="section-title m-0">{{ __('general.jobs') }}</h2>
+                <h2 class="section-title m-0">{{ \App\Support\Settings::get('home.sections.jobs.title', __('general.jobs')) }}</h2>
                 <a href="{{ route('jobs.index') }}" class="btn btn-outline-primary">
-                    {{ __('general.see_more') }}
+                    {{ \App\Support\Settings::get('home.sections.jobs.see_more_label', __('general.see_more')) }}
                     <i class="fas fa-arrow-left ms-2"></i>
                 </a>
             </div>
@@ -172,7 +286,7 @@
                                 <div class="mt-auto">
                                     <div class="d-flex gap-2">
                                         <a href="{{ route('jobs.show', $job->slug) }}" class="btn btn-primary flex-grow-1">
-                                            {{ __('general.view_details') }}
+                                            {{ \App\Support\Settings::get('home.sections.jobs.view_details_label', __('general.view_details')) }}
                                         </a>
                                         @if($job->whatsapp_phone)
                                             @php
@@ -194,90 +308,35 @@
         </div>
     </section>
     @endif
-
-{{--    <section id="features" class="features-section py-5 bg-white position-relative" style="background-color: rgba(0,0,0,0.02)">--}}
-{{--        <div class="container">--}}
-{{--            <h2 class="section-title text-center mb-4">{{ __('general.features') }}</h2>--}}
-{{--            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3 g-lg-4">--}}
-{{--                @foreach([1,2,3,4,5] as $i)--}}
-{{--                    <div class="col">--}}
-{{--                        <div class="card h-100 border-0 shadow-sm rounded-4 p-3">--}}
-{{--                            <div class="icon-badge mb-2"><i class="fa-solid fa-star"></i></div>--}}
-{{--                            <h3 class="h6 fw-bold mb-1">{{ __('general.feature_title') }} {{ $i }}</h3>--}}
-{{--                            <p class="small text-muted mb-0">{{ __('general.feature_desc') }}</p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
-
-{{--    <section id="testimonials" class="testimonials-section py-5 bg-white position-relative">--}}
-{{--        <div class="container">--}}
-{{--            <div class="d-flex align-items-center justify-content-between mb-3">--}}
-{{--                <h2 class="section-title m-0">{{ __('general.testimonials') }}</h2>--}}
-{{--            </div>--}}
-{{--            <div class="scroll-row">--}}
-{{--                @foreach([1,2,3,4] as $t)--}}
-{{--                    <div class="t-card card border-0 shadow-sm rounded-4">--}}
-{{--                        <div class="card-body">--}}
-{{--                            <div class="quote-icon mb-2"><i class="fa-solid fa-quote-right"></i></div>--}}
-{{--                            <p class="fst-italic mb-3">{{ __('general.testimonial_text') }}</p>--}}
-{{--                            <div class="d-flex align-items-center gap-2">--}}
-{{--                                <img src="https://i.pravatar.cc/40?img={{ $t }}" class="rounded-circle" width="40" height="40" alt="user">--}}
-{{--                                <div>--}}
-{{--                                    <div class="fw-bold small">{{ __('general.user_name') }}</div>--}}
-{{--                                    <div class="text-muted small">{{ __('general.user_title') }}</div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
-
-{{--    <section id="faq" class="faq-section py-5 bg-white position-relative" style="background-color: rgba(0,0,0,0.02)">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row g-4 align-items-start">--}}
-{{--                <div class="col-12 col-lg-5">--}}
-{{--                    <div class="ratio ratio-4x3 bg-dark rounded-4 d-flex align-items-center justify-content-center">--}}
-{{--                        <i class="fa-solid fa-circle-question text-white-50" style="font-size: 72px;"></i>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-12 col-lg-7">--}}
-{{--                    <h2 class="section-title mb-3">{{ __('general.faq') }}</h2>--}}
-{{--                    <div class="accordion" id="faqAccordion">--}}
-{{--                        @foreach([1,2,3,4] as $q)--}}
-{{--                        <div class="accordion-item border-0 shadow-sm rounded-3 mb-2 overflow-hidden">--}}
-{{--                            <h2 class="accordion-header">--}}
-{{--                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq{{$q}}" aria-expanded="{{ $q===1 ? 'true' : 'false' }}" aria-controls="faq{{$q}}">--}}
-{{--                                    {{ __('general.faq_q') }} {{ $q }}--}}
-{{--                                </button>--}}
-{{--                            </h2>--}}
-{{--                            <div id="faq{{$q}}" class="accordion-collapse collapse {{ $q===1 ? 'show' : '' }}" data-bs-parent="#faqAccordion">--}}
-{{--                                <div class="accordion-body">{{ __('general.faq_a') }}</div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
-
-    <section id="final-cta" class="final-cta-section py-5 bg-white position-relative">
+    @if(($faqs ?? collect())->count() > 0)
+    <section id="faq" class="py-5 bg-white position-relative">
         <div class="container">
-            <div class="rounded-4 p-4 p-md-5 text-center text-white cta-bg">
-                <h2 class="display-6 fw-bold mb-2">{{ __('general.cta_headline') }}</h2>
-                <p class="mb-4">{{ __('general.cta_subtext') }}</p>
-                <form class="d-flex gap-2 justify-content-center flex-column flex-sm-row">
-                    <input type="email" class="form-control rounded-pill" placeholder="{{ __('general.email_placeholder') }}" required>
-                    <button type="submit" class="btn btn-accent rounded-pill px-4">{{ __('general.submit') }}</button>
-                </form>
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h2 class="section-title m-0">{{ __('general.faqs') }}</h2>
+            </div>
+            <div class="accordion accordion-flush" id="faqAccordion">
+                @foreach($faqs as $index => $faq)
+                    @php
+                        $headingId = 'faqHeading'.$index;
+                        $collapseId = 'faqCollapse'.$index;
+                    @endphp
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="{{ $headingId }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $collapseId }}" aria-expanded="false" aria-controls="{{ $collapseId }}">
+                                {{ $faq->question }}
+                            </button>
+                        </h2>
+                        <div id="{{ $collapseId }}" class="accordion-collapse collapse" aria-labelledby="{{ $headingId }}" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                {!! nl2br(e($faq->answer)) !!}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 
     <x-footer/>
 @endsection

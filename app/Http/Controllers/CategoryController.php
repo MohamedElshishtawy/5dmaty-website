@@ -15,6 +15,16 @@ class CategoryController extends Controller
         return view('category.index');
     }
 
+    // Public: show category with its services
+    public function show(Category $category)
+    {
+        $category->load(['medias', 'services' => function ($q) {
+            $q->where('is_active', true)->with('medias');
+        }]);
+
+        return view('category.public.show', compact('category'));
+    }
+
 
 
 

@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="https://wa.me/201065189050?text={{ urlencode(__('general.whatsapp_prefill')) }}" target="_blank" rel="noopener" aria-label="{{ __('general.whatsapp') }}"  >
+                        <a href="https://wa.me/{{ config('constants.whatsapp_number') }}?text={{ urlencode(__('general.whatsapp_prefill')) }}" target="_blank" rel="noopener" aria-label="{{ __('general.whatsapp') }}"  >
                             <i class="fa-brands fa-whatsapp me-2" style="color:#25D366"></i>
                             <span>{{ __('general.cta_whatsapp') }}</span>
                         </a>

@@ -39,6 +39,13 @@
             <div class="text-center mb-5">
                 <h1 class="display-4 fw-bold text-dark mb-3">{{ __('general.properties') }}</h1>
                 <p class="lead text-muted">{{ __('general.properties_subtitle') }}</p>
+                @auth
+                <div class="d-flex justify-end">
+                    <button id="add-property-btn" class="btn btn-warning text-dark fw-semibold">
+                        <i class="fas fa-plus ms-1"></i> {{ __('general.add_property') }}
+                    </button>
+                </div>
+                @endauth
             </div>
         </div>
     </section>
@@ -46,6 +53,28 @@
     <section class="py-5 bg-white">
         <div class="container">
             @if($properties->count() > 0)
+                {{-- <form method="GET" action="{{ route('properties.index') }}" class="row g-2 align-items-end mb-4">
+                    <div class="col-6 col-md-3">
+                        <label for="property_type" class="form-label mb-1">{{ __('general.filter_by_type') }}</label>
+                        <select id="property_type" name="property_type" class="form-select">
+                            <option value="">{{ __('general.all_types') }}</option>
+                            <option value="sale" @selected(request('property_type')==='sale')>{{ __('general.sale') }}</option>
+                            <option value="rent" @selected(request('property_type')==='rent')>{{ __('general.rent') }}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label for="property_status" class="form-label mb-1">{{ __('general.filter_by_status') }}</label>
+                        <select id="property_status" name="property_status" class="form-select">
+                            <option value="">{{ __('general.all') }}</option>
+                            <option value="active" @selected(request('property_status')==='active')>{{ __('general.status_active') }}</option>
+                            <option value="sold" @selected(request('property_status')==='sold')>{{ __('general.status_sold') }}</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-auto d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">{{ __('general.filter_by') }}</button>
+                        <a href="{{ route('properties.index') }}" class="btn btn-outline-secondary">{{ __('general.clear_filters') }}</a>
+                    </div>
+                </form> --}}
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                     @foreach($properties as $property)
                         @php
@@ -68,8 +97,13 @@
                                     @endif
 
                                     @if($property->price)
-                                        <div class="mb-3">
+                                        <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
                                             <span class="price-badge">{{ number_format($property->price, 0) }} {{__('general.currency')}}</span>
+                                            <x-property-badges :property="$property" />
+                                        </div>
+                                    @else
+                                        <div class="mb-3">
+                                            <x-property-badges :property="$property" />
                                         </div>
                                     @endif
 
@@ -97,6 +131,22 @@
     </section>
 
     <x-footer/>
+    @auth
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var btn = document.getElementById('add-property-btn');
+            if (btn) {
+                btn.addEventListener('click', function () {
+                    if (window.Livewire && typeof window.Livewire.dispatch === 'function') {
+                        window.Livewire.dispatch('openModal', { component: 'create-edit-property-modal' });
+                    } else if (window.livewire && typeof window.livewire.emit === 'function') {
+                        window.livewire.emit('openModal', 'create-edit-property-modal');
+                    }
+                });
+            }
+        });
+    </script>
+    @endauth
 @endsection
 
 
