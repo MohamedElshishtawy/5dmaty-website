@@ -18,6 +18,7 @@ class SocialAuthController extends Controller
     {
         $user = Socialite::driver('google')->user();
 
+        dd($user);
         $oldUser = User::where('email', $user->email)->first();
 
         if ($oldUser) {
