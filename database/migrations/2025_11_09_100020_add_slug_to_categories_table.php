@@ -17,15 +17,28 @@ return new class extends Migration
         });
 
         // Backfill slugs for existing categories
+        // Add "checkers" for validation and ensure id uniqueness before updating slugs
         $categories = DB::table('categories')->select('id', 'name')->get();
+
+        // We'll make a checker array to keep track of existing slugs (just in case)
+        $existingSlugs = DB::table('categories')->pluck('slug')->filter()->toArray();
+        $slugChecker = array_flip($existingSlugs);
+
         foreach ($categories as $cat) {
             $base = Str::slug($cat->name ?? ('category-'.$cat->id));
+
             $slug = $base;
-            $i = 1;
-            while (DB::table('categories')->where('slug', $slug)->exists()) {
-                $slug = $base . '-' . ++$i;
+            $i    = 1;
+            // Check using both DB and our checker to avoid even temporary collision
+            while (
+                isset($slugChecker[$slug]) ||
+                DB::table('categories')->where('slug', $slug)->where('id', '!=', $cat->id)->exists()
+            ) {
+                $slug = $base . '-' . $i++;
             }
+            // Update and mark slug as used
             DB::table('categories')->where('id', $cat->id)->update(['slug' => $slug]);
+            $slugChecker[$slug] = true;
         }
     }
 
