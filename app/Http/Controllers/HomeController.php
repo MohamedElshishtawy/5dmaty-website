@@ -31,10 +31,8 @@ class HomeController extends Controller
         $categories = Category::all();
         
         // Get latest 5 published properties
-        $properties = Property::whereNotNull('published_at')
-            ->where('is_accepted', true)
+        $properties = Property::where('is_accepted', true)
             ->where('property_status', 'active')
-            ->orderBy('published_at', 'desc')
             ->with('medias')
             ->take(5)
             ->get();

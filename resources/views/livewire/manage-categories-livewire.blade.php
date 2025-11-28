@@ -1,3 +1,6 @@
+@php
+    $activeSidebar = 'categories';
+@endphp
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h2 class="card-title">{{ __('general.categories') }}</h2>
@@ -5,7 +8,7 @@
             <button class="btn btn-primary" wire:click="$dispatch('openModal', {'component': 'create-edit-category-modal'})">{{ __('general.add_category') }}</button>
         </div>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive">
         <table class="table" >
             <thead>
             <th>{{ __('general.name') }}</th>

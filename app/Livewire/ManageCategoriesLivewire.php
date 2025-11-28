@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Service;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ManageCategoriesLivewire extends Component
@@ -31,6 +32,7 @@ class ManageCategoriesLivewire extends Component
         }
     }
 
+    #[On('serviceUpdated')]
     public function render()
     {
         $categories = Category::with('services')->get();

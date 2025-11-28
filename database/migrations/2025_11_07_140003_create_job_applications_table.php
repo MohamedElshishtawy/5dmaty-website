@@ -11,13 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('job_applications')) {
+            Schema::dropIfExists('job_applications');
+        }
+        
         Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('job_posting_id')->constrained('job_postings')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('employee_profile_id')->nullable()->constrained()->onDelete('set null');
-            $table->text('notes')->nullable();
+            $table->string('name');
+            $table->integer('age')->nullable();
+            $table->string('education')->nullable();
+            $table->string('marital_status')->nullable();
+            $table->string('military_status')->nullable();
+            $table->string('residence')->nullable();
+            $table->string('desired_position')->nullable();
             $table->string('whatsapp_phone')->nullable();
+            $table->text('about')->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
     }

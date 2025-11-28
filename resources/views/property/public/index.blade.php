@@ -79,12 +79,17 @@
                     @foreach($properties as $property)
                         @php
                             $media = $property->medias->first();
-                            $image = $media ? asset('storage/' . $media->url) : asset('images/black-5dmaty.svg');
+                            $mediaUrl = $media ? asset('storage/' . $media->url) : asset('images/black-5dmaty.svg');
+                            $isVideo = $media && $media->type === 'video';
                         @endphp
                         <div class="col">
                             <div class="card property-card h-100 border-0 shadow-sm">
                                 <div class="ratio ratio-4x3">
-                                    <img src="{{ $image }}" alt="{{ $property->title }}" class="property-image">
+                                    @if($isVideo)
+                                        <video src="{{ $mediaUrl }}" class="property-image" controls preload="metadata"></video>
+                                    @else
+                                        <img src="{{ $mediaUrl }}" alt="{{ $property->title }}" class="property-image">
+                                    @endif
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <h3 class="h5 card-title mb-2">{{ $property->title }}</h3>

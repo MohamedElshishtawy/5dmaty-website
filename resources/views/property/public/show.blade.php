@@ -54,14 +54,22 @@
         .thumbnail {
             width: 100px;
             height: 100px;
-            object-fit: cover;
             border-radius: 8px;
             cursor: pointer;
             opacity: 0.6;
             transition: opacity 0.3s;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .thumbnail img, .thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .thumbnail:hover, .thumbnail.active {
             opacity: 1;
+            border: 2px solid var(--primary);
         }
     </style>
 @endsection
@@ -75,17 +83,33 @@
                 <!-- Property Images -->
                 <div class="col-lg-8">
                     @if($property->medias->count() > 0)
-                        <div class="property-gallery mb-3">
-                            <img id="mainImage" src="{{ asset('storage/' . $property->medias->first()->url) }}" alt="{{ $property->title }}">
+                        <div class="property-gallery mb-3" id="mainMediaContainer">
+                            @php $firstMedia = $property->medias->first(); @endphp
+                            @if($firstMedia->type === 'video')
+                                <video src="{{ asset('storage/' . $firstMedia->url) }}" controls style="width: 100%; height: 500px; object-fit: cover;"></video>
+                            @else
+                                <img src="{{ asset('storage/' . $firstMedia->url) }}" alt="{{ $property->title }}" style="width: 100%; height: 500px; object-fit: cover;">
+                            @endif
                         </div>
                         
                         @if($property->medias->count() > 1)
                             <div class="thumbnail-gallery">
                                 @foreach($property->medias as $index => $media)
-                                    <img src="{{ asset('storage/' . $media->url) }}" 
-                                         alt="{{ $property->title }}" 
-                                         class="thumbnail {{ $index === 0 ? 'active' : '' }}"
-                                         onclick="changeMainImage('{{ asset('storage/' . $media->url) }}', this)">
+                                    @php
+                                        $url = asset('storage/' . $media->url);
+                                        $type = $media->type;
+                                    @endphp
+                                    <div class="thumbnail {{ $index === 0 ? 'active' : '' }}"
+                                         onclick="changeMainMedia('{{ $url }}', '{{ $type }}', this)">
+                                        @if($type === 'video')
+                                            <video src="{{ $url }}"></video>
+                                            <div class="position-absolute top-50 start-50 translate-middle">
+                                                <i class="fas fa-play-circle text-white" style="font-size: 30px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);"></i>
+                                            </div>
+                                        @else
+                                            <img src="{{ $url }}" alt="{{ $property->title }}">
+                                        @endif
+                                    </div>
                                 @endforeach
                             </div>
                         @endif
@@ -162,8 +186,28 @@
     <x-footer/>
 
     <script>
-        function changeMainImage(src, thumbnail) {
-            document.getElementById('mainImage').src = src;
+        function changeMainMedia(url, type, thumbnail) {
+            const container = document.getElementById('mainMediaContainer');
+            container.innerHTML = '';
+            
+            if (type === 'video') {
+                const video = document.createElement('video');
+                video.src = url;
+                video.controls = true;
+                video.style.width = '100%';
+                video.style.height = '500px';
+                video.style.objectFit = 'cover';
+                video.autoplay = true;
+                container.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = url;
+                img.style.width = '100%';
+                img.style.height = '500px';
+                img.style.objectFit = 'cover';
+                container.appendChild(img);
+            }
+
             document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
             thumbnail.classList.add('active');
         }

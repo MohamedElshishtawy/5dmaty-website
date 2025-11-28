@@ -19,8 +19,7 @@ class PropertyController extends Controller
         $query = Property::where('is_accepted', true)
             ->where('property_status', 'active')
             ->publiclyVisible()
-            ->with('medias')
-            ->orderBy('published_at', 'desc');
+            ->with('medias');
 
         $propertyType = $request->query('property_type');
         if (in_array($propertyType, [Property::TYPE_SALE, Property::TYPE_RENT], true)) {
@@ -47,14 +46,6 @@ class PropertyController extends Controller
     // Public show - shows single property details
     public function show(Property $property)
     {
-        // Only show published and publicly visible properties
-        if (
-            !$property->published_at ||
-            $property->published_at > now() ||
-            !$property->isPubliclyVisible()
-        ) {
-            abort(404);
-        }
 
         return view('property.public.show', compact('property'));
     }

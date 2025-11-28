@@ -39,3 +39,12 @@ class ManageFaqsLivewire extends Component
 
 
 
+
+
+
+
+
+
+
+
+

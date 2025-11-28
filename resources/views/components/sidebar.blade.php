@@ -1,44 +1,45 @@
+@props(['activeSidebar' => null])
 <div {{$attributes->merge(['class'=>"sidebar"])}}>
 
     <div class="position-sticky sidebar bg-white  p-3" style="height: 100%; top: 0px;"> 
         <ul class="list-unstyled mb-0">
-            <li class="mb-2">
+            <li @class(["mb-2", "rounded", "bg-body-secondary" => $activeSidebar == 'users'])>
                 <a class="nav-link" href="{{ route('admin.users.index') }}">
                     <i class="fas fa-users me-2 text-primary-gradient"></i>
                     {{__('general.users-management')}}
                 </a>
             </li>
-            <li class="mb-2">
+            <li @class(["mb-2", "rounded", "bg-body-secondary" => $activeSidebar == 'jobs'])>
                 <a class="nav-link" href="{{route('admin.jobs.index')}}">
                     <i class="fas fa-briefcase me-2 text-primary-gradient"></i>
                     {{__('general.employment-management')}}
                 </a>
             </li>
-            <li class="mb-2">
+            <li @class(["mb-2", "rounded", "bg-body-secondary" => $activeSidebar == 'employees'])>
                 <a class="nav-link" href="{{route('admin.employees.index')}}">
                     <i class="fas fa-user-tie me-2 text-primary-gradient"></i>
                     {{__('general.employee_management')}}
                 </a>
             </li>
-            <li class="mb-2">
+            <li @class(["mb-2", "rounded", "bg-body-secondary" => $activeSidebar == 'properties'])>
                 <a class="nav-link" href="{{route('admin.properties.index')}}">
                     <i class="fas fa-home me-2 text-primary-gradient"></i>
                     {{__('general.real-state-management')}}
                 </a>
             </li>
-            <li class="mb-2">
+            <li @class(["mb-2", "rounded", "bg-body-secondary" => $activeSidebar == 'settings'])>
                 <a class="nav-link" href="{{route('admin.settings.index')}}">
                     <i class="fas fa-cog me-2 text-primary-gradient"></i>
                     {{__('general.settings')}}
                 </a>
             </li>
-            <li class="mb-2">
+            <li @class(["mb-2", "rounded", "bg-body-secondary" => $activeSidebar == 'faqs'])>
                 <a class="nav-link" href="{{route('admin.faqs.index')}}">
                     <i class="fas fa-question-circle me-2 text-primary-gradient"></i>
                     {{__('general.faq_management')}}
                 </a>
             </li>
-            <li class="mb-0">
+            <li @class(["mb-0", "rounded", "bg-body-secondary" => $activeSidebar == 'categories'])>
                 <a class="nav-link" href="{{route('admin.categories.index')}}">
                     <i class="fas fa-tags me-2 text-primary-gradient"></i>
                     {{__('general.categories')}}

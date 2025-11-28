@@ -31,7 +31,7 @@
                             <td>{{$property->title}}</td>
                             <td>{{$property->location ?? '-'}}</td>
                             <td>{{$property->price ? number_format($property->price, 2) : '-'}}</td>
-                            <td>{{$property->published_at ? $property->published_at->format('Y-m-d') : '-'}}</td>
+                            <td>{{$property->created_at->format('Y-m-d')}}</td>
                             <td>
                                 <button
                                     class="btn btn-sm {{ $property->is_accepted ? 'btn-success' : 'btn-outline-warning text-dark' }}"

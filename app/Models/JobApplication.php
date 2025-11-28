@@ -8,11 +8,22 @@ class JobApplication extends Model
 {
     protected $fillable = [
         'job_posting_id',
-        'user_id',
-        'employee_profile_id',
-        'notes',
-        'whatsapp_phone'
+        'name',
+        'age',
+        'education',
+        'marital_status',
+        'military_status',
+        'residence',
+        'desired_position',
+        'whatsapp_phone',
+        'about',
+        'status',
     ];
+
+    // Status constants
+    const STATUS_PENDING = 'pending';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REJECTED = 'rejected';
 
     public $timestamps = false;
 
@@ -26,13 +37,5 @@ class JobApplication extends Model
         return $this->belongsTo(JobPosting::class, 'job_posting_id');
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function employeeProfile()
-    {
-        return $this->belongsTo(EmployeeProfile::class);
-    }
+    
 }

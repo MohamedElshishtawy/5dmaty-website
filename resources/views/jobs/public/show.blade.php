@@ -58,16 +58,117 @@
                             </div>
                         @endif
 
-                        <div class="text-muted small">
-                            <i class="fas fa-calendar me-1"></i>
-                            {{ __('general.published_at') }}: {{ $job->published_at->format('Y-m-d') }}
-                        </div>
                     </div>
+
+                    <!-- Applications Section (Owner/Admin Only) -->
+                    @auth
+                        @if((Auth::id() === $job->user_id || Auth::user()->hasRole(['superadmin', 'admin'])) && $job->applications->count() > 0)
+                            <div class="job-detail-card bg-white p-4 mt-4">
+                                <h5 class="fw-bold mb-3">{{ __('general.applications') }} ({{ $job->applications->count() }})</h5>
+                                
+                                @foreach($job->applications as $application)
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <div>
+                                                    <h6 class="fw-bold mb-1">{{ $application->name }}</h6>
+                                                    @if($application->age)
+                                                        <small class="text-muted">{{ __('general.age') }}: {{ $application->age }}</small>
+                                                    @endif
+                                                </div>
+                                                <span class="badge bg-{{ $application->status === 'accepted' ? 'success' : ($application->status === 'rejected' ? 'danger' : 'warning') }}">
+                                                    @if($application->status === 'accepted')
+                                                        {{ __('general.accepted') }}
+                                                    @elseif($application->status === 'rejected')
+                                                        {{ __('general.rejected') }}
+                                                    @else
+                                                        {{ __('general.pending') }}
+                                                    @endif
+                                                </span>
+                                            </div>
+
+                                            <div class="row g-2 mb-2">
+                                                @if($application->education)
+                                                    <div class="col-6">
+                                                        <small><strong>{{ __('general.education') }}:</strong> {{ $application->education }}</small>
+                                                    </div>
+                                                @endif
+                                                @if($application->marital_status)
+                                                    <div class="col-6">
+                                                        <small><strong>{{ __('general.marital_status') }}:</strong> {{ $application->marital_status }}</small>
+                                                    </div>
+                                                @endif
+                                                @if($application->military_status)
+                                                    <div class="col-6">
+                                                        <small><strong>{{ __('general.military_status') }}:</strong> {{ $application->military_status }}</small>
+                                                    </div>
+                                                @endif
+                                                @if($application->residence)
+                                                    <div class="col-6">
+                                                        <small><strong>{{ __('general.residence') }}:</strong> {{ $application->residence }}</small>
+                                                    </div>
+                                                @endif
+                                                @if($application->desired_position)
+                                                    <div class="col-12">
+                                                        <small><strong>{{ __('general.desired_position') }}:</strong> {{ $application->desired_position }}</small>
+                                                    </div>
+                                                @endif
+                                                @if($application->whatsapp_phone)
+                                                    <div class="col-12">
+                                                        <small><strong>{{ __('general.whatsapp_phone') }}:</strong> 
+                                                            <a href="https://wa.me/{{ preg_replace('/\D+/', '', $application->whatsapp_phone) }}" target="_blank">
+                                                                {{ $application->whatsapp_phone }}
+                                                            </a>
+                                                        </small>
+                                                    </div>
+                                                @endif
+                                            </div>
+
+                                            @if($application->about)
+                                                <div class="mb-2">
+                                                    <small><strong>{{ __('general.about') }}:</strong></small>
+                                                    <p class="mb-0 small text-muted" style="white-space: pre-line;">{{ $application->about }}</p>
+                                                </div>
+                                            @endif
+
+                                            <div class="d-flex gap-2 mt-3">
+                                                @if($application->status !== 'accepted')
+                                                    <form action="{{ route('jobs.applications.updateStatus', ['job' => $job->slug, 'application' => $application->id]) }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="status" value="accepted">
+                                                        <button type="submit" class="btn btn-sm btn-success">
+                                                            <i class="fas fa-check me-1"></i>
+                                                            {{ __('general.accept') }}
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                                @if($application->status !== 'rejected')
+                                                    <form action="{{ route('jobs.applications.updateStatus', ['job' => $job->slug, 'application' => $application->id]) }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="status" value="rejected">
+                                                        <button type="submit" class="btn btn-sm btn-danger">
+                                                            <i class="fas fa-times me-1"></i>
+                                                            {{ __('general.reject') }}
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            </div>
+
+                                            <small class="text-muted">
+                                                <i class="fas fa-calendar me-1"></i>
+                                                {{ __('general.applied_at') }}: {{ $application->created_at->format('Y-m-d H:i') }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    @endauth
                 </div>
 
                 <!-- Action Sidebar -->
                 <div class="col-lg-4">
-                    <div class="job-detail-card bg-white p-4 sticky-top" style="top: 80px;">
+                    <div class="job-detail-card bg-white p-4 sticky-top z-0" style="top: 80px;">
                         <h5 class="fw-bold mb-3">{{ __('general.actions') }}</h5>
 
                         @if($job->whatsapp_phone)
@@ -84,15 +185,15 @@
                             </a>
                         @endif
 
-                        @auth
-                            @if($job->status === 'approved' && $job->is_active)
-                                <button class="btn btn-primary w-100 mb-3" 
-                                        onclick="Livewire.dispatch('openModal', {component: 'apply-to-job-modal', arguments: {job: {{ $job->id }}}})">
-                                    <i class="fas fa-paper-plane me-2"></i>
-                                    {{ __('general.apply_now') }}
-                                </button>
-                            @endif
+                        @if($job->status === 'approved' && $job->is_active)
+                            <button class="btn btn-primary w-100 mb-3" 
+                                    onclick="Livewire.dispatch('openModal', {component: 'apply-to-job-modal', arguments: {job: {{ $job->id }}}})">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                {{ __('general.apply_now') }}
+                            </button>
+                        @endif
 
+                        @auth
                             <!-- Owner/Admin Actions -->
                             @if(Auth::id() === $job->user_id || Auth::user()->hasRole(['superadmin', 'admin']))
                                 <div class="border-top pt-3 mt-3">
@@ -115,12 +216,6 @@
                                     @endif
                                 </div>
                             @endif
-                        @else
-                            <a href="{{ route('login') }}?intended={{ route('jobs.show', $job->slug) }}" 
-                               class="btn btn-primary w-100 mb-3">
-                                <i class="fas fa-sign-in-alt me-2"></i>
-                                {{ __('general.login_to_apply') }}
-                            </a>
                         @endauth
 
                         <a href="{{ route('jobs.index') }}" class="btn btn-outline-secondary w-100">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobPosting;
+use App\Models\JobApplication;
 use App\Models\EmployeeProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -94,5 +95,31 @@ class JobController extends Controller
         $job->update(['is_active' => !$job->is_active]);
 
         return back()->with('success', $job->is_active ? __('general.job_opened') : __('general.job_closed'));
+    }
+
+    // Update application status (owner or admin)
+    public function updateApplicationStatus(Request $request, JobPosting $job, JobApplication $application)
+    {
+        // Check authorization - must be job owner or admin
+        if (Auth::id() !== $job->user_id && !Auth::user()->hasRole(['superadmin', 'admin'])) {
+            abort(403);
+        }
+
+        // Verify application belongs to this job
+        if ($application->job_posting_id !== $job->id) {
+            abort(404);
+        }
+
+        $validated = $request->validate([
+            'status' => 'required|in:pending,accepted,rejected',
+        ]);
+
+        $application->update(['status' => $validated['status']]);
+
+        $message = $validated['status'] === 'accepted' 
+            ? __('general.application_accepted') 
+            : __('general.application_rejected');
+
+        return back()->with('success', $message);
     }
 }

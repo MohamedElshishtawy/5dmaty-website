@@ -24,12 +24,10 @@ class Property extends Model
         'price',
         'location',
         'whatsapp_phone',
-        'published_at',
         'is_accepted',
     ];
 
     protected $casts = [
-        'published_at' => 'datetime',
         'price' => 'decimal:2',
         'is_accepted' => 'boolean',
     ];

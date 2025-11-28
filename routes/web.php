@@ -5,6 +5,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\EmployeeProfileController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobAdminController;
 use App\Http\Controllers\Admin\FaqAdminController;
 use App\Http\Controllers\ServiceController;
@@ -44,12 +45,13 @@ Route::middleware('auth')->group(function () {
     Route::post('jobs', [JobController::class, 'store'])->name('jobs.store');
     Route::post('jobs/{job}/apply', [JobApplicationController::class, 'store'])->name('jobs.apply');
     Route::post('jobs/{job}/toggle-active', [JobController::class, 'toggleActive'])->name('jobs.toggleActive');
+    Route::post('jobs/{job}/applications/{application}/status', [JobController::class, 'updateApplicationStatus'])->name('jobs.applications.updateStatus');
     Route::post('employee-profile', [EmployeeProfileController::class, 'upsert'])->name('employee-profile.upsert');
 });
 
 // Admin area
 Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name('admin.')->group(function () {
-    Route::view('/', 'admin.dashboard')->name('dashboard');
+    Route::get('/', DashboardController::class)->name('dashboard');
     // keep users link to avoid layout route errors
     Route::view('users', 'admin.users.index')->name('users.index');
     Route::get('users/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('users.create');

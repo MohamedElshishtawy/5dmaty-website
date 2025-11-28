@@ -65,3 +65,12 @@ class CreateEditFaqModal extends ModalComponent
 
 
 
+
+
+
+
+
+
+
+
+

@@ -112,18 +112,6 @@
                 @enderror
             </div>
 
-            <!-- Published At -->
-            <div class="mb-3">
-                <label for="published_at" class="form-label">{{ __('general.published_at') }}</label>
-                <input type="date"
-                       class="form-control @error('published_at') is-invalid @enderror"
-                       id="published_at"
-                       wire:model="published_at">
-                @error('published_at')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
             <!-- Media Upload -->
             <div class="mb-3">
                 <label for="media_files" class="form-label">{{ __('general.upload_media') }}</label>
@@ -132,12 +120,12 @@
                        id="media_files"
                        wire:model="media_files"
                        multiple
-                       accept="image/*">
+                       accept="image/*,video/*">
                 @error('media_files.*')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-                <div class="form-text">{{ __('general.upload_media_help', ['formats' => 'JPG, PNG, GIF, WEBP']) }}</div>
-</div>
+                <div class="form-text">{{ __('general.upload_media_help', ['formats' => 'JPG, PNG, GIF, WEBP, MP4, AVI, MOV']) }}</div>
+            </div>
 
             <!-- Existing Media Display -->
             @if($property->id && $medias->count() > 0)

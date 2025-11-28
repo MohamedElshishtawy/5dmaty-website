@@ -98,8 +98,8 @@ class CreateEditServiceModal extends ModalComponent
 
         session()->flash('message', $this->service->id ? __('general.massages.updated') : __('general.massages.created'));
 
-        $this->dispatch('closeModal');
         $this->dispatch('serviceUpdated');
+        $this->dispatch('closeModal');
     }
 
     public function deleteIcon()

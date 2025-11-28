@@ -18,7 +18,6 @@ class CreateEditPropertyModal extends ModalComponent
     public $price;
     public $location;
     public $whatsapp_phone;
-    public $published_at;
     public $property_type;
     public $property_status;
     public $media_files;
@@ -32,11 +31,10 @@ class CreateEditPropertyModal extends ModalComponent
             'price' => 'nullable|numeric|min:0',
             'location' => 'nullable|string|max:255',
             'whatsapp_phone' => 'nullable|string|max:20',
-            'published_at' => 'nullable|date',
             'property_type' => 'required|in:sale,rent',
             'property_status' => 'required|in:inactive,active,sold',
             'media_files' => 'nullable|array',
-            'media_files.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,webp|max:10240',
+            'media_files.*' => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,mp4,mov,avi,wmv,webm|max:51200',
         ];
     }
 
@@ -49,7 +47,6 @@ class CreateEditPropertyModal extends ModalComponent
             $this->price = $this->property->price;
             $this->location = $this->property->location;
             $this->whatsapp_phone = $this->property->whatsapp_phone;
-            $this->published_at = $this->property->published_at ? $this->property->published_at->format('Y-m-d') : null;
             $this->property_type = $this->property->property_type;
             $this->property_status = $this->property->property_status ?: \App\Models\Property::STATUS_ACTIVE;
             $this->medias = $this->property->medias;
@@ -73,7 +70,6 @@ class CreateEditPropertyModal extends ModalComponent
                 'price' => $this->price,
                 'location' => $this->location,
                 'whatsapp_phone' => $this->whatsapp_phone,
-                'published_at' => $this->published_at,
             ]);
             $property = $this->property;
         } else {
@@ -86,7 +82,6 @@ class CreateEditPropertyModal extends ModalComponent
                 'price' => $this->price,
                 'location' => $this->location,
                 'whatsapp_phone' => $this->whatsapp_phone,
-                'published_at' => $this->published_at,
             ]);
         }
 

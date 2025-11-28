@@ -39,10 +39,10 @@
             <div class="col-6 col-lg-3">
                 <h6 class="text-light-emphasis small fw-bold mb-2">{{ __('general.main_pages') }}</h6>
                 <ul class="list-unstyled footer-links text-white">
-                    <li><a href="#">{{ __('general.home') }}</a></li>
-                    <li><a href="#">{{ __('general.employment') }}</a></li>
-                    <li><a href="#">{{ __('general.real-state') }}</a></li>
-                    <li><a href="#">{{ __('general.market') }}</a></li>
+                    <li><a href="{{ route('home') }}">{{ __('general.home') }}</a></li>
+                    <li><a href="{{ route('jobs.index') }}">{{ __('general.employment') }}</a></li>
+                    <li><a href="{{ route('properties.index') }}">{{ __('general.real-state') }}</a></li>
+                    <li><a href="https://mtgar.5dmaty.com">{{ __('general.market') }}</a></li>
                 </ul>
             </div>
 
@@ -51,14 +51,17 @@
                 <div class="col-6 col-lg-3">
                     <h6 class="text-light-emphasis small fw-bold mb-2">{{ __('general.management_links') }}</h6>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="#">{{ __('general.users-management') }}</a></li>
-                        <li><a href="#">{{ __('general.employment-management') }}</a></li>
-                        <li><a href="#">{{ __('general.real-state-management') }}</a></li>
-                        <li><a href="#">{{ __('general.settings') }}</a></li>
-                        <li><a href="#">{{ __('general.categories') }}</a></li>
+                        <li><a href="{{ route('admin.users.index') }}">{{ __('general.users-management') }}</a></li>
+                        <li><a href="{{ route('admin.jobs.index') }}">{{ __('general.employment-management') }}</a></li>
+                        <li><a href="{{ route('admin.properties.index') }}">{{ __('general.real-state-management') }}</a></li>
+                        <li><a href="{{ route('admin.settings.index') }}">{{ __('general.settings') }}</a></li>
+                        <li><a href="{{ route('admin.categories.index') }}">{{ __('general.categories') }}</a></li>
                         <li>
-                        <li>
-                            <a href="{{route('logout')}}" class="text-danger">{{ __('general.logout') }}</a>
+                            <form method="post" action="{{route('logout')}}">
+                                @csrf
+                                
+                                <button class="text-danger">{{ __('general.logout') }}</button>
+                            </form>
                         </li>
 
                     </ul>

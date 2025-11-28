@@ -143,7 +143,9 @@ return [
     'back_to_jobs' => 'العودة للوظائف',
     'job_whatsapp_message' => 'أرغب بالاستفسار عن وظيفة: :title',
     'login_to_apply' => 'سجل دخولك للتقديم',
-    
+
+    'ask' => 'استعلم',
+    'accept' => 'قبول',
     // Employee Profile translations
     'employee_profile' => 'الملف الوظيفي',
     'add_or_edit_profile' => 'أضف أو عدّل بياناتك',
@@ -198,6 +200,10 @@ return [
     'reject' => 'رفض',
     'accepted' => 'مقبول',
     'not_accepted' => 'غير مقبول',
+    'pending' => 'قيد الانتظار',
+    'applied_at' => 'تاريخ التقديم',
+    'application_accepted' => 'تم قبول الطلب',
+    'application_rejected' => 'تم رفض الطلب',
     
     // Services translations
     'services' => 'الخدمات',
@@ -239,4 +245,27 @@ return [
     'edit_user' => 'تعديل مستخدم',
     'role' => 'الدور',
     'address' => 'العنوان',
+    'metrics' => 'مؤشرات',
+
+    // Dashboard
+    'dashboard_welcome' => 'أهلاً بك :name 👋',
+    'dashboard_subtitle' => 'إليك نظرة سريعة على أداء المنصة اليوم.',
+    'dashboard_stats_title' => 'ملخص المؤشرات',
+    'dashboard_users_total' => 'إجمالي المستخدمين',
+    'dashboard_properties_total' => 'إجمالي العقارات',
+    'dashboard_properties_active' => 'عقارات منشورة',
+    'dashboard_properties_sold' => 'تم بيع/تأجير',
+    'dashboard_properties_pending' => 'بانتظار المراجعة',
+    'dashboard_categories_total' => 'إجمالي الأقسام',
+    'dashboard_services_total' => 'إجمالي الخدمات',
+    'dashboard_services_active' => 'خدمات فعّالة',
+    'dashboard_jobs_total' => 'إجمالي الوظائف',
+    'dashboard_jobs_pending' => 'وظائف قيد المراجعة',
+    'dashboard_jobs_approved' => 'وظائف منشورة',
+    'dashboard_jobs_rejected' => 'وظائف مرفوضة',
+    'dashboard_applications_total' => 'طلبات التوظيف',
+    'dashboard_employees_total' => 'ملفات الموظفين',
+    'dashboard_employees_public' => 'ملفات عامة',
+    'dashboard_faqs_total' => 'الأسئلة الشائعة',
+    'dashboard_faqs_active' => 'الأسئلة المنشورة',
 ];

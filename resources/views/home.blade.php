@@ -29,12 +29,19 @@
                             <a href="#categories" class="btn btn-gradient px-4 py-2 rounded-pill">{{ \App\Support\Settings::get('home.cta.categories_label', __('general.categories')) }}</a>
                             <a href="#features" class="btn btn-outline-dark px-4 py-2 rounded-pill">{{ \App\Support\Settings::get('home.cta.features_label', __('general.features')) }}</a>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 order-1 order-lg-2 d-none d-lg-block position-relative">
                     <img src="{{ asset('images/globe2 (1).png') }}" alt="mock" class="top-50 start-50 w-100 m-auto">
                 </div>
             </div>
+            <div class="">
+                {{-- button arrow down animated --}}
+                <a href="#categories" class="text-black">
+                    <i class="bi bi-arrow-bar-down"></i>
+                </a>
+                </div>
         </div>
     </section>
 
@@ -55,13 +62,13 @@
                                 <div class="card-body d-grid gap-2" style="grid-template-rows: auto 1fr;">
                                     <div class="d-flex align-items-center gap-3">
                                         <img src="{{ $icon }}" alt="{{ $service->name }}" style="width:56px;height:56px;object-fit:cover;border-radius:12px;">
-                                        <div class="d-grid">
+                                        <div class="d-grid text-break">
                                             <strong class="small">{{ $service->name }}</strong>
                                             <small class="text-muted">{{ $service->category?->name }}</small>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        @if(!is_null($service->price) && (float)$service->price > 0)
+                                        @if(!is_null(value: $service->price) && (float)$service->price > 0)
                                             <div>
                                                 <span style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; font-weight: bold; padding: 0.25rem 0.6rem; border-radius: 8px; font-size:.85rem;">
                                                     {{ number_format($service->price, 0) }} {{ __('general.currency') }}
@@ -76,7 +83,9 @@
                                             $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
                                         @endphp
                                         <a href="{{ $wa_url }}" target="_blank" class="btn btn-sm whatsapp-btn" title="{{ __('general.inquire_about_service') }}">
+                                            
                                             <i class="fab fa-whatsapp"></i>
+                                        {{ __('general.ask') }}
                                         </a>
                                     </div>
                                     @php
@@ -135,7 +144,7 @@
             <h2 class="section-title m-0">{{ \App\Support\Settings::get('home.sections.categories.title', __('general.categories')) }}</h2>
         </div>
 
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
             @foreach(($categories ?? collect()) as $category)
                 @php
                     $media = $category->medias->first();
@@ -200,12 +209,17 @@
                     @continue(method_exists($property, 'isPubliclyVisible') && !$property->isPubliclyVisible())
                     @php
                         $media = $property->medias->first();
-                        $image = $media ? asset('storage/' . $media->url) : asset('images/black-5dmaty.svg');
+                        $mediaUrl = $media ? asset('storage/' . $media->url) : asset('images/black-5dmaty.svg');
+                        $isVideo = $media && $media->type === 'video';
                     @endphp
                     <div class="col">
                         <div class="card property-card h-100 border-0 shadow-sm">
                             <div class="ratio ratio-4x3">
-                                <img src="{{ $image }}" alt="{{ $property->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                @if($isVideo)
+                                    <video src="{{ $mediaUrl }}" style="width: 100%; height: 100%; object-fit: cover;" controls preload="metadata"></video>
+                                @else
+                                    <img src="{{ $mediaUrl }}" alt="{{ $property->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                @endif
                             </div>
                             <div class="card-body d-flex flex-column">
                                 <h3 class="h5 card-title mb-2">{{ $property->title }}</h3>
@@ -338,5 +352,12 @@
     </section>
     @endif
 
+    <section class="py-5 bg-white position-relative">
+        
+    <!-- Elfsight Facebook Reviews | Untitled Facebook Reviews -->
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+    <div class="elfsight-app-afeb0387-617a-4243-98e1-f31366eeff04 p-3" data-elfsight-app-lazy></div>
+    </section>
+    
     <x-footer/>
 @endsection

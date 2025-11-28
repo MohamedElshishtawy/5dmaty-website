@@ -53,14 +53,6 @@
                 @endif
             </div>
 
-            <div class="mb-3">
-                <label for="media_files" class="form-label">{{ __('general.upload_media') }} ({{ __('general.optional') }})</label>
-                <input type="file" id="media_files" class="form-control @error('media_files.*') is-invalid @enderror" wire:model="media_files" multiple accept="image/*">
-                @error('media_files.*')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
             <div class="form-check form-switch mb-3">
                 <input class="form-check-input" type="checkbox" id="is_active" wire:model="is_active">
                 <label class="form-check-label" for="is_active">{{ __('general.active') }}</label>
@@ -72,6 +64,15 @@
         </form>
     </x-slot:body>
 </x-modal-card>
+
+
+
+
+
+
+
+
+
 
 
 
