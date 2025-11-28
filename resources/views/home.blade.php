@@ -17,7 +17,7 @@
     right: 0px;
 "></span>
         <span class="hero-orb"></span>
-        <span class="hero-dots"></span>
+        {{-- <span class="hero-dots"></span> --}}
         <div class="container">
             <div class="row align-items-center g-4">
                 <div class="col-12 col-lg-6 order-2 order-lg-1">
@@ -36,12 +36,7 @@
                     <img src="{{ asset('images/globe2 (1).png') }}" alt="mock" class="top-50 start-50 w-100 m-auto">
                 </div>
             </div>
-            <div class="">
-                {{-- button arrow down animated --}}
-                <a href="#categories" class="text-black">
-                    <i class="bi bi-arrow-bar-down"></i>
-                </a>
-                </div>
+            
         </div>
     </section>
 
@@ -115,14 +110,17 @@
                 new Swiper('#servicesSwiper', {
                     loop: true,
                     rtl: true,
-                    speed: 1000,
-                    autoplay: { delay: 500, disableOnInteraction: false },
+                    speed: 600,
+                    autoplay: { 
+                        delay: 1500, // Increased to give enough time between slides
+                        disableOnInteraction: false 
+                    },
                     slidesPerView: 1.2,
                     spaceBetween: 12,
                     breakpoints: {
-                        576: { slidesPerView: 1.5, spaceBetween: 12 },
+                        576: { slidesPerView: 1, spaceBetween: 12 },
                         768: { slidesPerView: 2, spaceBetween: 16 },
-                        992: { slidesPerView: 2.5, spaceBetween: 18 },
+                        992: { slidesPerView: 2, spaceBetween: 18 },
                         1200: { slidesPerView: 3, spaceBetween: 20 }
                     },
                     pagination: {
@@ -155,9 +153,9 @@
                     $short = \Illuminate\Support\Str::words(strip_tags($description), 15, '...');
                 @endphp
                 <div class="col">
-                    <div class="card category-card h-100 border-0 shadow-sm">
-                        <div class="ratio ratio-16x9">
-                            <img src="{{ $src }}" alt="{{ $category->name }}" class="category-image">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                        <div class="" style="height: 216px;">
+                            <img src="{{ $src }}" alt="{{ $category->name }}" class="w-100 h-100">
                         </div>
                         <div class="p-3" style="
                         display: grid;

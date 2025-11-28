@@ -3,6 +3,7 @@
     --primary-light: oklch(80.9% 0.105 251.813);
     --secondary: oklch(55.8% 0.288 302.321);
     --secondary-light: oklch(90.2% 0.063 306.703);
+    --gray: #f2f3f6;
 
     --primary-gradient: linear-gradient(90deg, var(--primary), var(--secondary));
     --secondary-gradient: linear-gradient(90deg, var(--primary-light), var(--secondary-light));

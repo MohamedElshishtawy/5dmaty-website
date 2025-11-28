@@ -39,7 +39,7 @@
 @section('content')
     <x-navbar class="shadow-sm sticky-top" />
 
-    <section class="py-5">
+    <section class="py-5" style="background-color: var(--gray)">
         <div class="container">
             <x-message :message="session('message')" />
             <div class="mb-4">
