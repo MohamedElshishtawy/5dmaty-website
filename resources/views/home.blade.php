@@ -47,11 +47,13 @@
 
     @if(($services ?? collect())->count() > 0)
     <section id="services" class="services-slider-section py-5 bg-white position-relative">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <h2 class="section-title m-0">{{ \App\Support\Settings::get('home.sections.services.title', __('general.services')) }}</h2>
-            </div>
-            <div class="swiper" id="servicesSwiper">
+        <div class="">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                    <h2 class="section-title text-center m-0">{{ \App\Support\Settings::get('home.sections.services.title', __('general.services')) }}</h2>
+                </div>
+                </div>
+            <div class="swiper py-3  px-2" style="background-color: #f2f3f6" id="servicesSwiper">
                 <div class="swiper-wrapper">
                     @foreach($services as $service)
                         @php
@@ -59,9 +61,9 @@
                         @endphp
                         <div class="swiper-slide">
                             <div class="card h-100 border-0 shadow-sm">
-                                <div class="card-body d-grid gap-2" style="grid-template-rows: auto 1fr;">
-                                    <div class="d-flex align-items-center gap-3">
-                                        <img src="{{ $icon }}" alt="{{ $service->name }}" style="width:56px;height:56px;object-fit:cover;border-radius:12px;">
+                                <div class="card-body d-grid gap-2 align-items-start" style="grid-template-rows: auto 1fr;">
+                                    <div class="d-flex gap-3">
+                                        <img src="{{ $icon }}" alt="{{ $service->name }}" style="width:60px;height:60px;object-fit:cover;" class="rounded">
                                         <div class="d-grid text-break">
                                             <strong class="small">{{ $service->name }}</strong>
                                             <small class="text-muted">{{ $service->category?->name }}</small>
@@ -104,7 +106,6 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="swiper-pagination"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
@@ -114,14 +115,15 @@
                 new Swiper('#servicesSwiper', {
                     loop: true,
                     rtl: true,
-                    autoplay: { delay: 2500, disableOnInteraction: false },
-                    slidesPerView: 2,
+                    speed: 1000,
+                    autoplay: { delay: 500, disableOnInteraction: false },
+                    slidesPerView: 1.2,
                     spaceBetween: 12,
                     breakpoints: {
-                        576: { slidesPerView: 2, spaceBetween: 12 },
-                        768: { slidesPerView: 3, spaceBetween: 16 },
-                        992: { slidesPerView: 4, spaceBetween: 18 },
-                        1200: { slidesPerView: 5, spaceBetween: 20 }
+                        576: { slidesPerView: 1.5, spaceBetween: 12 },
+                        768: { slidesPerView: 2, spaceBetween: 16 },
+                        992: { slidesPerView: 2.5, spaceBetween: 18 },
+                        1200: { slidesPerView: 3, spaceBetween: 20 }
                     },
                     pagination: {
                         el: '.swiper-pagination',
