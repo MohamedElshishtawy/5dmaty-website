@@ -18,7 +18,7 @@
 "></span>
         <span class="hero-orb"></span>
         {{-- <span class="hero-dots"></span> --}}
-        <div class="container">
+        <div class="container z-1">
             <div class="row align-items-center g-4">
                 <div class="col-12 col-lg-6 order-2 order-lg-1">
                     <div class="text-center text-lg-start hero-glass p-3 p-md-4 rounded-4">
