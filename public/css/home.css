@@ -113,7 +113,6 @@
 /* Frosted glass panel for hero text */
 .hero-glass {
     -webkit-backdrop-filter: blur(12px) saturate(120%);
-    backdrop-filter: blur(12px) saturate(120%);
 }
 
 /* Property and Job Cards Hover Effects */

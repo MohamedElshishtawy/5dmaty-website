@@ -2,7 +2,7 @@
 @extends('layouts.normal-layout')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/home.css')}}">
+    <link rel="stylesheet" href="{{asset('css/home.css')}}?v=1">
     <link rel="stylesheet" href="{{asset('css/jobs.css')}}">
 @endsection
 

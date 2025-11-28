@@ -21,7 +21,7 @@ class SocialAuthController extends Controller
         $oldUser = User::where('email', $user->email)->first();
 
         if ($oldUser) {
-            auth()->login($oldUser);
+            Auth::login($oldUser);
             return redirect()->route('home');
         }
 
@@ -32,7 +32,7 @@ class SocialAuthController extends Controller
             'social_id' => $user->id,
         ]);
 
-        auth()->login($user);
+        Auth::login($user);
 
         return redirect()->route('home');
 
