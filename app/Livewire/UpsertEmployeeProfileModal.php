@@ -31,7 +31,6 @@ class UpsertEmployeeProfileModal extends ModalComponent
             'desired_position' => 'nullable|string|max:255',
             'whatsapp_phone' => 'nullable|string|max:20',
             'about' => 'nullable|string',
-            'is_public' => 'nullable|boolean',
         ];
     }
 
@@ -49,7 +48,6 @@ class UpsertEmployeeProfileModal extends ModalComponent
             $this->desired_position = $profile->desired_position;
             $this->whatsapp_phone = $profile->whatsapp_phone;
             $this->about = $profile->about;
-            $this->is_public = $profile->is_public;
         } else {
             // Pre-fill name from user
             $this->name = Auth::user()->name;
@@ -72,7 +70,6 @@ class UpsertEmployeeProfileModal extends ModalComponent
             'desired_position' => $this->desired_position,
             'whatsapp_phone' => $this->whatsapp_phone,
             'about' => $this->about,
-            'is_public' => $this->is_public ?? false,
         ];
 
         if ($profile) {

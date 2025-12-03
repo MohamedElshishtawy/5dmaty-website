@@ -47,4 +47,30 @@ return [
     'verify_instructions' => 'قبل المتابعة، يرجى التحقق من بريدك الإلكتروني للحصول على رابط التحقق.',
     'did_not_receive' => 'إذا لم تصلك الرسالة،',
     'request_another' => 'اضغط هنا لطلب رابط آخر',
+
+
+
+
+    // Reset Password Page
+    'reset_password_title' => 'إعادة تعيين كلمة المرور',
+
+    'reset_password_button' => 'إعادة تعيين كلمة المرور',
+    'remember_password' => 'تتذكر كلمة المرور؟',
+    'back_to_login' => 'العودة لتسجيل الدخول',
+
+    // Forgot Password Page
+    'forgot_password_title' => 'نسيت كلمة المرور؟',
+    'forgot_password_description' => 'أدخل عنوان بريدك الإلكتروني وسنرسل لك رابطاً لإعادة تعيين كلمة المرور.',
+    'send_reset_link_button' => 'إرسال رابط إعادة التعيين',
+
+    // Confirm Password Page
+    'confirm_password_title' => 'تأكيد كلمة المرور',
+    'confirm_password_description' => 'يرجى تأكيد كلمة المرور الخاصة بك قبل المتابعة.',
+    'confirm_password_button' => 'تأكيد كلمة المرور',
+    'forgot_your_password' => 'نسيت كلمة المرور؟',
+    'reset_it' => 'أعد تعيينها',
+
+    // Verify Email Page
+    'resend_verification_button' => 'إعادة إرسال بريد التحقق',
+
 ];

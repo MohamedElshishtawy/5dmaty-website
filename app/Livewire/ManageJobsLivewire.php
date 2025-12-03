@@ -3,12 +3,13 @@
 namespace App\Livewire;
 
 use App\Models\JobPosting;
+use App\Models\JobApplication;
 use Livewire\Component;
 
 class ManageJobsLivewire extends Component
 {
     public $status = 'all';
-    protected $listeners = ['jobUpdated' => '$refresh'];
+    protected $listeners = ['jobUpdated' => '$refresh', 'applicationUpdated' => '$refresh'];
 
     public function mount()
     {
@@ -58,9 +59,42 @@ class ManageJobsLivewire extends Component
         }
     }
 
+    public function deleteApplication($id)
+    {
+        $application = JobApplication::find($id);
+        if ($application) {
+            $application->delete();
+            session()->flash('message', __('general.massages.deleted'));
+        } else {
+            session()->flash('error', __('general.massages.not_found'));
+        }
+    }
+
+    public function activateApplication($id)
+    {
+        $application = JobApplication::find($id);
+        if ($application) {
+            $application->update(['is_active' => true]);
+            session()->flash('message', __('general.application_activated'));
+        } else {
+            session()->flash('error', __('general.massages.not_found'));
+        }
+    }
+
+    public function deactivateApplication($id)
+    {
+        $application = JobApplication::find($id);
+        if ($application) {
+            $application->update(['is_active' => false]);
+            session()->flash('message', __('general.application_deactivated'));
+        } else {
+            session()->flash('error', __('general.massages.not_found'));
+        }
+    }
+
     public function render()
     {
-        $query = JobPosting::with('user');
+        $query = JobPosting::with('user', 'applications');
 
         if ($this->status !== 'all') {
             $query->where('status', $this->status);

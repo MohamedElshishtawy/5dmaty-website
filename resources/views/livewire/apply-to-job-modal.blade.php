@@ -122,12 +122,12 @@
 
             <!-- About -->
             <div class="mb-3">
-                <label for="about" class="form-label">{{ __('general.about') }}</label>
+                <label for="about" class="form-label">{{ __('general.about_employee') }}</label>
                 <textarea class="form-control @error('about') is-invalid @enderror"
                           id="about"
                           rows="4"
                           wire:model="about"
-                          placeholder="{{ __('general.about') }}"></textarea>
+                          placeholder="{{ __('general.about_yourself') }}"></textarea>
                 @error('about')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

@@ -17,11 +17,16 @@ class EmployeeProfile extends Model
         'desired_position',
         'whatsapp_phone',
         'about',
-        'is_public'
+        'is_public',
+    ];
+
+    protected $attributes = [
+        'is_public' => false,
     ];
 
     protected $casts = [
         'is_public' => 'boolean',
+        'is_accpted' => 'boolean',
         'age' => 'integer',
     ];
 

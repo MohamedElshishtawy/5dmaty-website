@@ -35,7 +35,7 @@
                 <a href="{{ route('jobs.index', ['tab' => 'jobs']) }}" 
                    class="job-tab {{ $tab === 'jobs' ? 'active' : '' }}">
                     <i class="fas fa-briefcase me-2"></i>
-                    {{ __('general.jobs') }}
+                    {{ __('general.add_job') }}
                 </a>
                 <a href="{{ route('jobs.index', ['tab' => 'employees']) }}" 
                    class="job-tab {{ $tab === 'employees' ? 'active' : '' }}">
@@ -146,13 +146,13 @@
                         <button class="btn btn-dark btn-lg" 
                                 onclick="Livewire.dispatch('openModal', {component: 'upsert-employee-profile-modal'})">
                             <i class="fas fa-user-edit me-2"></i>
-                            {{ __('general.edit_profile') }}
+                            {{ __('general.add_your_data') }}
                         </button>
                     @else
                         <a href="{{ route('login') }}?intended={{ route('jobs.index', ['tab' => 'employees', 'action' => 'edit_profile']) }}" 
                            class="btn btn-dark btn-lg">
                             <i class="fas fa-user-edit me-2"></i>
-                            {{ __('general.edit_profile') }}
+                            {{ __('general.add_your_data') }}
                         </a>
                     @endauth
                 </div>

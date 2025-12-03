@@ -18,6 +18,7 @@ class JobApplication extends Model
         'whatsapp_phone',
         'about',
         'status',
+        'is_active',
     ];
 
     // Status constants

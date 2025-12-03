@@ -16,12 +16,16 @@
 @section('main')
 <div class="auth-wrapper bg-secondary-gradient d-flex align-items-center py-5" style="opacity: .95;">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-11 col-sm-10 col-md-7 col-lg-5 col-xl-4 position-relative">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-11 col-sm-10 col-md-6 col-lg-5 col-xl-5">
                 <div class="auth-card shadow p-4 p-md-5">
                     @yield('content')
                 </div>
             </div>
+            <div class="col-xl-6 col-lg-6 d-none d-lg-block">
+                <img src="{{ asset('images/5dmaty-globe.png') }}" alt="5dmaty globe" /> 
+            </div>
+            
         </div>
     </div>
 </div>

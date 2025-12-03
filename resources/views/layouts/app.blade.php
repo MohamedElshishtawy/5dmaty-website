@@ -9,19 +9,17 @@
 
     <title>{{ \App\Support\Settings::get('seo.home.title', config('app.name', 'Laravel')) }}</title>
     @php
-        $metaDescription = \App\Support\Settings::get('seo.home.description');
-        $metaKeywords = \App\Support\Settings::get('seo.home.keywords');
-        $faviconUrl = \App\Support\Settings::imageUrl('site.favicon');
+        $metaDescription = \App\Models\Setting::where('key', 'seo.home.description')->where('locale', app()->getLocale())->value('value');
+        $metaKeywords = \App\Models\Setting::where('key', 'seo.home.keywords')->where('locale', app()->getLocale())->value('value');
+        $faviconUrl = \App\Models\Setting::where('key', 'site.favicon')->value('value');
     @endphp
     @if(!empty($metaDescription))
         <meta name="description" content="{{ $metaDescription }}">
     @endif
-    @if(!empty($metaKeywords))
+    @if($metaKeywords)
         <meta name="keywords" content="{{ $metaKeywords }}">
     @endif
-    @if(!empty($faviconUrl))
-        <link rel="icon" href="{{ $faviconUrl }}">
-    @endif
+        <link rel="icon" href="{{ $faviconUrl ? asset('storage/' . $faviconUrl) : '' }}" type="image/x-icon">
 
     {{--Modal reqiremnts Alphine & tailwind--}}
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -48,6 +46,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css' )}}?v=4">
     @yield('css')
     @livewireStyles
+    
 </head>
 <body dir="rtl">
 
@@ -60,5 +59,7 @@
     @livewire('wire-elements-modal')
     <!-- Swiper -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    @yield('js')
 </body>
 </html>

@@ -62,11 +62,11 @@
 
                     <!-- Applications Section (Owner/Admin Only) -->
                     @auth
-                        @if((Auth::id() === $job->user_id || Auth::user()->hasRole(['superadmin', 'admin'])) && $job->applications->count() > 0)
+                        @if((Auth::id() === $job->user_id || Auth::user()->hasRole(['superadmin', 'admin'])) && $applications->count() > 0)
                             <div class="job-detail-card bg-white p-4 mt-4">
-                                <h5 class="fw-bold mb-3">{{ __('general.applications') }} ({{ $job->applications->count() }})</h5>
+                                <h5 class="fw-bold mb-3">{{ __('general.applications') }} ({{ $applications->count() }})</h5>
                                 
-                                @foreach($job->applications as $application)
+                                @foreach($applications as $application)
                                     <div class="card mb-3">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-start mb-2">
@@ -126,7 +126,7 @@
 
                                             @if($application->about)
                                                 <div class="mb-2">
-                                                    <small><strong>{{ __('general.about') }}:</strong></small>
+                                                    <small><strong>{{ __('general.about_employee') }}:</strong></small>
                                                     <p class="mb-0 small text-muted" style="white-space: pre-line;">{{ $application->about }}</p>
                                                 </div>
                                             @endif

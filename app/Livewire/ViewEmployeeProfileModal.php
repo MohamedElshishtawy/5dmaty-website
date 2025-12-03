@@ -11,7 +11,7 @@ class ViewEmployeeProfileModal extends ModalComponent
 
     public function mount($employeeId)
     {
-        $this->employee = EmployeeProfile::with('user', 'jobApplications.jobPosting')->findOrFail($employeeId);
+        $this->employee = EmployeeProfile::with('user')->findOrFail($employeeId);
     }
 
     public function render()

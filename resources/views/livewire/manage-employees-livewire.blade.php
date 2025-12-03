@@ -66,7 +66,7 @@
                                     <button class="btn btn-{{$employee->is_public ? 'warning' : 'success'}} btn-sm" 
                                             wire:click="togglePublic({{$employee->id}})"
                                             title="{{ $employee->is_public ? __('general.make_private') : __('general.make_public') }}">
-                                        <i class="fas fa-{{$employee->is_public ? 'eye-slash' : 'eye'}}"></i>
+                                        <i class="fas fa-{{$employee->is_public ? 'pause' : 'play'}}"></i>
                                     </button>
                                     
                                     <button class="btn btn-info btn-sm" 

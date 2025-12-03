@@ -148,7 +148,7 @@
             <div wire:loading wire:target="media_files" class="text-center">
                 <div class="spinner-border spinner-border-sm text-primary" role="status">
                     <span class="visually-hidden">{{ __('general.loading') }}</span>
-                </div>
+                </div>-
                 {{ __('general.uploading') }}
             </div>
         </form>

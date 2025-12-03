@@ -43,3 +43,10 @@ class Faq extends Model
 
 
 
+
+
+
+
+
+
+

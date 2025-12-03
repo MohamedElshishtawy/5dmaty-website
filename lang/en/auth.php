@@ -49,4 +49,27 @@ return [
     'did_not_receive' => 'If you did not receive the email,',
     'request_another' => 'click here to request another',
 
+
+    // Reset Password Page
+    'reset_password_title' => 'Reset Password',
+
+    'reset_password_button' => 'Reset Password',
+    'remember_password' => 'Remember your password?',
+    'back_to_login' => 'Back to Login',
+
+    // Forgot Password Page
+    'forgot_password_title' => 'Forgot Password?',
+    'forgot_password_description' => 'Enter your email address and we\'ll send you a link to reset your password.',
+    'send_reset_link_button' => 'Send Password Reset Link',
+
+    // Confirm Password Page
+    'confirm_password_title' => 'Confirm Password',
+    'confirm_password_description' => 'Please confirm your password before continuing.',
+    'confirm_password_button' => 'Confirm Password',
+    'forgot_your_password' => 'Forgot your password?',
+    'reset_it' => 'Reset it',
+
+    // Verify Email Page
+    'resend_verification_button' => 'Resend Verification Email',
+
 ];

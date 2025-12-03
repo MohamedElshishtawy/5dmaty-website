@@ -4,6 +4,7 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('css/home.css')}}?v=1">
     <link rel="stylesheet" href="{{asset('css/jobs.css')}}">
+    <link rel="stylesheet" href="{{asset('css/accordion.css')}}">
 @endsection
 
 @section('content')
@@ -24,28 +25,104 @@
                     <div class="text-center text-lg-start hero-glass p-3 p-md-4 rounded-4">
                         <img class="hero-logo mb-3 mx-auto mx-lg-0" src="{{ \App\Support\Settings::imageUrl('home.hero.logo', asset('images/white-5dmaty.svg')) }}" alt="5dmaty"/>
                         <h1 class="display-5 fw-bold mb-3  mx-auto mx-lg-0 text-center text-lg-end text-dark parastoo">{{ \App\Support\Settings::get('home.hero.title', __('خدماتي')) }}</h1>
+                        <p style="font-style: italic;" class="mb-2 bold lead text-center text-lg-end text-dark hero-slogan">{{ __('general.slogen') }}</p>
                         <p class="lead mb-4  text-center text-lg-end text-dark">{{ \App\Support\Settings::get('home.hero.subtitle', __('general.tagline_home', ['company' => config('app.name')])) }}</p>
                         <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
                             <a href="#categories" class="btn btn-gradient px-4 py-2 rounded-pill">{{ \App\Support\Settings::get('home.cta.categories_label', __('general.categories')) }}</a>
-                            <a href="#features" class="btn btn-outline-dark px-4 py-2 rounded-pill">{{ \App\Support\Settings::get('home.cta.features_label', __('general.features')) }}</a>
+                            <a href="#why-us" class="btn btn-outline-dark px-4 py-2 rounded-pill">{{ \App\Support\Settings::get('home.cta.features_label', __('general.why_us_title')) }}</a>
                         </div>
                         
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 order-1 order-lg-2 d-none d-lg-block position-relative">
-                    <img src="{{ asset('images/globe2 (1).png') }}" alt="mock" class="top-50 start-50 w-100 m-auto">
+                    <img src="{{ asset('storage/' . (\App\Models\Setting::where('key', 'home.hero.logo')->value('value') ?? 'images/globe2 (1).png')) }}" alt="mock" class="top-50 start-50 w-100 m-auto">
                 </div>
             </div>
             
         </div>
     </section>
 
+
+    
+
+
+    <!-- Why Us Section -->
+    <section id="why-us" class="why-us-section py-3 position-relative" style="background-color: #f2f3f6">
+    <div class="container">
+        <div class="text-center mb-3">
+            <h2 class="section-title text-primary-gradient my-3">{{ __('general.why_us_title') }}</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- Item 1 -->
+            <div class="col-6 col-lg-4 why-us-item mb-4">
+                <div class="d-flex justify-content-center">
+                    <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
+                        <img src="{{ asset('images/lottie/Multi-Tasking.gif') }}">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
+                    <h3 class="fw-bold mb-0 text-primary-gradient text-center" style="font-size: 0.9rem;">{{ __('general.why_us_item_1') }}</h3>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="col-6 col-lg-4 why-us-item mb-4">
+                <div class="d-flex justify-content-center">
+                    <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
+                        <img src="{{ asset('images/lottie/Available.gif') }}">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
+                    <h3 class="fw-bold mb-0 text-primary-gradient text-center" style="font-size: 0.9rem;">{{ __('general.why_us_item_2') }}</h3>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="col-6 col-lg-4 why-us-item mb-4">
+                <div class="d-flex justify-content-center">
+                    <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
+                        <img src="{{ asset('images/lottie/Tracking.gif') }}">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
+                    <h3 class="fw-bold mb-0 text-primary-gradient text-center" style="font-size: 0.9rem;">{{ __('general.why_us_item_3') }}</h3>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="col-6 col-lg-4 why-us-item mb-4">
+                <div class="d-flex justify-content-center">
+                    <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
+                        <img src="{{ asset('images/lottie/Discount.gif') }}">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
+                    <h3 class="fw-bold mb-0 text-primary-gradient text-center" style="font-size: 0.9rem;">{{ __('general.why_us_item_4') }}</h3>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="col-6 col-lg-4 why-us-item mb-4">
+                <div class="d-flex justify-content-center">
+                    <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
+                        <img src="{{ asset('images/lottie/Expert.gif') }}">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
+                    <h3 class="fw-bold mb-0 text-primary-gradient text-center" style="font-size: 0.9rem;">{{ __('general.why_us_item_5') }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
     @if(($services ?? collect())->count() > 0)
     <section id="services" class="services-slider-section py-5 bg-white position-relative">
         <div class="">
             <div class="container">
                 <div class="d-flex align-items-center justify-content-center mb-3">
-                    <h2 class="section-title text-center m-0">{{ \App\Support\Settings::get('home.sections.services.title', __('general.services')) }}</h2>
+                    <h2 class="section-title text-center m-0 text-primary-gradient bold">{{ \App\Support\Settings::get('home.sections.services.title', __('general.services')) }}</h2>
                 </div>
                 </div>
             <div class="swiper py-3  px-2" style="background-color: #f2f3f6" id="servicesSwiper">
@@ -79,10 +156,9 @@
                                             $wa_text = urlencode(__('general.service_whatsapp_message', ['service' => $service->name, 'category' => $service->category?->name ?? '']));
                                             $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
                                         @endphp
-                                        <a href="{{ $wa_url }}" target="_blank" class="btn btn-sm whatsapp-btn" title="{{ __('general.inquire_about_service') }}">
+                                        <a href="{{ $wa_url }}" target="_blank" class="btn btn-sm btn-primary" title="{{ __('general.inquire_about_service') }}">
                                             
-                                            <i class="fab fa-whatsapp"></i>
-                                        {{ __('general.ask') }}
+                                        {{ __('general.view_details') }}
                                         </a>
                                     </div>
                                     @php
@@ -322,35 +398,40 @@
         </div>
     </section>
     @endif
-    @if(($faqs ?? collect())->count() > 0)
-    <section id="faq" class="py-5 bg-white position-relative">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <h2 class="section-title m-0">{{ __('general.faqs') }}</h2>
-            </div>
-            <div class="accordion accordion-flush" id="faqAccordion">
-                @foreach($faqs as $index => $faq)
-                    @php
-                        $headingId = 'faqHeading'.$index;
-                        $collapseId = 'faqCollapse'.$index;
-                    @endphp
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="{{ $headingId }}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $collapseId }}" aria-expanded="false" aria-controls="{{ $collapseId }}">
-                                {{ $faq->question }}
-                            </button>
-                        </h2>
-                        <div id="{{ $collapseId }}" class="accordion-collapse collapse" aria-labelledby="{{ $headingId }}" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                {!! nl2br(e($faq->answer)) !!}
-                            </div>
+
+
+    <!-- FAQ Section -->
+   
+@if(($faqs ?? collect())->count() > 0)
+<section id="faq" class="py-5 bg-white position-relative">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="section-title m-0">{{ __('general.faqs') }}</h2>
+        </div>
+        <div class="accordion" id="faqAccordion">
+            @foreach($faqs as $index => $faq)
+                @php
+                    $collapseId = 'faqCollapse'.$index;
+                @endphp
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-toggle="collapse" data-target="#{{ $collapseId }}">
+                            {{ $faq->question }}
+                        </button>
+                    </h2>
+                    <div id="{{ $collapseId }}" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            {!! nl2br(e($faq->answer)) !!}
                         </div>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
-    </section>
-    @endif
+    </div>
+</section>
+
+
+@endif
 
     <section class="py-5 bg-white position-relative">
         
@@ -360,4 +441,119 @@
     </section>
     
     <x-footer/>
+@endsection
+
+
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js"></script>
+<script>
+  const { animate } = anime;
+</script>
+
+<!-- GSAP & ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<!-- Lottie -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Accordion Functionality -->
+<script src="{{asset('js/accordion.js')}}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initialize Lottie animations
+    const iconContainers = document.querySelectorAll('.why-us-icon');
+    const lottieAnimations = [];
+
+    iconContainers.forEach((container, index) => {
+        const lottiePath = container.getAttribute('data-lottie-path');
+        if (lottiePath) {
+            const anim = lottie.loadAnimation({
+                container: container,
+                renderer: 'svg',
+                loop: true,
+                autoplay: false,
+                path: lottiePath
+            });
+            lottieAnimations.push(anim);
+        }
+    });
+
+    // GSAP ScrollTrigger animations for items
+    const whyUsItems = document.querySelectorAll('.why-us-item');
+    
+    whyUsItems.forEach((item, index) => {
+        const content = item.querySelector('.why-us-content');
+        const icon = item.querySelector('.why-us-icon');
+        
+        // Set initial state
+        gsap.set(item, { opacity: 0 });
+        gsap.set(content, { 
+            y: 30,
+            opacity: 0 
+        });
+        gsap.set(icon, { 
+            scale: 0.5,
+            opacity: 0 
+        });
+
+        // Create timeline for this item
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: item,
+                start: 'top 85%',
+                end: 'bottom 15%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+
+        // Animate item container
+        tl.to(item, {
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power2.out'
+        });
+
+        // Animate content (slide up and fade in)
+        tl.to(content, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out'
+        }, '-=0.2');
+
+        // Animate icon with scale and fade
+        tl.to(icon, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.5,
+            ease: 'back.out(1.5)'
+        }, '-=0.4');
+
+        // Play Lottie animation when icon is visible
+        if (lottieAnimations[index]) {
+            ScrollTrigger.create({
+                trigger: item,
+                start: 'top 80%',
+                onEnter: () => {
+                    lottieAnimations[index].play();
+                },
+                onLeave: () => {
+                    lottieAnimations[index].pause();
+                },
+                onEnterBack: () => {
+                    lottieAnimations[index].play();
+                },
+                onLeaveBack: () => {
+                    lottieAnimations[index].pause();
+                }
+            });
+        }
+    });
+});
+</script>
 @endsection

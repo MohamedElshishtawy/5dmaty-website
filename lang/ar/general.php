@@ -4,7 +4,6 @@ return [
     'home' => 'الرئيسية',
     'dashboard' => 'الداشبورد',
     'employment' => 'التوظيف',
-    'jobs' => 'وظائف',
     'employment_request' => 'طلب توظيف',
     'about' => 'من نحن',
     'real-state' => 'العقارات',
@@ -53,10 +52,10 @@ return [
     'brand' => 'خدماتى',
     'whatsapp' => 'واتساب',
     'cta_call' => 'اتصل بنا',
-    'cta_whatsapp' => 'الدردشة عبر واتساب',
+    'cta_whatsapp' => 'تواصل عبر واتس اب',
     'whatsapp_prefill' => 'السلام عليكم، هل ممكن أستعلم عن خدماتكم وأسعارها؟',
     'footer_mission' => 'نسعى لتقديم أفضل الحلول والخدمات لعملائنا الكرام.',
-    'tagline_home' => 'بصفتنا روادًا في مجالنا، نوفر لكم كفاءات استثنائية تتجسد في أرقى مستويات الجودة والأداء لخدماتنا. هدفنا هو تقديم قيمة مضافة حقيقية لعملكم، عبر حلول متكاملة ومبتكرة تضمن لكم التفوق والريادة.',
+    'tagline_home' => 'نقدّم في خدماتي تجربة مختلفة تمامًا في عالم الخدمات الإلكترونية، حيث نجمع لك كل ما تحتاجه في مكان واحد وبجودة عالية وسرعة تنفيذ واحترافية. نساعد الأفراد والشركات على إنجاز أعمالهم اليومية والمهام التقنية بسهولة تامة، من خلال فريق متخصص وخبرة قوية في تقديم حلول رقمية متكاملة.',
     'toggle-navigation' => 'تبديل التنقل',
     'close' => 'إغلاق',
     'edit' => 'تعديل',
@@ -92,7 +91,8 @@ return [
     'email' => 'البريد الإلكتروني',
     'registration' => 'حساب جديد',
     'whatsapp_category_question' => 'أود الإستعلام عن خدمتكم فى :category',
-    
+    'accept_all_methods' => 'نقبل جميع طرق الدفع ',
+
     // Properties translations
     'properties' => 'العقارات',
     'property' => 'عقار',
@@ -113,10 +113,14 @@ return [
     'properties_subtitle' => 'تصفح أفضل العقارات المتاحة',
     'currency' => 'ج.م',
     'see_more' => 'شاهد المزيد',
+    'slogen' => 'حيث كل ما تحتاج في مكان واحد فقط',
+    'inter' => 'الدخول',
     
     // Jobs translations
     'jobs' => 'الوظائف',
     'job' => 'وظيفة',
+    'add_job' => 'إضافة وظيفة',
+    'add_your_data' => 'أضف بياناتك',
     'jobs_subtitle' => 'تصفح أحدث فرص العمل المتاحة',
     'employees' => 'الموظفون',
     'employees_subtitle' => 'تصفح ملفات الموظفين المتاحين للعمل',
@@ -166,7 +170,7 @@ return [
     'opportunities' => 'وظائف',
     'residence' => 'محل الإقامة',
     'desired_position' => 'الوظيفة المطلوبة',
-    'about' => 'نبذة',
+    'about_employee' => 'نبذة',
     'about_yourself' => 'اكتب نبذة مختصرة عنك',
     'select' => 'اختر',
     'filter_by' => 'تصفية حسب',
@@ -204,6 +208,18 @@ return [
     'applied_at' => 'تاريخ التقديم',
     'application_accepted' => 'تم قبول الطلب',
     'application_rejected' => 'تم رفض الطلب',
+    'application_activated' => 'تم تفعيل الطلب',
+    'application_deactivated' => 'تم إلغاء تفعيل الطلب',
+    'view_application' => 'عرض الطلب',
+    'job_posting' => 'الإعلان الوظيفي',
+    'active_status' => 'حالة النشاط',
+    'application_date' => 'تاريخ التقديم',
+    'applicant_name' => 'اسم المتقدم',
+    'no_applications_yet' => 'لا توجد طلبات حتى الآن',
+    'confirm_accept' => 'هل أنت متأكد من قبول الطلب؟',
+    'confirm_reject' => 'هل أنت متأكد من رفض الطلب؟',
+    'activate' => 'تفعيل',
+    'deactivate' => 'إلغاء التفعيل',
     
     // Services translations
     'services' => 'الخدمات',
@@ -268,4 +284,17 @@ return [
     'dashboard_employees_public' => 'ملفات عامة',
     'dashboard_faqs_total' => 'الأسئلة الشائعة',
     'dashboard_faqs_active' => 'الأسئلة المنشورة',
+    
+    // Why Us section
+    'why_us_title' => 'لماذا نحن؟',
+    'why_us_subtitle' => 'خدمات تكنولوجية وإجرائية إلكترونية',
+    'why_us_item_1' => 'كل خدماتك الإلكترونية في مكان واحد',
+    'why_us_item_2' => 'دعم فني متواصل على مدار 24/7',
+    'why_us_item_3' => 'تنفيذ سريع ونتائج موثوقة بخبرة 9 سنوات',
+    'why_us_item_4' => 'أسعار مناسبة وتنافسية تناسب جميع أحجام المشاريع',
+    'why_us_item_5' => 'التزام كامل بالجودة والاحترافية',
+
+    // QA section
+    'add_fqa' => 'إضافة سؤال وجواب',
+    'edit_qa' => 'تعديل سؤال وجواب',
 ];

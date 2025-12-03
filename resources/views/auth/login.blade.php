@@ -8,10 +8,6 @@
         <i class="fa-brands fa-google"></i>
         <span>{{ __('auth.continue_with_google') }}</span>
     </a>
-{{--    <a href="#" class="btn btn-facebook social-btn d-flex align-items-center justify-content-center gap-2">--}}
-{{--        <i class="fa-brands fa-facebook-f"></i>--}}
-{{--        <span>{{ __('auth.continue_with_facebook') }}</span>--}}
-{{--    </a>--}}
     </div>
 
 <div class="separator mb-3"><span>{{ __('auth.or') }}</span></div>

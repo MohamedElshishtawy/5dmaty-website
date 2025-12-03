@@ -58,9 +58,12 @@ class JobController extends Controller
             abort(404);
         }
 
-        $job->load('user', 'applications');
+        $job->load('user');
 
-        return view('jobs.public.show', compact('job'));
+        $applications = $job->applications()->where('is_active', true)->orderBy('created_at', 'desc')->get();
+
+
+        return view('jobs.public.show', compact('job', 'applications'));
     }
 
     // Store new job (auth + role required)

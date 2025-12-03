@@ -93,7 +93,7 @@
                                 <label class="form-label">{{ __('شعار الموقع') }}</label>
                                 <div class="mb-2">
                                     @php
-                                        $navLogo = \App\Support\Settings::imageUrl('site.logo', asset('images/white-5dmaty.svg'));
+                                        $navLogo = \App\Models\Setting::where('key', 'site.logo')->value('value') ?? asset('images/white-5dmaty.svg');
                                     @endphp
                                     <img src="{{ $navLogo }}" alt="Logo" class="img-fluid rounded border" style="max-height: 80px; background:#fff;">
                                 </div>
@@ -104,10 +104,10 @@
                                 <label class="form-label">{{ __('أيقونة التبويب (Favicon)') }}</label>
                                 <div class="mb-2">
                                     @php
-                                        $favicon = \App\Support\Settings::imageUrl('site.favicon');
+                                        $favicon = \App\Models\Setting::where('key', 'site.favicon')->value('value');
                                     @endphp
                                     @if($favicon)
-                                        <img src="{{ $favicon }}" alt="Favicon" class="img-fluid rounded border" style="max-height: 40px; background:#fff;">
+                                        <img src="{{ asset('storage/' . $favicon) }}" alt="Favicon" class="img-fluid rounded border" style="max-height: 40px; background:#fff;">
                                     @endif
                                 </div>
                                 <input type="file" name="site_favicon" class="form-control" accept=".ico,.png,.svg">
@@ -161,34 +161,34 @@
                                         <div class="col-12 col-md-6">
                                             <label class="form-label">{{ __('SEO - العنوان') }}</label>
                                             <input type="text" class="form-control" name="seo[{{ $code }}][title]"
-                                                   value="{{ \Illuminate\Support\Arr::get($map, $code.'.seo.home.title') ?? '' }}"
+                                                   value="{{ $settings[$code]['seo.home.title'] ?? '' }}"
                                                    placeholder="{{ __('مثال: خدماتي - منصتك للخدمات') }}">
                                             @error("seo.$code.title")<div class="text-danger small">{{ $message }}</div>@enderror
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <label class="form-label">{{ __('SEO - الكلمات المفتاحية') }}</label>
                                             <input type="text" class="form-control" name="seo[{{ $code }}][keywords]"
-                                                   value="{{ \Illuminate\Support\Arr::get($map, $code.'.seo.home.keywords') ?? '' }}"
+                                                   value="{{ $settings[$code]['seo.home.keywords'] ?? '' }}"
                                                    placeholder="{{ __('خدمات, وظائف, عقارات') }}">
                                             @error("seo.$code.keywords")<div class="text-danger small">{{ $message }}</div>@enderror
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">{{ __('SEO - الوصف') }}</label>
-                                            <textarea class="form-control" rows="2" name="seo[{{ $code }}][description]" placeholder="{{ __('وصف موجز يظهر في محركات البحث') }}">{{ \Illuminate\Support\Arr::get($map, $code.'.seo.home.description') ?? '' }}</textarea>
+                                            <textarea class="form-control" rows="2" name="seo[{{ $code }}][description]" placeholder="{{ __('وصف موجز يظهر في محركات البحث') }}">{{ $settings[$code]['seo.home.description'] ?? '' }}</textarea>
                                             @error("seo.$code.description")<div class="text-danger small">{{ $message }}</div>@enderror
                                         </div>
 
                                         <div class="col-12 col-md-6">
                                             <label class="form-label">{{ __('نص الهيرو - العنوان') }}</label>
                                             <input type="text" class="form-control" name="hero[{{ $code }}][title]"
-                                                   value="{{ \Illuminate\Support\Arr::get($map, $code.'.home.hero.title') ?? '' }}"
+                                                   value="{{ $settings[$code]['home.hero.title'] ?? '' }}"
                                                    placeholder="{{ __('خدماتي') }}">
                                             @error("hero.$code.title")<div class="text-danger small">{{ $message }}</div>@enderror
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <label class="form-label">{{ __('نص الهيرو - الوصف القصير') }}</label>
                                             <input type="text" class="form-control" name="hero[{{ $code }}][subtitle]"
-                                                   value="{{ \Illuminate\Support\Arr::get($map, $code.'.home.hero.subtitle') ?? '' }}"
+                                                   value="{{ $settings[$code]['home.hero.subtitle'] ?? '' }}"
                                                    placeholder="{{ __('سطر تعريفي قصير عن المنصة') }}">
                                             @error("hero.$code.subtitle")<div class="text-danger small">{{ $message }}</div>@enderror
                                         </div>

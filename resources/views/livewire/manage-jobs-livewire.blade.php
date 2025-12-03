@@ -28,7 +28,7 @@
         @endif
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>{{__('general.job_title')}}</th>
@@ -107,6 +107,76 @@
                                 </div>
                             </td>
                         </tr>
+
+                        <!-- Manage the applications -->
+                        <tr>
+                            <td colspan="7">
+                                <div class="table-responsive mt-2">
+                                    <strong>{{ __('general.applications') }}:</strong>
+                                    @if($job->applications->isEmpty())
+                                        <p class="mb-0">{{ __('general.no_applications_yet') }}</p>
+                                    @else
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>{{ __('general.applicant_name') }}</th>
+                                                    <th>{{ __('general.phone') }}</th>
+                                                    <th>{{ __('general.status') }}</th>
+                                                    <th>{{ __('general.actions') }}</th>
+                                                </tr>
+                                            </thead>
+                                    
+                                            @foreach($job->applications as $application)
+                                                <tr>
+                                                    <td>
+                                                        {{ $application->full_name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $application->phone }}
+                                                    </td>
+                                                    <td>
+                                                        @if($application->is_active)
+                                                            <span class="badge bg-success">{{ __('general.active') }}</span>
+                                                        @else
+                                                            <span class="badge bg-secondary">{{ __('general.inactive') }}</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-sm" style="direction: ltr" role="group">
+                                                            <button class="btn btn-info btn-sm" 
+                                                                    wire:click="$dispatch('openModal', {'component': 'view-application-modal', 'arguments': {'application': {{$application->id}}} })"
+                                                                    title="{{ __('general.view') }}">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
+                                                            <button class="btn btn-danger btn-sm" 
+                                                                    wire:confirm="{{__('general.confirm_delete')}}" 
+                                                                    wire:click="deleteApplication({{$application->id}})"
+                                                                    title="{{ __('general.delete') }}">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                            @if($application->is_active)
+                                                                <button class="btn btn-secondary btn-sm" 
+                                                                        wire:click="deactivateApplication({{$application->id}})"
+                                                                        title="{{ __('general.deactivate') }}">
+                                                                    <i class="fas fa-pause"></i>
+                                                                </button>
+                                                            @else
+                                                                <button class="btn btn-success btn-sm" 
+                                                                        wire:click="activateApplication({{$application->id}})"
+                                                                        title="{{ __('general.activate') }}">
+                                                                    <i class="fas fa-play"></i>
+                                                                </button>
+                                                            @endif
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </table>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+
                     @empty
                         <tr>
                             <td colspan="7" class="text-center">{{__('general.no_jobs')}}</td>

@@ -70,7 +70,7 @@
                             id="military_status"
                             wire:model="military_status">
                         <option value="">{{ __('general.select') }}</option>
-                        <option value="أعفى نهائي">أعفى نهائي</option>
+                        <option value="أعفى نهائي">إعفاء نهائي</option>
                         <option value="أدى الخدمة">أدى الخدمة</option>
                         <option value="مؤجل">مؤجل</option>
                         <option value="لم يؤدِّ الخدمة">لم يؤدِّ الخدمة</option>
@@ -123,7 +123,7 @@
 
             <!-- About -->
             <div class="mb-3">
-                <label for="about" class="form-label">{{ __('general.about') }}</label>
+                <label for="about" class="form-label">{{ __('general.about_employee') }}</label>
                 <textarea class="form-control @error('about') is-invalid @enderror"
                           id="about"
                           rows="3"
@@ -133,18 +133,6 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
 </div>
-
-            <!-- Make Public -->
-            <div class="mb-3 form-check">
-                <input type="checkbox"
-                       class="form-check-input"
-                       id="is_public"
-                       wire:model="is_public">
-                <label class="form-check-label" for="is_public">
-                    {{ __('general.make_profile_public') }}
-                    <small class="text-muted d-block">{{ __('general.public_profile_note') }}</small>
-                </label>
-            </div>
         </form>
     </x-slot:body>
 
