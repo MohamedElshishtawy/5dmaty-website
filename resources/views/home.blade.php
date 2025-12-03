@@ -47,7 +47,7 @@
 
 
     <!-- Why Us Section -->
-    <section id="why-us" class="why-us-section py-3 position-relative" style="background-color: #f2f3f6">
+    {{-- <section id="why-us" class="why-us-section py-3 position-relative" style="background-color: #f2f3f6">
     <div class="container">
         <div class="text-center mb-3">
             <h2 class="section-title text-primary-gradient my-3">{{ __('general.why_us_title') }}</h2>
@@ -115,7 +115,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
     @if(($services ?? collect())->count() > 0)
     <section id="services" class="services-slider-section py-5 bg-white position-relative">
