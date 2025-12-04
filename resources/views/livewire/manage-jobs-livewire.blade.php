@@ -4,8 +4,9 @@
             <h2 class="card-title m-0">{{__('general.manage')}} {{__('general.jobs')}}</h2>
             <x-spinner />
         </div>
-       
-        <button class="btn btn-primary" wire:click="$dispatch('openModal', {'component': 'create-edit-job-modal'})">{{__('general.add_job')}}</button>
+
+        <button class="btn btn-primary"
+            wire:click="$dispatch('openModal', {'component': 'create-edit-job-modal'})">{{__('general.add_job')}}</button>
 
     </div>
     <div class="card-body">
@@ -23,34 +24,23 @@
         @if(session()->has('message'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{__('general.close')}}"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                    aria-label="{{__('general.close')}}"></button>
             </div>
         @endif
 
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>{{__('general.job_title')}}</th>
-                        <th>{{__('general.shop_name')}}</th>
-                        <th>{{__('general.owner')}}</th>
-                        <th>{{__('general.status')}}</th>
-                        <th>{{__('general.active')}}</th>
-                        <th>{{__('general.applications')}}</th>
-                        <th>{{__('general.actions')}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($jobs as $job)
-                        <tr>
-                            <td>
-                                <a href="{{ route('jobs.show', $job->slug) }}" target="_blank">
-                                    {{ $job->title }}
-                                </a>
-                            </td>
-                            <td>{{ $job->shop_name ?? '-' }}</td>
-                            <td>{{ $job->user->name }}</td>
-                            <td>
+        <div class="row g-3">
+            @forelse($jobs as $job)
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <h5 class="card-title mb-0">
+                                    <a href="{{ route('jobs.show', $job->slug) }}" target="_blank"
+                                        class="text-decoration-none">
+                                        {{ $job->title }}
+                                    </a>
+                                </h5>
                                 @if($job->status === 'pending')
                                     <span class="badge bg-warning">{{ __('general.pending_review') }}</span>
                                 @elseif($job->status === 'approved')
@@ -58,132 +48,142 @@
                                 @else
                                     <span class="badge bg-danger">{{ __('general.rejected') }}</span>
                                 @endif
-                            </td>
-                            <td>
-                                @if($job->is_active)
-                                    <span class="badge bg-success">{{ __('general.active') }}</span>
-                                @else
-                                    <span class="badge bg-secondary">{{ __('general.inactive') }}</span>
+                            </div>
+                            <div class="btn-group btn-group-sm" style="direction: ltr" role="group">
+                                @if($job->status === 'pending')
+                                    <button class="btn btn-success btn-sm" wire:click="approve({{$job->id}})"
+                                        title="{{ __('general.approve') }}">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" wire:click="reject({{$job->id}})"
+                                        title="{{ __('general.reject') }}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
                                 @endif
-                            </td>
-                            <td>
-                                <span class="badge bg-info">{{ $job->applications->count() }}</span>
-                            </td>
-                            <td>
-                                <div class="btn-group btn-group-sm" style="direction: ltr" role="group">
-                                    @if($job->status === 'pending')
-                                        <button class="btn btn-success btn-sm" 
-                                                wire:click="approve({{$job->id}})"
-                                                title="{{ __('general.approve') }}">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm" 
-                                                wire:click="reject({{$job->id}})"
-                                                title="{{ __('general.reject') }}">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    @endif
-                                    
-                                    @if($job->status === 'approved')
-                                        <button class="btn btn-{{$job->is_active ? 'warning' : 'success'}} btn-sm" 
-                                                wire:click="toggleActive({{$job->id}})"
-                                                title="{{ $job->is_active ? __('general.close_job') : __('general.open_job') }}">
-                                            <i class="fas fa-{{$job->is_active ? 'pause' : 'play'}}"></i>
-                                        </button>
-                                    @endif
-                                    
-                                    <button class="btn btn-info btn-sm" 
-                                            wire:click="$dispatch('openModal', {'component': 'create-edit-job-modal', 'arguments': {'job': {{$job->id}}} })"
-                                            title="{{ __('general.edit') }}">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    
-                                    <button class="btn btn-danger btn-sm" 
-                                            wire:confirm="{{__('general.confirm_delete')}}" 
-                                            wire:click="delete({{$job->id}})"
-                                            title="{{ __('general.delete') }}">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
 
-                        <!-- Manage the applications -->
-                        <tr>
-                            <td colspan="7">
-                                <div class="table-responsive mt-2">
-                                    <strong>{{ __('general.applications') }}:</strong>
-                                    @if($job->applications->isEmpty())
-                                        <p class="mb-0">{{ __('general.no_applications_yet') }}</p>
-                                    @else
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>{{ __('general.applicant_name') }}</th>
-                                                    <th>{{ __('general.phone') }}</th>
-                                                    <th>{{ __('general.status') }}</th>
-                                                    <th>{{ __('general.actions') }}</th>
-                                                </tr>
-                                            </thead>
-                                    
-                                            @foreach($job->applications as $application)
-                                                <tr>
-                                                    <td>
-                                                        {{ $application->full_name }}
-                                                    </td>
-                                                    <td>
-                                                        {{ $application->phone }}
-                                                    </td>
-                                                    <td>
-                                                        @if($application->is_active)
-                                                            <span class="badge bg-success">{{ __('general.active') }}</span>
-                                                        @else
-                                                            <span class="badge bg-secondary">{{ __('general.inactive') }}</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <div class="btn-group btn-group-sm" style="direction: ltr" role="group">
-                                                            <button class="btn btn-info btn-sm" 
-                                                                    wire:click="$dispatch('openModal', {'component': 'view-application-modal', 'arguments': {'application': {{$application->id}}} })"
-                                                                    title="{{ __('general.view') }}">
-                                                                <i class="fas fa-eye"></i>
-                                                            </button>
-                                                            <button class="btn btn-danger btn-sm" 
-                                                                    wire:confirm="{{__('general.confirm_delete')}}" 
-                                                                    wire:click="deleteApplication({{$application->id}})"
-                                                                    title="{{ __('general.delete') }}">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
+                                @if($job->status === 'approved')
+                                    <button class="btn btn-{{$job->is_active ? 'warning' : 'success'}} btn-sm"
+                                        wire:click="toggleActive({{$job->id}})"
+                                        title="{{ $job->is_active ? __('general.close_job') : __('general.open_job') }}">
+                                        <i class="fas fa-{{$job->is_active ? 'pause' : 'play'}}"></i>
+                                    </button>
+                                @endif
+
+                                <button class="btn btn-info btn-sm"
+                                    wire:click="$dispatch('openModal', {'component': 'create-edit-job-modal', 'arguments': {'job': {{$job->id}}} })"
+                                    title="{{ __('general.edit') }}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+
+                                <button class="btn btn-danger btn-sm" wire:confirm="{{__('general.confirm_delete')}}"
+                                    wire:click="delete({{$job->id}})" title="{{ __('general.delete') }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <small class="text-muted">{{ __('general.shop_name') }}:</small>
+                                    <p class="mb-1">{{ $job->shop_name ?? '-' }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="text-muted">{{ __('general.owner') }}:</small>
+                                    <p class="mb-1">{{ $job->user->name }}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="text-muted">{{ __('general.active') }}:</small>
+                                    <p class="mb-1">
+                                        @if($job->is_active)
+                                            <span class="badge bg-success">{{ __('general.active') }}</span>
+                                        @else
+                                            <span class="badge bg-secondary">{{ __('general.inactive') }}</span>
+                                        @endif
+                                    </p>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="text-muted">{{ __('general.applications') }}:</small>
+                                    <p class="mb-1">
+                                        <span class="badge bg-info">{{ $job->applications->count() }}</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            @if($job->applications->isNotEmpty())
+                                <hr>
+                                <div class="mt-3">
+                                    <h6 class="mb-3">{{ __('general.applications') }}:</h6>
+                                    <div class="row g-2">
+                                        @foreach($job->applications as $application)
+                                            <div class="col-12">
+                                                <div class="card card-body bg-light">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-3">
+                                                            <strong>{{ $application->full_name }}</strong>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <small class="text-muted">{{ __('general.phone') }}:</small>
+                                                            {{ $application->phone }}
+                                                        </div>
+                                                        <div class="col-md-3">
                                                             @if($application->is_active)
-                                                                <button class="btn btn-secondary btn-sm" 
-                                                                        wire:click="deactivateApplication({{$application->id}})"
-                                                                        title="{{ __('general.deactivate') }}">
-                                                                    <i class="fas fa-pause"></i>
-                                                                </button>
+                                                                <span class="badge bg-success">{{ __('general.active') }}</span>
                                                             @else
-                                                                <button class="btn btn-success btn-sm" 
-                                                                        wire:click="activateApplication({{$application->id}})"
-                                                                        title="{{ __('general.activate') }}">
-                                                                    <i class="fas fa-play"></i>
-                                                                </button>
+                                                                <span class="badge bg-secondary">{{ __('general.inactive') }}</span>
                                                             @endif
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </table>
-                                    @endif
+                                                        <div class="col-md-3">
+                                                            <div class="btn-group btn-group-sm" style="direction: ltr" role="group">
+                                                                <button class="btn btn-info btn-sm"
+                                                                    wire:click="$dispatch('openModal', {'component': 'view-application-modal', 'arguments': {'application': {{$application->id}}} })"
+                                                                    title="{{ __('general.view') }}">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </button>
+                                                                <button class="btn btn-danger btn-sm"
+                                                                    wire:confirm="{{__('general.confirm_delete')}}"
+                                                                    wire:click="deleteApplication({{$application->id}})"
+                                                                    title="{{ __('general.delete') }}">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                                @if($application->is_active)
+                                                                    <button class="btn btn-secondary btn-sm"
+                                                                        wire:click="deactivateApplication({{$application->id}})"
+                                                                        title="{{ __('general.deactivate') }}">
+                                                                        <i class="fas fa-pause"></i>
+                                                                    </button>
+                                                                @else
+                                                                    <button class="btn btn-success btn-sm"
+                                                                        wire:click="activateApplication({{$application->id}})"
+                                                                        title="{{ __('general.activate') }}">
+                                                                        <i class="fas fa-play"></i>
+                                                                    </button>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
-
-                    @empty
-                        <tr>
-                            <td colspan="7" class="text-center">{{__('general.no_jobs')}}</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                            @else
+                                <hr>
+                                <p class="text-muted mb-0">{{ __('general.no_applications_yet') }}</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <i class="fas fa-briefcase fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">{{ __('general.no_jobs') }}</h5>
+                        </div>
+                    </div>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>

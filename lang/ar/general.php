@@ -220,6 +220,8 @@ return [
     'confirm_reject' => 'هل أنت متأكد من رفض الطلب؟',
     'activate' => 'تفعيل',
     'deactivate' => 'إلغاء التفعيل',
+    'edit_your_profile' => 'عدل بياناتك',
+    'add_your_profile' => 'أضف بياناتك',
     
     // Services translations
     'services' => 'الخدمات',
@@ -230,7 +232,7 @@ return [
     'service_description' => 'وصف الخدمة',
     'service_price' => 'سعر الخدمة',
     'icon_image' => 'صورة أيقونية',
-    'inquire_about_service' => 'استفسر عن الخدمة',
+    'inquire_about_service' => 'استعلم عن الخدمة',
     'service_whatsapp_message' => 'أرغب بالاستفسار عن الخدمة: :service في قسم :category',
     'no_services' => 'لا توجد خدمات حالياً',
     'all_services' => 'كل الخدمات',

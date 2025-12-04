@@ -1,7 +1,7 @@
 @extends('layouts.normal-layout')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/jobs.css')}}">
+    <link rel="stylesheet" href="{{asset('css/jobs.css')}}?v=1">
 @endsection
 
 @section('content')
@@ -139,7 +139,15 @@
                 <div class="cta-card text-center">
                     <h3 class="fw-bold text-dark mb-3">
                         <i class="fas fa-user-tie me-2"></i>
-                        {{ __('general.add_or_edit_profile') }}
+                        @auth
+                            @if(auth()->user()->employeeProfile)
+                                {{ __('general.edit_your_profile') }}
+                            @else
+                                {{ __('general.add_your_profile') }}
+                            @endif
+                        @else
+                            {{ __('general.add_or_edit_profile') }}
+                        @endauth
                     </h3>
                     <p class="text-dark mb-3">{{ __('general.profile_cta_sub') }}</p>
                     @auth
@@ -196,7 +204,7 @@
 
                                         @if($employee->about)
                                             <p class="card-text text-muted mt-3">
-                                                {{ Str::limit($employee->about, 100) }}
+                                                {{ $employee->about }}
                                             </p>
                                         @endif
 

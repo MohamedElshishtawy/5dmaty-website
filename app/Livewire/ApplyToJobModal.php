@@ -24,14 +24,14 @@ class ApplyToJobModal extends ModalComponent
     {
         return [
             'name' => 'required|string|max:255',
-            'age' => 'nullable|integer|min:16|max:100',
-            'education' => 'nullable|string|max:255',
-            'marital_status' => 'nullable|string|max:255',
-            'military_status' => 'nullable|string|max:255',
-            'residence' => 'nullable|string|max:255',
-            'desired_position' => 'nullable|string|max:255',
-            'whatsapp_phone' => 'nullable|string|max:20',
-            'about' => 'nullable|string',
+            'age' => 'required|integer|min:16|max:100',
+            'education' => 'required|string|max:255',
+            'marital_status' => 'required|string|max:255',
+            'military_status' => 'required|string|max:255',
+            'residence' => 'required|string|max:255',
+            'desired_position' => 'required|string|max:255',
+            'whatsapp_phone' => 'required|string|max:20',
+            'about' => 'required|string',
         ];
     }
 

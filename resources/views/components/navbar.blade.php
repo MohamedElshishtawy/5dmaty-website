@@ -63,40 +63,40 @@
     <div class="offcanvas-body d-grid" style="grid-template-rows: 1fr auto;">
         <div class="mb-4">
             <ul class="list-unstyled glass-list">
-                <li @class(["py-2 rounded", "bg-body-secondary" => $active == 'home']) >
+                <li @class(["py-2 rounded", "active-nav-link" => $active == 'home']) >
                     <a @class(['nav-link', 'text-center']) href="/" >
                         <i class="bi bi-house me-2"></i>
                         {{__('general.home')}}
                     </a>
                 </li>
                 @hasanyrole('superadmin|admin')
-                <li @class(["py-2 rounded", "bg-body-secondary" => $active == 'dashboard']) >
+                <li @class(["py-2 rounded", "active-nav-link" => $active == 'dashboard']) >
                     <a @class(['nav-link', 'text-center']) href="{{ route('admin.dashboard') }}" >
                         <i class="bi bi-speedometer2 me-2"></i>
                         {{__('general.dashboard')}}
                     </a>
                 </li>
                 @endhasanyrole  {{-- Corrected: This closing directive was missing and caused the "unexpected end of file" error --}}
-                <li @class(["py-2 rounded", "bg-body-secondary" => $active == 'employment']) >
+                <li @class(["py-2 rounded", "active-nav-link" => $active == 'employment']) >
                     <a @class(['nav-link', 'text-center']) href="{{route('jobs.index')}}" >
                         <i class="bi bi-briefcase me-2"></i>
                         {{__('general.jobs')}}
                     </a>
                 </li>
             
-                <li @class(["py-2 rounded", "bg-body-secondary" => $active == 'real-state']) >
+                <li @class(["py-2 rounded", "active-nav-link" => $active == 'real-state']) >
                     <a @class(['nav-link', 'text-center']) href="{{route('properties.index')}}" >
                         <i class="bi bi-building me-2"></i>
                         {{__('general.real-state')}}
                     </a>
                 </li>
-                <li @class(["py-2 rounded", "bg-body-secondary" => $active == 'market']) >
+                <li @class(["py-2 rounded", "active-nav-link" => $active == 'market']) >
                     <a @class(['nav-link', 'text-center']) href="https://mtgar.5dmaty.com" >
                         <i class="bi bi-shop me-2"></i>
                         {{__('general.market')}}
                     </a>
                 </li>
-                <li @class(["py-2 rounded", "bg-body-secondary" => $active == 'courses']) >
+                <li @class(["py-2 rounded", "active-nav-link" => $active == 'courses']) >
                     <a @class(['nav-link', 'text-center']) href="https://edu.5dmaty.com" >
                         <i class="bi bi-mortarboard me-2"></i>
                         {{__('general.courses')}}
@@ -119,43 +119,43 @@
             <hr class="text-muted">
             <h6 class="text-muted text-uppercase fw-bold mb-3">{{__('general.management')}}</h6>
             <ul class="list-unstyled glass-list">
-                <li @class(["py-2", "rounded", "bg-body-secondary" => $activeSidebar == 'users'])>
+                <li @class(["py-2", "rounded", "active-nav-link" => $activeSidebar == 'users'])>
                     <a class="nav-link text-center" href="{{route('admin.users.index')}}" >
                         <i class="bi bi-people me-2 "></i>
                         {{__('general.users-management')}}
                     </a>
                 </li>
-                <li @class(["py-2", "rounded", "bg-body-secondary" => $activeSidebar == 'jobs'])>
+                <li @class(["py-2", "rounded", "active-nav-link" => $activeSidebar == 'jobs'])>
                     <a class="nav-link text-center" href="{{route('admin.jobs.index')}}" >
                         <i class="bi bi-briefcase me-2 "></i>
                         {{__('general.employment-management')}}
                     </a>
                 </li>
-                <li @class(["py-2", "rounded", "bg-body-secondary" => $activeSidebar == 'employees'])>
+                <li @class(["py-2", "rounded", "active-nav-link" => $activeSidebar == 'employees'])>
                     <a class="nav-link text-center" href="{{route('admin.employees.index')}}" >
                         <i class="bi bi-person-lines-fill me-2 "></i>
                         {{__('general.employee_management')}}
                     </a>
                 </li>
-                <li @class(["py-2", "rounded", "bg-body-secondary" => $activeSidebar == 'properties'])>
+                <li @class(["py-2", "rounded", "active-nav-link" => $activeSidebar == 'properties'])>
                     <a class="nav-link text-center" href="{{route('admin.properties.index')}}" >
                         <i class="bi bi-building me-2 "></i>
                         {{__('general.real-state-management')}}
                     </a>
                 </li>
-                <li @class(["py-2", "rounded", "bg-body-secondary" => $activeSidebar == 'faqs'])>
+                <li @class(["py-2", "rounded", "active-nav-link" => $activeSidebar == 'faqs'])>
                     <a class="nav-link text-center" href="{{route('admin.faqs.index')}}" >
                         <i class="bi bi-question-circle me-2 "></i>
                         {{__('general.faq_management')}}
                     </a>
                 </li>
-                <li @class(["py-2", "rounded", "bg-body-secondary" => $activeSidebar == 'settings'])>
+                <li @class(["py-2", "rounded", "active-nav-link" => $activeSidebar == 'settings'])>
                     <a class="nav-link text-center" href="{{ route('admin.settings.index') }}" >
                         <i class="bi bi-gear me-2 "></i>
                         {{__('general.settings')}}
                     </a>
                 </li>
-                <li @class(["py-2", "rounded", "bg-body-secondary" => $activeSidebar == 'categories'])>
+                <li @class(["py-2", "rounded", "active-nav-link" => $activeSidebar == 'categories'])>
                     <a class="nav-link text-center" href="{{route('admin.categories.index')}}" >
                         <i class="bi bi-tags me-2 "></i>
                         {{__('general.categories')}}

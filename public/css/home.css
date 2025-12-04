@@ -17,6 +17,8 @@
 .section-title {
     
     font-weight: bold;
+    font-family: "parastoo", sans-serif;
+    font-size: 2.9rem;
 }
 
 .category-card {

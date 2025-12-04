@@ -2,12 +2,14 @@
 @extends('layouts.normal-layout')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/home.css')}}?v=1">
-    <link rel="stylesheet" href="{{asset('css/jobs.css')}}">
+    <link rel="stylesheet" href="{{asset('css/home.css')}}?v=3">
+    <link rel="stylesheet" href="{{asset('css/jobs.css')}}?v=3">
     <link rel="stylesheet" href="{{asset('css/accordion.css')}}">
 @endsection
 
 @section('content')
+<script type="module" src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js"></script>
+
     <x-navbar class="shadow-sm sticky-top" />
 
     <section class="hero-split py-3 py-md-6  min-vh-100 d-flex position-sticky overflow-hidden">
@@ -47,7 +49,7 @@
 
 
     <!-- Why Us Section -->
-    {{-- <section id="why-us" class="why-us-section py-3 position-relative" style="background-color: #f2f3f6">
+     <section id="why-us" class="why-us-section py-3 position-relative" style="background-color: #f2f3f6">
     <div class="container">
         <div class="text-center mb-3">
             <h2 class="section-title text-primary-gradient my-3">{{ __('general.why_us_title') }}</h2>
@@ -57,8 +59,13 @@
             <!-- Item 1 -->
             <div class="col-6 col-lg-4 why-us-item mb-4">
                 <div class="d-flex justify-content-center">
-                    <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
-                        <img src="{{ asset('images/lottie/Multi-Tasking.gif') }}">
+                    <div class="bg-white rounded-circle">
+                        <dotlottie-wc
+                        src="https://lottie.host/297013e0-5a76-428d-8df6-bef3928d3e93/aC3QDd6v8r.lottie"
+                        style="width: 150px; height: 150px;"
+                        autoplay
+                        loop
+                        ></dotlottie-wc>
                     </div>
                 </div>
                 <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
@@ -69,8 +76,13 @@
             <!-- Item 2 -->
             <div class="col-6 col-lg-4 why-us-item mb-4">
                 <div class="d-flex justify-content-center">
-                    <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
-                        <img src="{{ asset('images/lottie/Available.gif') }}">
+                    <div class="bg-white rounded-circle">
+                        <dotlottie-wc
+                        src="https://lottie.host/414509b7-99d1-41ce-bd05-904fafc0b54d/K0hRfZArJQ.lottie"
+                        style="width: 135px; height: 135px;"
+                        autoplay
+                        loop
+                        ></dotlottie-wc>
                     </div>
                 </div>
                 <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
@@ -82,7 +94,12 @@
             <div class="col-6 col-lg-4 why-us-item mb-4">
                 <div class="d-flex justify-content-center">
                     <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
-                        <img src="{{ asset('images/lottie/Tracking.gif') }}">
+                        <dotlottie-wc
+                        src="https://lottie.host/d3866e36-19d1-41d0-8174-8c7d16766ab9/ZrUTybSmMm.lottie"
+                        style="width: 135px; height: 135px;"
+                        autoplay
+                        loop
+                        ></dotlottie-wc>
                     </div>
                 </div>
                 <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
@@ -93,8 +110,13 @@
             <!-- Item 4 -->
             <div class="col-6 col-lg-4 why-us-item mb-4">
                 <div class="d-flex justify-content-center">
-                    <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
-                        <img src="{{ asset('images/lottie/Discount.gif') }}">
+                    <div class="bg-white rounded-circle">
+                        <dotlottie-wc
+                        src="https://lottie.host/dbcdcb7a-0d97-49b3-ad45-4cf4986b36b1/Xooj10J5XJ.lottie"
+                        style="width: 135px; height: 135px;"
+                        autoplay
+                        loop
+                        ></dotlottie-wc>
                     </div>
                 </div>
                 <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
@@ -105,8 +127,13 @@
             <!-- Item 5 -->
             <div class="col-6 col-lg-4 why-us-item mb-4">
                 <div class="d-flex justify-content-center">
-                    <div class="bg-white rounded-circle" style="width: 130px; height: 130px;">
-                        <img src="{{ asset('images/lottie/Expert.gif') }}">
+                    <div class="bg-white rounded-circle">
+                        <dotlottie-wc
+                        src="https://lottie.host/5e71153a-d46d-41d6-a3af-7f5c1f5b6d15/L7jp4p0Mhb.lottie"
+                        style="width: 135px; height: 135px;"
+                        autoplay
+                        loop
+                        ></dotlottie-wc>
                     </div>
                 </div>
                 <div class="d-flex align-items-center bg-white rounded-3 p-2 justify-content-center mt-2 why-us-text relative">
@@ -115,7 +142,7 @@
             </div>
         </div>
     </div>
-</section> --}}
+</section> 
 
     @if(($services ?? collect())->count() > 0)
     <section id="services" class="services-slider-section py-5 bg-white position-relative">

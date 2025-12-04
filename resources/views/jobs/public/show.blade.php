@@ -127,7 +127,7 @@
                                             @if($application->about)
                                                 <div class="mb-2">
                                                     <small><strong>{{ __('general.about_employee') }}:</strong></small>
-                                                    <p class="mb-0 small text-muted" style="white-space: pre-line;">{{ $application->about }}</p>
+                                                    <p class="mb-0 small text-muted">{{ $application->about }}</p>
                                                 </div>
                                             @endif
 

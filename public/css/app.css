@@ -15,7 +15,7 @@
 }
 
 * {
-    font-family: "parastoo", sans-serif;
+    font-family: "Cairo", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
     font-variation-settings: "slnt" 0;
@@ -23,6 +23,12 @@
     direction: rtl;
 }
 
+.font-parastoo {
+    font-family: "parastoo", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "slnt" 0;
+}
 /* Override Bootstrap Buttons */
 .btn-primary {
     background: var(--primary-gradient) !important;
@@ -103,6 +109,10 @@
     border-bottom: 1px solid rgba(255,255,255,0.35);
 }
 .animate-nav { animation: fadeSlideDown .6s ease both; }
+.active-nav-link {
+    background: oklch(0.62 0.21 259.82 / 0.12);
+    color: var(--primary);
+}
 @keyframes fadeSlideDown { from { transform: translateY(-8px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
 .link-underline { position: relative; }
 .link-underline::after {
