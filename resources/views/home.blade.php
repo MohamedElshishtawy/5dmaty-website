@@ -62,7 +62,7 @@
                     <div class="bg-white rounded-circle">
                         <dotlottie-wc
                         src="https://lottie.host/297013e0-5a76-428d-8df6-bef3928d3e93/aC3QDd6v8r.lottie"
-                        style="width: 150px; height: 150px;"
+                        style="width: 135px; height: 135px;"
                         autoplay
                         loop
                         ></dotlottie-wc>
