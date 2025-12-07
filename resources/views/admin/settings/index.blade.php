@@ -117,9 +117,9 @@
                                 <label class="form-label">{{ __('شعار الهيرو (الصفحة الرئيسية)') }}</label>
                                 <div class="mb-2">
                                     @php
-                                        $heroLogo = \App\Support\Settings::imageUrl('home.hero.logo', asset('images/white-5dmaty.svg'));
+                                        $heroLogo = \App\Models\Setting::where('key', 'home.hero.logo')->value('value') ?? asset('images/white-5dmaty.svg');
                                     @endphp
-                                    <img src="{{ $heroLogo }}" alt="Hero Logo" class="img-fluid rounded border" style="max-height: 80px; background:#fff;">
+                                    <img src="{{ asset('storage/' . $heroLogo) }}" alt="Hero Logo" class="img-fluid rounded border" style="max-height: 80px; background:#fff;">
                                 </div>
                                 <input type="file" name="home_hero_logo" class="form-control" accept=".png,.jpg,.jpeg,.webp,.svg">
                                 @error('home_hero_logo')<div class="text-danger small">{{ $message }}</div>@enderror
