@@ -120,11 +120,11 @@
                                                 <div class="card card-body bg-light">
                                                     <div class="row align-items-center">
                                                         <div class="col-md-3">
-                                                            <strong>{{ $application->full_name }}</strong>
+                                                            <strong>{{ $application->name }}</strong>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <small class="text-muted">{{ __('general.phone') }}:</small>
-                                                            {{ $application->phone }}
+                                                            {{ $application->whatsapp_phone }}
                                                         </div>
                                                         <div class="col-md-3">
                                                             @if($application->is_active)

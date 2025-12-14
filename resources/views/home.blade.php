@@ -28,10 +28,10 @@
                         <img class="hero-logo mb-3 mx-auto mx-lg-0" src="{{ \App\Support\Settings::imageUrl('home.hero.logo', asset('images/white-5dmaty.svg')) }}" alt="5dmaty"/>
                         <h1 class="display-5 fw-bold mb-3  mx-auto mx-lg-0 text-center text-lg-end text-dark parastoo">{{ \App\Support\Settings::get('home.hero.title', __('خدماتي')) }}</h1>
                         <p style="font-style: italic;" class="mb-2 bold lead text-center text-lg-end text-dark hero-slogan">{{ __('general.slogen') }}</p>
-                        <p class="lead mb-4  text-center text-lg-end text-dark">{{ \App\Support\Settings::get('home.hero.subtitle', __('general.tagline_home', ['company' => config('app.name')])) }}</p>
+                        <p class="lead mb-4  text-center text-lg-end text-dark">{{ \App\Models\Setting::where('key', 'home.hero.subtitle')->value('value') ?? __('general.tagline_home') }}</p>
                         <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
-                            <a href="#categories" class="btn btn-gradient px-4 py-2 rounded-pill">{{ \App\Support\Settings::get('home.cta.categories_label', __('general.categories')) }}</a>
-                            <a href="#why-us" class="btn btn-outline-dark px-4 py-2 rounded-pill">{{ \App\Support\Settings::get('home.cta.features_label', __('general.why_us_title')) }}</a>
+                            <a href="#categories" class="btn btn-gradient px-4 py-2 rounded-pill">{{ __('general.categories') }}</a>
+                            <a href="#why-us" class="btn btn-outline-dark px-4 py-2 rounded-pill">{{ __('general.why_us_title') }}</a>
                         </div>
                         
                     </div>
