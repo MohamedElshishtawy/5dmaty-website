@@ -181,7 +181,7 @@
                                         @php
                                             $wa_number = config('constants.whatsapp_number');
                                             $wa_text = urlencode(__('general.service_whatsapp_message', ['service' => $service->name, 'category' => $service->category?->name ?? '']));
-                                            $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
+                                            $wa_url = "https://wa.me/+2{$wa_number}?text={$wa_text}";
                                         @endphp
                                         <a href="{{ $wa_url }}" target="_blank" class="btn btn-sm btn-primary" title="{{ __('general.inquire_about_service') }}">
                                             
