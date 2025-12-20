@@ -409,7 +409,7 @@
                                             @php
                                                 $wa_number = preg_replace('/\D+/', '', $job->whatsapp_phone);
                                                 $wa_text = urlencode(__('general.job_whatsapp_message', ['title' => $job->title]));
-                                                $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
+                                                $wa_url = "https://wa.me/+2{$wa_number}?text={$wa_text}";
                                             @endphp
                                             <a href="{{ $wa_url }}" target="_blank" class="btn btn-success">
                                                 <i class="fab fa-whatsapp"></i>
