@@ -22,7 +22,7 @@
     <label class="form-label">{{ __('الدور') }}</label>
     <select name="role" class="form-select" required>
         @foreach($roles as $roleName)
-            <option value="{{ $roleName }}" @selected(old('role', optional($user->roles->first())->name ?? 'user') === $roleName)>{{ __($roleName) }}</option>
+            <option value="{{ $roleName }}">{{ $roleName }}</option>
         @endforeach
     </select>
     @error('role')<div class="text-danger small">{{ $message }}</div>@enderror
