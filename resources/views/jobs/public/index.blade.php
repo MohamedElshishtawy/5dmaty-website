@@ -32,13 +32,13 @@
         <div class="container">
             <!-- Centered Tabs -->
             <div class="job-tabs">
-                <a href="{{ route('jobs.index', ['tab' => 'jobs']) }}" 
-                   class="job-tab {{ $tab === 'jobs' ? 'active' : '' }}">
+                <a href="{{ route('jobs.index', ['tab' => 'jobs']) }}"
+                    class="job-tab {{ $tab === 'jobs' ? 'active' : '' }}">
                     <i class="fas fa-briefcase me-2"></i>
                     {{ __('general.add_job') }}
                 </a>
-                <a href="{{ route('jobs.index', ['tab' => 'employees']) }}" 
-                   class="job-tab {{ $tab === 'employees' ? 'active' : '' }}">
+                <a href="{{ route('jobs.index', ['tab' => 'employees']) }}"
+                    class="job-tab {{ $tab === 'employees' ? 'active' : '' }}">
                     <i class="fas fa-users me-2"></i>
                     {{ __('general.employment_request') }}
                 </a>
@@ -54,15 +54,15 @@
                     </h3>
                     <p class="text-dark mb-3">{{ __('general.post_job_cta_sub') }}</p>
                     @auth
-                        <button class="btn btn-dark btn-lg" 
-                                wire:click="$dispatch('openModal', {'component': 'create-edit-job-modal'})"
-                                onclick="Livewire.dispatch('openModal', {component: 'create-edit-job-modal'})">
+                        <button class="btn btn-dark btn-lg"
+                            wire:click="$dispatch('openModal', {'component': 'create-edit-job-modal'})"
+                            onclick="Livewire.dispatch('openModal', {component: 'create-edit-job-modal'})">
                             <i class="fas fa-plus me-2"></i>
                             {{ __('general.add_job') }}
                         </button>
                     @else
-                        <a href="{{ route('login') }}?intended={{ route('jobs.index', ['tab' => 'jobs', 'action' => 'create']) }}" 
-                           class="btn btn-dark btn-lg">
+                        <a href="{{ route('login') }}?intended={{ route('jobs.index', ['tab' => 'jobs', 'action' => 'create']) }}"
+                            class="btn btn-dark btn-lg">
                             <i class="fas fa-plus me-2"></i>
                             {{ __('general.add_job') }}
                         </a>
@@ -77,7 +77,7 @@
                                 <div class="card job-card h-100 border-0 shadow-sm">
                                     <div class="card-body d-flex flex-column">
                                         <h5 class="card-title fw-bold">{{ $job->title }}</h5>
-                                        
+
                                         @if($job->shop_name)
                                             <p class="text-muted mb-2">
                                                 <i class="fas fa-store me-1"></i>
@@ -100,19 +100,16 @@
 
                                         <div class="mt-auto">
                                             <div class="d-flex gap-2">
-                                                <a href="{{ route('jobs.show', $job->slug) }}" 
-                                                   class="btn btn-primary flex-grow-1">
+                                                <a href="{{ route('jobs.show', $job->slug) }}" class="btn btn-primary flex-grow-1">
                                                     {{ __('general.view_details') }}
                                                 </a>
                                                 @if($job->whatsapp_phone)
                                                     @php
                                                         $wa_number = preg_replace('/\D+/', '', $job->whatsapp_phone);
                                                         $wa_text = urlencode(__('general.job_whatsapp_message', ['title' => $job->title]));
-                                                        $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
+                                                        $wa_url = "https://wa.me/+2{$wa_number}?text={$wa_text}";
                                                     @endphp
-                                                    <a href="{{ $wa_url }}" 
-                                                       target="_blank" 
-                                                       class="btn btn-success">
+                                                    <a href="{{ $wa_url }}" target="_blank" class="btn btn-success">
                                                         <i class="fab fa-whatsapp"></i>
                                                     </a>
                                                 @endif
@@ -151,14 +148,14 @@
                     </h3>
                     <p class="text-dark mb-3">{{ __('general.profile_cta_sub') }}</p>
                     @auth
-                        <button class="btn btn-dark btn-lg" 
-                                onclick="Livewire.dispatch('openModal', {component: 'upsert-employee-profile-modal'})">
+                        <button class="btn btn-dark btn-lg"
+                            onclick="Livewire.dispatch('openModal', {component: 'upsert-employee-profile-modal'})">
                             <i class="fas fa-user-edit me-2"></i>
                             {{ __('general.add_your_data') }}
                         </button>
                     @else
-                        <a href="{{ route('login') }}?intended={{ route('jobs.index', ['tab' => 'employees', 'action' => 'edit_profile']) }}" 
-                           class="btn btn-dark btn-lg">
+                        <a href="{{ route('login') }}?intended={{ route('jobs.index', ['tab' => 'employees', 'action' => 'edit_profile']) }}"
+                            class="btn btn-dark btn-lg">
                             <i class="fas fa-user-edit me-2"></i>
                             {{ __('general.add_your_data') }}
                         </a>
@@ -173,7 +170,7 @@
                                 <div class="card employee-card h-100 border-0 shadow-sm">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold">{{ $employee->name }}</h5>
-                                        
+
                                         @if($employee->desired_position)
                                             <p class="text-primary mb-2">
                                                 <i class="fas fa-briefcase me-1"></i>
@@ -212,12 +209,10 @@
                                             @php
                                                 $wa_number = preg_replace('/\D+/', '', $employee->whatsapp_phone);
                                                 $wa_text = urlencode(__('general.employee_whatsapp_message', ['name' => $employee->name]));
-                                                $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
+                                                $wa_url = "https://wa.me/+2{$wa_number}?text={$wa_text}";
                                             @endphp
                                             <div class="mt-3">
-                                                <a href="{{ $wa_url }}" 
-                                                   target="_blank" 
-                                                   class="btn btn-success w-100">
+                                                <a href="{{ $wa_url }}" target="_blank" class="btn btn-success w-100">
                                                     <i class="fab fa-whatsapp me-2"></i>
                                                     {{ __('general.contact_whatsapp') }}
                                                 </a>
@@ -242,6 +237,5 @@
         </div>
     </section>
 
-    <x-footer/>
+    <x-footer />
 @endsection
-

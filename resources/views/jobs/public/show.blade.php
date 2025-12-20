@@ -65,7 +65,7 @@
                         @if((Auth::id() === $job->user_id || Auth::user()->hasRole(['superadmin', 'admin'])) && $applications->count() > 0)
                             <div class="job-detail-card bg-white p-4 mt-4">
                                 <h5 class="fw-bold mb-3">{{ __('general.applications') }} ({{ $applications->count() }})</h5>
-                                
+
                                 @foreach($applications as $application)
                                     <div class="card mb-3">
                                         <div class="card-body">
@@ -76,7 +76,8 @@
                                                         <small class="text-muted">{{ __('general.age') }}: {{ $application->age }}</small>
                                                     @endif
                                                 </div>
-                                                <span class="badge bg-{{ $application->status === 'accepted' ? 'success' : ($application->status === 'rejected' ? 'danger' : 'warning') }}">
+                                                <span
+                                                    class="badge bg-{{ $application->status === 'accepted' ? 'success' : ($application->status === 'rejected' ? 'danger' : 'warning') }}">
                                                     @if($application->status === 'accepted')
                                                         {{ __('general.accepted') }}
                                                     @elseif($application->status === 'rejected')
@@ -90,33 +91,39 @@
                                             <div class="row g-2 mb-2">
                                                 @if($application->education)
                                                     <div class="col-6">
-                                                        <small><strong>{{ __('general.education') }}:</strong> {{ $application->education }}</small>
+                                                        <small><strong>{{ __('general.education') }}:</strong>
+                                                            {{ $application->education }}</small>
                                                     </div>
                                                 @endif
                                                 @if($application->marital_status)
                                                     <div class="col-6">
-                                                        <small><strong>{{ __('general.marital_status') }}:</strong> {{ $application->marital_status }}</small>
+                                                        <small><strong>{{ __('general.marital_status') }}:</strong>
+                                                            {{ $application->marital_status }}</small>
                                                     </div>
                                                 @endif
                                                 @if($application->military_status)
                                                     <div class="col-6">
-                                                        <small><strong>{{ __('general.military_status') }}:</strong> {{ $application->military_status }}</small>
+                                                        <small><strong>{{ __('general.military_status') }}:</strong>
+                                                            {{ $application->military_status }}</small>
                                                     </div>
                                                 @endif
                                                 @if($application->residence)
                                                     <div class="col-6">
-                                                        <small><strong>{{ __('general.residence') }}:</strong> {{ $application->residence }}</small>
+                                                        <small><strong>{{ __('general.residence') }}:</strong>
+                                                            {{ $application->residence }}</small>
                                                     </div>
                                                 @endif
                                                 @if($application->desired_position)
                                                     <div class="col-12">
-                                                        <small><strong>{{ __('general.desired_position') }}:</strong> {{ $application->desired_position }}</small>
+                                                        <small><strong>{{ __('general.desired_position') }}:</strong>
+                                                            {{ $application->desired_position }}</small>
                                                     </div>
                                                 @endif
                                                 @if($application->whatsapp_phone)
                                                     <div class="col-12">
-                                                        <small><strong>{{ __('general.whatsapp_phone') }}:</strong> 
-                                                            <a href="https://wa.me/{{ preg_replace('/\D+/', '', $application->whatsapp_phone) }}" target="_blank">
+                                                        <small><strong>{{ __('general.whatsapp_phone') }}:</strong>
+                                                            <a href="https://wa.me/+2{{ preg_replace('/\D+/', '', $application->whatsapp_phone) }}"
+                                                                target="_blank">
                                                                 {{ $application->whatsapp_phone }}
                                                             </a>
                                                         </small>
@@ -133,7 +140,9 @@
 
                                             <div class="d-flex gap-2 mt-3">
                                                 @if($application->status !== 'accepted')
-                                                    <form action="{{ route('jobs.applications.updateStatus', ['job' => $job->slug, 'application' => $application->id]) }}" method="POST">
+                                                    <form
+                                                        action="{{ route('jobs.applications.updateStatus', ['job' => $job->slug, 'application' => $application->id]) }}"
+                                                        method="POST">
                                                         @csrf
                                                         <input type="hidden" name="status" value="accepted">
                                                         <button type="submit" class="btn btn-sm btn-success">
@@ -143,7 +152,9 @@
                                                     </form>
                                                 @endif
                                                 @if($application->status !== 'rejected')
-                                                    <form action="{{ route('jobs.applications.updateStatus', ['job' => $job->slug, 'application' => $application->id]) }}" method="POST">
+                                                    <form
+                                                        action="{{ route('jobs.applications.updateStatus', ['job' => $job->slug, 'application' => $application->id]) }}"
+                                                        method="POST">
                                                         @csrf
                                                         <input type="hidden" name="status" value="rejected">
                                                         <button type="submit" class="btn btn-sm btn-danger">
@@ -175,19 +186,17 @@
                             @php
                                 $wa_number = preg_replace('/\D+/', '', $job->whatsapp_phone);
                                 $wa_text = urlencode(__('general.job_whatsapp_message', ['title' => $job->title]));
-                                $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
+                                $wa_url = "https://wa.me/+2{$wa_number}?text={$wa_text}";
                             @endphp
-                            <a href="{{ $wa_url }}" 
-                               target="_blank" 
-                               class="btn whatsapp-btn w-100 mb-3">
+                            <a href="{{ $wa_url }}" target="_blank" class="btn whatsapp-btn w-100 mb-3">
                                 <i class="fab fa-whatsapp me-2"></i>
                                 {{ __('general.contact_whatsapp') }}
                             </a>
                         @endif
 
                         @if($job->status === 'approved' && $job->is_active)
-                            <button class="btn btn-primary w-100 mb-3" 
-                                    onclick="Livewire.dispatch('openModal', {component: 'apply-to-job-modal', arguments: {job: {{ $job->id }}}})">
+                            <button class="btn btn-primary w-100 mb-3"
+                                onclick="Livewire.dispatch('openModal', {component: 'apply-to-job-modal', arguments: {job: {{ $job->id }}}})">
                                 <i class="fas fa-paper-plane me-2"></i>
                                 {{ __('general.apply_now') }}
                             </button>
@@ -198,9 +207,9 @@
                             @if(Auth::id() === $job->user_id || Auth::user()->hasRole(['superadmin', 'admin']))
                                 <div class="border-top pt-3 mt-3">
                                     <h6 class="fw-bold mb-3">{{ __('general.manage') }}</h6>
-                                    
-                                    <button class="btn btn-info w-100 mb-2" 
-                                            onclick="Livewire.dispatch('openModal', {component: 'create-edit-job-modal', arguments: {job: {{ $job->id }}}})">
+
+                                    <button class="btn btn-info w-100 mb-2"
+                                        onclick="Livewire.dispatch('openModal', {component: 'create-edit-job-modal', arguments: {job: {{ $job->id }}}})">
                                         <i class="fas fa-edit me-2"></i>
                                         {{ __('general.edit_job') }}
                                     </button>
@@ -208,7 +217,8 @@
                                     @if($job->status === 'approved')
                                         <form action="{{ route('jobs.toggleActive', $job) }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="btn btn-{{$job->is_active ? 'warning' : 'success'}} w-100 mb-2">
+                                            <button type="submit"
+                                                class="btn btn-{{$job->is_active ? 'warning' : 'success'}} w-100 mb-2">
                                                 <i class="fas fa-{{$job->is_active ? 'pause' : 'play'}} me-2"></i>
                                                 {{ $job->is_active ? __('general.close_job') : __('general.open_job') }}
                                             </button>
@@ -228,6 +238,5 @@
         </div>
     </section>
 
-    <x-footer/>
+    <x-footer />
 @endsection
-

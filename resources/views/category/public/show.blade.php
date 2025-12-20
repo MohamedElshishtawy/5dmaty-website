@@ -3,18 +3,21 @@
 @section('css')
     <style>
         .service-card {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             transition: transform .2s ease, box-shadow .2s ease;
         }
+
         .service-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
+
         .service-icon {
             width: 100px;
             height: 100px;
             object-fit: cover;
         }
+
         .price-badge {
             background: linear-gradient(135deg, #FFD700, #FFA500);
             color: #000;
@@ -24,6 +27,7 @@
             display: inline-block;
             font-size: .95rem;
         }
+
         .whatsapp-btn {
             background-color: #25D366;
             color: white;
@@ -32,7 +36,12 @@
             padding: .6rem 1rem;
             transition: all .2s ease;
         }
-        .whatsapp-btn:hover { background-color: #128C7E; color: #fff; transform: scale(1.02); }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            color: #fff;
+            transform: scale(1.02);
+        }
     </style>
 @endsection
 
@@ -57,7 +66,7 @@
                         $icon = $service->icon_image ? asset('storage/' . $service->icon_image) : asset('images/black-5dmaty.svg');
                         $wa_number = config('constants.whatsapp_number');
                         $wa_text = urlencode(__('general.service_whatsapp_message', ['service' => $service->name, 'category' => $category->name]));
-                        $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
+                        $wa_url = "https://wa.me/+2{$wa_number}?text={$wa_text}";
                     @endphp
                     <div class="col">
                         <div class="card service-card h-100 rounded-2">
@@ -66,13 +75,15 @@
                                     <img src="{{ $icon }}" alt="{{ $service->name }}" class="service-icon rounded">
                                     <div>
                                         <h3 class="h5 mb-1">{{ $service->name }}</h3>
-                                        @if(!is_null($service->price) && (float)$service->price > 0)
-                                            <span class="price-badge">{{ number_format($service->price, 0) }} {{ __('general.currency') }}</span>
+                                        @if(!is_null($service->price) && (float) $service->price > 0)
+                                            <span class="price-badge">{{ number_format($service->price, 0) }}
+                                                {{ __('general.currency') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 @if($service->description)
-                                    <p class="text-muted mb-0" style="display:-webkit-box;;-webkit-box-orient:vertical;overflow:hidden;">
+                                    <p class="text-muted mb-0"
+                                        style="display:-webkit-box;;-webkit-box-orient:vertical;overflow:hidden;">
                                         {{ $service->description }}
                                     </p>
                                 @endif
@@ -93,23 +104,5 @@
         </div>
     </section>
 
-    <x-footer/>
+    <x-footer />
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

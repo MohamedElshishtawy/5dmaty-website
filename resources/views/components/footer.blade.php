@@ -1,4 +1,3 @@
-
 <footer class="site-footer py-5 position-relative">
     <div class="container">
         <div class="row g-4">
@@ -17,13 +16,15 @@
                 <h5 class="text-dark-emphasis small fw-bold mb-2">{{ __('general.contact_us') }}</h5>
                 <ul class="list-unstyled footer-links">
                     <li class="mb-2">
-                        <a href="https://www.facebook.com/5damate" target="_blank" rel="noopener" aria-label="{{ __('general.facebook') }}" class="" >
+                        <a href="https://www.facebook.com/5damate" target="_blank" rel="noopener"
+                            aria-label="{{ __('general.facebook') }}" class="">
                             <i class="fa-brands fa-facebook me-2" style="color:#1877F2"></i>
                             <span>{{ __('general.facebook') }}</span>
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="https://wa.me/{{ config('constants.whatsapp_number') }}?text={{ urlencode(__('general.whatsapp_prefill')) }}" target="_blank" rel="noopener" aria-label="{{ __('general.whatsapp') }}"  >
+                        <a href="https://wa.me/+2{{ config('constants.whatsapp_number') }}?text={{ urlencode(__('general.whatsapp_prefill')) }}"
+                            target="_blank" rel="noopener" aria-label="{{ __('general.whatsapp') }}">
                             <i class="fa-brands fa-whatsapp me-2" style="color:#25D366"></i>
                             <span>{{ __('general.cta_whatsapp') }}</span>
                         </a>
@@ -48,28 +49,29 @@
             </div>
 
             @auth
-            <div class="col-6 col-lg-3">
-                <h5 class="text-dark-emphasis small fw-bold mb-2">{{ __('general.management_links') }}</h5>
-                <ul class="list-unstyled footer-links">
-                @role('admin|superadmin')
-                
+                <div class="col-6 col-lg-3">
+                    <h5 class="text-dark-emphasis small fw-bold mb-2">{{ __('general.management_links') }}</h5>
+                    <ul class="list-unstyled footer-links">
+                        @role('admin|superadmin')
+
                         <li><a href="{{ route('admin.users.index') }}">{{ __('general.users-management') }}</a></li>
                         <li><a href="{{ route('admin.jobs.index') }}">{{ __('general.employment-management') }}</a></li>
-                        <li><a href="{{ route('admin.properties.index') }}">{{ __('general.real-state-management') }}</a></li>
+                        <li><a href="{{ route('admin.properties.index') }}">{{ __('general.real-state-management') }}</a>
+                        </li>
                         <li><a href="{{ route('admin.settings.index') }}">{{ __('general.settings') }}</a></li>
                         <li><a href="{{ route('admin.categories.index') }}">{{ __('general.categories') }}</a></li>
-                        
-                @endrole
-                <li>
-                    <form method="post" action="{{route('logout')}}">
-                        @csrf
-                        
-                        <button class="text-danger">{{ __('general.logout') }}</button>
-                    </form>
-                </li>
 
-            </ul>
-        </div>
+                        @endrole
+                        <li>
+                            <form method="post" action="{{route('logout')}}">
+                                @csrf
+
+                                <button class="text-danger">{{ __('general.logout') }}</button>
+                            </form>
+                        </li>
+
+                    </ul>
+                </div>
             @endauth
 
             @guest
@@ -85,13 +87,20 @@
             <div class="col-12">
                 <h5 class="text-dark-emphasis small fw-bold mb-2">{{ __('general.accept_all_methods') }}</h5>
                 <div class="d-flex flex-wrap gap-2 align-items-center">
-                    <img src="{{ asset('images/payments/visa.png') }}" alt="Visa" width="30" height="30" class="object-fit-contain">
-                    <img src="{{ asset('images/payments/visa-electron.png') }}" alt="Visa Electron" width="30" height="30" class="object-fit-contain">
-                    <img src="{{ asset('images/payments/maestro.png') }}" alt="Maestro" width="30" height="30" class="object-fit-contain">
-                    <img src="{{ asset('images/payments/american-express.png') }}" alt="American Express" width="30" height="30" class="object-fit-contain">
-                    <img src="{{ asset('images/payments/paypal.png') }}" alt="PayPal" width="30" height="30" class="object-fit-contain">
-                    <img src="{{ asset('images/payments/vodafon.png') }}" alt="Vodafone Cash" width="30" height="30" class="object-fit-contain">
-                    <img src="{{ asset('images/payments/card.png') }}" alt="Card" width="30" height="30" class="object-fit-contain">
+                    <img src="{{ asset('images/payments/visa.png') }}" alt="Visa" width="30" height="30"
+                        class="object-fit-contain">
+                    <img src="{{ asset('images/payments/visa-electron.png') }}" alt="Visa Electron" width="30"
+                        height="30" class="object-fit-contain">
+                    <img src="{{ asset('images/payments/maestro.png') }}" alt="Maestro" width="30" height="30"
+                        class="object-fit-contain">
+                    <img src="{{ asset('images/payments/american-express.png') }}" alt="American Express" width="30"
+                        height="30" class="object-fit-contain">
+                    <img src="{{ asset('images/payments/paypal.png') }}" alt="PayPal" width="30" height="30"
+                        class="object-fit-contain">
+                    <img src="{{ asset('images/payments/vodafon.png') }}" alt="Vodafone Cash" width="30" height="30"
+                        class="object-fit-contain">
+                    <img src="{{ asset('images/payments/card.png') }}" alt="Card" width="30" height="30"
+                        class="object-fit-contain">
                 </div>
             </div>
 
@@ -105,7 +114,7 @@
     </div>
 </footer>
 <script>
-    (function(){
+    (function () {
         var yearElement = document.getElementById('footer-year');
         if (yearElement) {
             yearElement.textContent = new Date().getFullYear();

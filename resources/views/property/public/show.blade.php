@@ -6,22 +6,27 @@
             border-radius: 16px;
             overflow: hidden;
         }
+
         .property-gallery img {
             width: 100%;
             height: 500px;
             object-fit: cover;
         }
+
         .property-detail-card {
             border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
         .detail-item {
             padding: 1rem 0;
             border-bottom: 1px solid #eee;
         }
+
         .detail-item:last-child {
             border-bottom: none;
         }
+
         .price-display {
             background: linear-gradient(135deg, #FFD700, #FFA500);
             color: #000;
@@ -31,6 +36,7 @@
             border-radius: 12px;
             text-align: center;
         }
+
         .whatsapp-btn {
             background-color: #25D366;
             color: white;
@@ -40,17 +46,20 @@
             border: none;
             transition: all 0.3s ease;
         }
+
         .whatsapp-btn:hover {
             background-color: #128C7E;
             color: white;
             transform: scale(1.05);
         }
+
         .thumbnail-gallery {
             display: flex;
             gap: 10px;
             overflow-x: auto;
             margin-top: 10px;
         }
+
         .thumbnail {
             width: 100px;
             height: 100px;
@@ -62,12 +71,16 @@
             overflow: hidden;
             flex-shrink: 0;
         }
-        .thumbnail img, .thumbnail video {
+
+        .thumbnail img,
+        .thumbnail video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .thumbnail:hover, .thumbnail.active {
+
+        .thumbnail:hover,
+        .thumbnail.active {
             opacity: 1;
             border: 2px solid var(--primary);
         }
@@ -86,12 +99,14 @@
                         <div class="property-gallery mb-3" id="mainMediaContainer">
                             @php $firstMedia = $property->medias->first(); @endphp
                             @if($firstMedia->type === 'video')
-                                <video src="{{ asset('storage/' . $firstMedia->url) }}" controls style="width: 100%; height: 500px; object-fit: cover;"></video>
+                                <video src="{{ asset('storage/' . $firstMedia->url) }}" controls
+                                    style="width: 100%; height: 500px; object-fit: cover;"></video>
                             @else
-                                <img src="{{ asset('storage/' . $firstMedia->url) }}" alt="{{ $property->title }}" style="width: 100%; height: 500px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $firstMedia->url) }}" alt="{{ $property->title }}"
+                                    style="width: 100%; height: 500px; object-fit: cover;">
                             @endif
                         </div>
-                        
+
                         @if($property->medias->count() > 1)
                             <div class="thumbnail-gallery">
                                 @foreach($property->medias as $index => $media)
@@ -100,11 +115,12 @@
                                         $type = $media->type;
                                     @endphp
                                     <div class="thumbnail {{ $index === 0 ? 'active' : '' }}"
-                                         onclick="changeMainMedia('{{ $url }}', '{{ $type }}', this)">
+                                        onclick="changeMainMedia('{{ $url }}', '{{ $type }}', this)">
                                         @if($type === 'video')
                                             <video src="{{ $url }}"></video>
                                             <div class="position-absolute top-50 start-50 translate-middle">
-                                                <i class="fas fa-play-circle text-white" style="font-size: 30px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);"></i>
+                                                <i class="fas fa-play-circle text-white"
+                                                    style="font-size: 30px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);"></i>
                                             </div>
                                         @else
                                             <img src="{{ $url }}" alt="{{ $property->title }}">
@@ -114,7 +130,8 @@
                             </div>
                         @endif
                     @else
-                        <div class="property-gallery bg-light d-flex align-items-center justify-content-center" style="height: 500px;">
+                        <div class="property-gallery bg-light d-flex align-items-center justify-content-center"
+                            style="height: 500px;">
                             <i class="fas fa-home fa-5x text-muted"></i>
                         </div>
                     @endif
@@ -161,7 +178,7 @@
                             @php
                                 $wa_number = preg_replace('/\D+/', '', $property->whatsapp_phone);
                                 $wa_text = urlencode(__('general.whatsapp_message_template', ['title' => $property->title]));
-                                $wa_url = "https://wa.me/{$wa_number}?text={$wa_text}";
+                                $wa_url = "https://wa.me/+2{$wa_number}?text={$wa_text}";
                             @endphp
                             <div class="mt-4">
                                 <a href="{{ $wa_url }}" target="_blank" class="btn whatsapp-btn w-100">
@@ -183,13 +200,13 @@
         </div>
     </section>
 
-    <x-footer/>
+    <x-footer />
 
     <script>
         function changeMainMedia(url, type, thumbnail) {
             const container = document.getElementById('mainMediaContainer');
             container.innerHTML = '';
-            
+
             if (type === 'video') {
                 const video = document.createElement('video');
                 video.src = url;
@@ -213,6 +230,3 @@
         }
     </script>
 @endsection
-
-
-
