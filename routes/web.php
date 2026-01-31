@@ -14,6 +14,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
+use Illuminate\Support\Facades\Http;
 
 Livewire::setUpdateRoute(function ($handle) {
     return Route::post(env('APP_ASSET').'/livewire/update', $handle);
@@ -54,10 +55,6 @@ Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name(
     Route::get('/', DashboardController::class)->name('dashboard');
     // keep users link to avoid layout route errors
     Route::view('users', 'admin.users.index')->name('users.index');
-    Route::get('users/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('users.create');
-    Route::post('users', [App\Http\Controllers\Admin\UserController::class, 'store'])->name('users.store');
-    Route::get('users/{user}/edit', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('users.edit');
-    Route::put('users/{user}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
     Route::delete('users/{user}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
 
 
@@ -92,3 +89,32 @@ Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name(
 
 //Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Auth::routes();
+
+Route::get('/reviews-test', function () {
+     $pageId = 'awlaadelblad'; // Or use your numeric page ID
+            $accessToken = env('FACEBOOK_PAGE_ACCESS_TOKEN');
+            
+            if (!$accessToken) {
+                return $this->getDefaultReviews();
+            }
+
+            // Facebook Graph API endpoint for page reviews
+            $url = "https://graph.facebook.com/v18.0/{$pageId}/ratings";
+
+            
+            $response = Http::get($url, [
+                'access_token' => $accessToken,
+                'fields' => 'reviewer{name,picture},rating,review_text,created_time'
+                ]);
+                
+                dd($response);
+            if ($response->successful()) {
+                $data = $response->json();
+                return $this->formatReviews($data['data'] ?? []);
+            }
+
+            return $this->getDefaultReviews();
+
+       
+            return $this->getDefaultReviews();
+});
