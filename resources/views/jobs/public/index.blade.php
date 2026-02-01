@@ -7,17 +7,18 @@
 @section('content')
     <x-navbar active="employment" class="shadow-sm sticky-top" />
 
-    <section class="hero-jobs">
+<section class="hero-jobs" style="background-image: url('{{ asset('images/emp.jpg') }}'); background-repeat: no-repeat; background-size: cover;">
+        <div class="py-3" style="backdrop-filter: brightness(0.5);">
         <div class="container">
             <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold text-dark mb-3">
+                <h1 class="display-4 fw-bold text-white mb-3">
                     @if($tab === 'jobs')
                         {{ __('general.jobs') }}
                     @else
                         {{ __('general.employees') }}
                     @endif
                 </h1>
-                <p class="lead text-muted">
+                <p class="lead text-white">
                     @if($tab === 'jobs')
                         {{ __('general.jobs_subtitle') }}
                     @else
@@ -25,6 +26,7 @@
                     @endif
                 </p>
             </div>
+        </div>
         </div>
     </section>
 

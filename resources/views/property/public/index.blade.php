@@ -34,11 +34,12 @@
 @section('content')
     <x-navbar active="real-state" class="shadow-sm sticky-top" />
 
-    <section class="hero-properties">
-        <div class="container">
+    <section class="hero-properties" style="background-image: url('{{ asset('images/real-state.jpg') }}'); background-repeat: no-repeat; background-size: cover;">
+        <div class="py-3" style="backdrop-filter: brightness(0.5);">
+            <div class="container">
             <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold text-dark mb-3">{{ __('general.properties') }}</h1>
-                <p class="lead text-muted">{{ __('general.properties_subtitle') }}</p>
+                <h1 class="display-4 fw-bold text-white mb-3">{{ __('general.properties') }}</h1>
+                <p class="lead text-white">{{ __('general.properties_subtitle') }}</p>
                 @auth
                 <div class="d-flex justify-end">
                     <button id="add-property-btn" class="btn btn-warning text-dark fw-semibold">
@@ -48,33 +49,12 @@
                 @endauth
             </div>
         </div>
+        </div>
     </section>
 
     <section class="py-5 bg-white">
         <div class="container">
             @if($properties->count() > 0)
-                {{-- <form method="GET" action="{{ route('properties.index') }}" class="row g-2 align-items-end mb-4">
-                    <div class="col-6 col-md-3">
-                        <label for="property_type" class="form-label mb-1">{{ __('general.filter_by_type') }}</label>
-                        <select id="property_type" name="property_type" class="form-select">
-                            <option value="">{{ __('general.all_types') }}</option>
-                            <option value="sale" @selected(request('property_type')==='sale')>{{ __('general.sale') }}</option>
-                            <option value="rent" @selected(request('property_type')==='rent')>{{ __('general.rent') }}</option>
-                        </select>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <label for="property_status" class="form-label mb-1">{{ __('general.filter_by_status') }}</label>
-                        <select id="property_status" name="property_status" class="form-select">
-                            <option value="">{{ __('general.all') }}</option>
-                            <option value="active" @selected(request('property_status')==='active')>{{ __('general.status_active') }}</option>
-                            <option value="sold" @selected(request('property_status')==='sold')>{{ __('general.status_sold') }}</option>
-                        </select>
-                    </div>
-                    <div class="col-12 col-md-auto d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">{{ __('general.filter_by') }}</button>
-                        <a href="{{ route('properties.index') }}" class="btn btn-outline-secondary">{{ __('general.clear_filters') }}</a>
-                    </div>
-                </form> --}}
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                     @foreach($properties as $property)
                         @php
