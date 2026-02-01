@@ -460,9 +460,9 @@
 
 @endif
 
-    <section class="py-5 bg-white position-relative">
+    {{-- <section class="py-5 bg-white position-relative">
         <x-show-reviews />
-    </section>
+    </section> --}}
     
     <x-footer/>
 @endsection
