@@ -15,6 +15,7 @@ class CreateEditUserModal extends ModalComponent
     public ?string $email = null;
     public ?string $address = null;
     public string $role = 'user';
+    public ?string $password = null;
 
     public function mount($user = null): void
     {
@@ -45,13 +46,14 @@ class CreateEditUserModal extends ModalComponent
                 Rule::unique('users', 'phone')->ignore($this->userId),
             ],
             'email' => [
-                'nullable',
+                'required',
                 'email',
                 'max:255',
                 Rule::unique('users', 'email')->ignore($this->userId),
             ],
             'address' => ['nullable', 'string', 'max:255'],
             'role' => ['required', 'string'],
+            'password' => [$this->userId ? 'nullable' : 'required', 'string', 'min:8'],
         ];
     }
 
@@ -67,13 +69,16 @@ class CreateEditUserModal extends ModalComponent
                 'email' => $this->email ?: null,
                 'address' => $this->address ?: null,
             ]);
+            if ($this->password) {
+                $user->update(['password' => bcrypt($this->password)]);
+            }
         } else {
             $user = User::create([
                 'name' => $this->name,
                 'phone' => $this->phone,
                 'email' => $this->email ?: null,
                 'address' => $this->address ?: null,
-                'password' => bcrypt('12345678'),
+                'password' => $this->password ? bcrypt($this->password) : bcrypt('12345678'),
             ]);
         }
 
@@ -90,6 +95,7 @@ class CreateEditUserModal extends ModalComponent
         return view('livewire.create-edit-user-modal', compact('roles'));
     }
 }
+
 
 
 

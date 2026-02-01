@@ -264,6 +264,7 @@ return [
     'role' => 'الدور',
     'address' => 'العنوان',
     'metrics' => 'مؤشرات',
+    'password' => 'كلمة المرور',
 
     // Dashboard
     'dashboard_welcome' => 'أهلاً بك :name 👋',

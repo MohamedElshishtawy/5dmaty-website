@@ -1,0 +1,8 @@
+body, h1, h2, h3, h4, h5, h6, p, div, ul, ol, li, span, a {
+    direction: ltr; 
+    text-align: left;
+}
+footer .slogen {
+    text-align: left !important;
+}
+

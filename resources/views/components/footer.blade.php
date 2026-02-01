@@ -9,7 +9,7 @@
                     </a>
                     <strong class="text-white">{{ __('general.brand') }}</strong>
                 </div>
-                <p class="text-white small text-center text-lg-end">{{ __('general.slogen') }} ✨</p>
+                <p class="text-white small text-center text-lg-end slogen">{{ __('general.slogen') }} ✨</p>
             </div>
 
             <div class="col-12 col-lg-3">

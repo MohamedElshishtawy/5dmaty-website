@@ -3,12 +3,14 @@
         <form wire:submit.prevent="save" class="space-y-3">
             <div class="mb-2">
                 <label class="form-label">{{ __('general.name') }}</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" wire:model.defer="name" required>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" wire:model.defer="name"
+                    required>
                 @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-2">
                 <label class="form-label">{{ __('general.phone') }}</label>
-                <input type="text" class="form-control @error('phone') is-invalid @enderror" wire:model.defer="phone" required>
+                <input type="text" class="form-control @error('phone') is-invalid @enderror" wire:model.defer="phone"
+                    required>
                 @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-2">
@@ -18,17 +20,24 @@
             </div>
             <div class="mb-2">
                 <label class="form-label">{{ __('general.address') }}</label>
-                <input type="text" class="form-control @error('address') is-invalid @enderror" wire:model.defer="address">
+                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                    wire:model.defer="address">
                 @error('address')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
             <div class="mb-2">
                 <label class="form-label">{{ __('general.role') }}</label>
                 <select class="form-select @error('role') is-invalid @enderror" wire:model.defer="role" required>
                     @foreach($roles as $roleName)
-                        <option value="{{ $roleName }}">{{ __('general.'.$roleName) }}</option>
+                        <option value="{{ $roleName }}">{{ __('general.' . $roleName) }}</option>
                     @endforeach
                 </select>
                 @error('role')<div class="invalid-feedback">{{ $message }}</div>@enderror
+            </div>
+            <div class="mb-2">
+                <label class="form-label">{{ __('general.password') }}</label>
+                <input type="text" class="form-control @error('password') is-invalid @enderror"
+                    wire:model.defer="password">
+                @error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
         </form>
     </x-slot:body>
@@ -39,4 +48,3 @@
         </div>
     </x-slot:footer>
 </x-modal-card>
-

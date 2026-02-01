@@ -8,9 +8,11 @@ use App\Http\Controllers\EmployeeProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobAdminController;
 use App\Http\Controllers\Admin\FaqAdminController;
+use App\Http\Controllers\LangSwitchController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SocialAuthController;
 use App\Models\Category;
+use Facebook\Facebook;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
@@ -24,7 +26,10 @@ Livewire::setScriptRoute(function ($handle) {
     return Route::get(env('APP_ASSET').'/livewire/livewire.js', $handle);
 });
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Language switcher
+Route::get('lang/{lang}', [LangSwitchController::class, 'switchLang'])->name('lang.switch');
+
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/auth/google', [SocialAuthController::class, 'googleRedirect'])->name('google.redirect');
 Route::get('/auth/google/callback', [SocialAuthController::class, 'googleCallback'])->name('google.callback');
 
@@ -93,13 +98,21 @@ Auth::routes();
 Route::get('/reviews-test', function () {
      $pageId = 'awlaadelblad'; // Or use your numeric page ID
             $accessToken = env('FACEBOOK_PAGE_ACCESS_TOKEN');
-            
-            if (!$accessToken) {
-                return $this->getDefaultReviews();
-            }
 
             // Facebook Graph API endpoint for page reviews
             $url = "https://graph.facebook.com/v18.0/{$pageId}/ratings";
+
+            $fb = new Facebook([
+                'app_id' => env('FACEBOOK_APP_ID'),
+                'app_secret' => env('FACEBOOK_APP_SECRET'),
+                'default_access_token' => $accessToken,
+            ]);
+
+            // Make the API call using official SDK
+            $response = $fb->get(
+                "/{$pageId}/ratings",
+                $accessToken
+            );
 
             
             $response = Http::get($url, [

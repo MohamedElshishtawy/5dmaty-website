@@ -1,0 +1,329 @@
+/* Facebook Reviews Section */
+
+:root {
+    --primary-blue: #1877F2;
+    --star-yellow: #FFC107;
+    --text-main: #1C1E21;
+    --text-secondary: #65676B;
+    --card-bg: #F0F2F5;
+    --white: #FFFFFF;
+    --border-light: #EDEDED;
+    --section-bg: #F9F9F9;
+    --shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.facebook-reviews-section {
+    background-color: var(--section-bg);
+    padding: 40px 20px;
+    width: 100%;
+}
+
+.reviews-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.reviews-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.facebook-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.facebook-btn:hover {
+    background-color: #165ac7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(24, 119, 242, 0.3);
+}
+
+.facebook-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Rating Badge */
+.rating-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+}
+
+.stars svg {
+    width: 20px;
+    height: 20px;
+}
+
+.rating-score {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.rating-count {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Reviews Grid */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* Review Card */
+.review-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+/* Card Header */
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Avatar Fallback Initial */
+.avatar-initial {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1877F2, #165ac7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.review-date {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.fb-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--white);
+    border-radius: 50%;
+    padding: 2px;
+}
+
+/* Card Rating */
+.card-rating {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.card-rating svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Review Text */
+.review-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-main);
+    margin: 0 0 12px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Read More Link */
+.read-more {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.read-more:hover {
+    color: #165ac7;
+    text-decoration: underline;
+}
+
+/* No Reviews */
+.no-reviews {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .facebook-reviews-section {
+        padding: 30px 16px;
+    }
+
+    .reviews-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 30px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .reviews-title {
+        font-size: 24px;
+    }
+
+    .reviews-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+    }
+
+    .review-card {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .facebook-reviews-section {
+        padding: 20px 12px;
+    }
+
+    .reviews-title {
+        font-size: 20px;
+    }
+
+    .facebook-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rating-badge {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+}
+
+/* Animation for card load */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.review-card {
+    animation: slideUp 0.5s ease-out;
+}
+
+.review-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.review-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.review-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.review-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.review-card:nth-child(5) {
+    animation-delay: 0.25s;
+}

@@ -461,10 +461,7 @@
 @endif
 
     <section class="py-5 bg-white position-relative">
-        
-    <!-- Elfsight Facebook Reviews | Untitled Facebook Reviews -->
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-    <div class="elfsight-app-afeb0387-617a-4243-98e1-f31366eeff04 p-3" data-elfsight-app-lazy></div>
+        <x-show-reviews />
     </section>
     
     <x-footer/>
@@ -583,4 +580,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
 @endsection
