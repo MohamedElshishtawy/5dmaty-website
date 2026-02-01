@@ -63,12 +63,6 @@
                                     <span class="badge {{ $lang->is_active ? 'bg-success' : 'bg-secondary' }}">{{ $lang->is_active ? __('مفعلة') : __('معطلة') }}</span>
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.languages.toggle', $lang) }}" method="post" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-outline-dark">
-                                            {{ $lang->is_active ? __('تعطيل') : __('تفعيل') }}
-                                        </button>
-                                    </form>
                                     <form action="{{ route('admin.languages.destroy', $lang) }}" method="post" class="d-inline" onsubmit="return confirm('{{ __('هل أنت متأكد من حذف هذه اللغة؟ قد يؤدي ذلك إلى فقدان بعض البيانات.') }}');">
                                         @csrf
                                         @method('DELETE')
