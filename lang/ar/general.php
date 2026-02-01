@@ -257,6 +257,7 @@ return [
     'superadmin' => 'سوبر أدمن',
     'admin' => 'أدمن',
     'user' => 'مستخدم',
+    'client' => 'عميل',
     
     // Users modal
     'add_user' => 'إضافة مستخدم',

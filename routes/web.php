@@ -81,7 +81,6 @@ Route::prefix('dashboard')->middleware(['auth', 'role:superadmin|admin'])->name(
     Route::post('settings', [App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('settings.update');
     // Languages management (simple)
     Route::post('languages', [App\Http\Controllers\Admin\LanguageAdminController::class, 'store'])->name('languages.store');
-    Route::post('languages/{language}/toggle', [App\Http\Controllers\Admin\LanguageAdminController::class, 'toggle'])->name('languages.toggle');
     Route::delete('languages/{language}', [App\Http\Controllers\Admin\LanguageAdminController::class, 'destroy'])->name('languages.destroy');
 
     // Employee management routes

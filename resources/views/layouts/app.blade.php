@@ -7,12 +7,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ \App\Support\Settings::get('seo.home.title', config('app.name', 'Laravel')) }}</title>
     @php
+        $homeTitle = \App\Models\Setting::where('key', 'seo.home.title')->where('locale', app()->getLocale())->value('value') ?? config('app.name', 'Laravel');
         $metaDescription = \App\Models\Setting::where('key', 'seo.home.description')->where('locale', app()->getLocale())->value('value');
         $metaKeywords = \App\Models\Setting::where('key', 'seo.home.keywords')->where('locale', app()->getLocale())->value('value');
         $faviconUrl = \App\Models\Setting::where('key', 'site.favicon')->value('value');
-    @endphp
+        @endphp
+    
+    <title>{{ $homeTitle }}</title>
     @if(!empty($metaDescription))
         <meta name="description" content="{{ $metaDescription }}">
     @endif

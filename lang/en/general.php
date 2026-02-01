@@ -256,6 +256,7 @@ return [
     'superadmin' => 'Super Admin',
     'admin' => 'Admin',
     'user' => 'User',
+    'client' => 'Client',
     
     // Users modal
     'add_user' => 'Add User',

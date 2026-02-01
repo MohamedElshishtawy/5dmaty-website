@@ -27,13 +27,6 @@ class LanguageAdminController extends Controller
         return back()->with('status', __('تمت إضافة اللغة بنجاح'));
     }
 
-    public function toggle(Language $language): RedirectResponse
-    {
-        $language->is_active = !$language->is_active;
-        $language->save();
-        return back()->with('status', __('تم تحديث حالة اللغة'));
-    }
-
     public function destroy(Language $language): RedirectResponse
     {
         // Prevent deletion of default language (e.g., 'en')
