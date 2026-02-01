@@ -44,7 +44,7 @@
 
         <div class="d-flex align-items-center">
             {{-- Language Selector --}}
-            <div class=" dropdown">
+            {{-- <div class=" dropdown">
                 <div class="dropdown">
                     <button class="btn btn-link dropdown-toggle btn-lg text-decoration-none text-dark" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,7 +59,7 @@
                         @endforeach
                     </ul>
                 </div>
-            </div>
+            </div> --}}
             <button class="navbar-toggler d-lg-none border-0 shadow-none" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#mobileOffcanvas" aria-controls="mobileOffcanvas">
                 <img src="{{asset('images/menu.png')}}" width="30" alt="menu" class="menu-icon">
