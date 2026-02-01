@@ -33,6 +33,17 @@ class LanguageAdminController extends Controller
         $language->save();
         return back()->with('status', __('تم تحديث حالة اللغة'));
     }
+
+    public function destroy(Language $language): RedirectResponse
+    {
+        // Prevent deletion of default language (e.g., 'en')
+        if ($language->code === 'ar') {
+            return back()->withErrors(['error' => __('لا يمكن حذف اللغة الافتراضية.')]);
+        }
+
+        $language->delete();
+        return back()->with('status', __('تم حذف اللغة بنجاح'));
+    }
 }
 
 
