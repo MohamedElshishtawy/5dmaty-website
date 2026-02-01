@@ -27,7 +27,7 @@ Livewire::setScriptRoute(function ($handle) {
 });
 
 // Language switcher
-Route::get('lang/{lang}', [LangSwitchController::class, 'switchLang'])->name('lang.switch');
+Route::post('lang/{lang}', [LangSwitchController::class, 'switchLang'])->name('lang.switch');
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/auth/google', [SocialAuthController::class, 'googleRedirect'])->name('google.redirect');

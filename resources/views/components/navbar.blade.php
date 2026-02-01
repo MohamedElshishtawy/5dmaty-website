@@ -52,7 +52,10 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         @foreach (App\Models\Language::all() as $lang)
-                            <a href="{{ route('lang.switch', $lang->code) }}" class="dropdown-item">{{ $lang->name }}</a>
+                            <form method="post" action="{{ route('lang.switch', $lang->code) }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item w-100 text-start">{{ $lang->name }}</button>
+                            </form>
                         @endforeach
                     </ul>
                 </div>
